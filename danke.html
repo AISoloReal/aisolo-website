@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vielen Dank — AI Solo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --petrol-primary: #1a4f55;
+  --petrol-dark: #132f35;
+  --petrol-medium: #3a8585;
+  --petrol-light: #6aadad;
+  --petrol-pale: #d6e8e8;
+  --cta-pink: #d63384;
+  --text: #171717;
+  --text-secondary: #404040;
+  --text-muted: #737373;
+  --border: #e5e5e5;
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.7;
+  background: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.legal-nav {
+  background: var(--petrol-dark);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.legal-nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
+.legal-nav a:hover { color: #fff; }
+.legal-nav .logo { height: 48px; }
+.thank-you {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+}
+.thank-you-inner {
+  max-width: 560px;
+  text-align: center;
+}
+.thank-you-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--petrol-pale);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+  font-size: 36px;
+}
+.thank-you-inner h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 36px;
+  color: var(--petrol-dark);
+  margin-bottom: 16px;
+}
+.thank-you-inner p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.thank-you-inner .highlight {
+  background: #f0faf0;
+  border: 1px solid #c6e6c6;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 24px 0;
+}
+.thank-you-inner .highlight p {
+  margin-bottom: 0;
+  color: #2d6a2d;
+  font-weight: 500;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--petrol-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+.back-link:hover { text-decoration: underline; }
+.legal-footer {
+  background: var(--petrol-dark);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 24px 40px;
+  font-size: 13px;
+}
+.legal-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a href="index.html"><img src="assets/logo/ai_solo_white_transparent.png" alt="AI Solo" class="logo"></a>
+  <a href="index.html">Startseite</a>
+</nav>
+
+<main class="thank-you">
+  <div class="thank-you-inner">
+    <div class="thank-you-icon">&#10003;</div>
+    <h1>Vielen Dank f&uuml;r Ihren Kauf!</h1>
+    <p>
+      Ihre Bestellung wurde erfolgreich abgeschlossen. Wir bereiten Ihren
+      individuellen Analysebericht vor.
+    </p>
+    <div class="highlight">
+      <p>
+        Sie erhalten in wenigen Minuten eine E-Mail mit Ihrem
+        pers&ouml;nlichen Download-Link an die bei der Bestellung
+        angegebene E-Mail-Adresse.
+      </p>
+    </div>
+    <p style="font-size: 14px; color: var(--text-muted);">
+      Der Download-Link ist 72 Stunden g&uuml;ltig. Falls Sie keine E-Mail
+      erhalten, pr&uuml;fen Sie bitte Ihren Spam-Ordner oder kontaktieren
+      Sie uns unter <a href="mailto:hello@aisolo.io" style="color:var(--petrol-primary);">hello@aisolo.io</a>.
+    </p>
+    <a href="index.html" class="back-link">&larr; Zur&uuml;ck zur Startseite</a>
+  </div>
+</main>
+
+<footer class="legal-footer">
+  <p>&copy; 2026 AI Solo &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Solo — KI, die für Sie arbeitet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --petrol-primary: #1a4f55;
+  --petrol-dark: #132f35;
+  --petrol-medium: #3a8585;
+  --petrol-light: #6aadad;
+  --petrol-pale: #d6e8e8;
+  --petrol-ice: #eff5f5;
+  --cta-pink: #d63384;
+  --cta-pink-hover: #b52a6f;
+  --pink-mist: #fce4f0;
+  --text: #171717;
+  --text-secondary: #404040;
+  --text-muted: #737373;
+  --border: #e5e5e5;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: 0 2px 24px rgba(19,47,53,0.08); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 40px;
+}
+.nav-logo img { height: 160px; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  text-decoration: none; color: var(--text-secondary);
+  font-size: 14px; font-weight: 500; letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--petrol-primary); }
+.nav-cta {
+  background: var(--cta-pink); color: var(--white) !important;
+  padding: 10px 24px; border-radius: 8px;
+  font-weight: 600 !important; font-size: 13px !important;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--cta-pink-hover); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(155deg, var(--petrol-dark) 0%, var(--petrol-primary) 40%, #1d5e65 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 20%, rgba(58,133,133,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 15% 80%, rgba(106,173,173,0.15) 0%, transparent 60%);
+}
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236aadad' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.hero-inner {
+  max-width: 1200px; margin: 0 auto; padding: 160px 40px 120px;
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.hero-text h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.1; color: var(--white);
+  margin-bottom: 24px;
+}
+.hero-text h1 em {
+  font-style: italic; color: var(--petrol-light);
+}
+.hero-text .subtitle {
+  font-size: 18px; line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  max-width: 480px; margin-bottom: 40px;
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--cta-pink); color: var(--white);
+  padding: 16px 32px; border-radius: 10px;
+  font-size: 15px; font-weight: 600; text-decoration: none;
+  transition: all 0.2s; border: none; cursor: pointer;
+}
+.btn-primary:hover { background: var(--cta-pink-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(214,51,132,0.3); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white);
+  padding: 16px 32px; border-radius: 10px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+.hero-visual {
+  display: flex; justify-content: center; align-items: center;
+}
+.hero-card {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 40px 36px;
+  max-width: 400px; width: 100%;
+}
+.hero-card .stat-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.hero-card .stat-row:last-child { border-bottom: none; }
+.hero-card .stat-label { color: rgba(255,255,255,0.5); font-size: 13px; }
+.hero-card .stat-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px; color: var(--white);
+}
+.hero-card .stat-value.good { color: var(--petrol-light); }
+.hero-card .stat-value.bad { color: #f0a0c0; }
+.hero-card .stat-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.hero-card-header {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--petrol-light);
+  margin-bottom: 8px;
+}
+.hero-card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px; color: var(--white); margin-bottom: 20px;
+}
+
+/* ── SECTION COMMONS ── */
+section { padding: 120px 40px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--petrol-medium);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15; color: var(--petrol-dark);
+  margin-bottom: 20px;
+}
+.section-subtitle {
+  font-size: 17px; line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+/* ── BRAND STORY ── */
+.brand-story { background: var(--white); }
+.brand-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  margin-top: 64px; align-items: start;
+}
+.brand-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: 28px; line-height: 1.4;
+  color: var(--petrol-primary);
+  border-left: 3px solid var(--petrol-medium);
+  padding-left: 28px;
+  margin-bottom: 32px;
+}
+.brand-text p {
+  color: var(--text-secondary); line-height: 1.8;
+  margin-bottom: 16px; font-size: 15px;
+}
+.brand-values {
+  display: flex; flex-direction: column; gap: 24px;
+  margin-top: 40px;
+}
+.brand-value {
+  display: flex; gap: 20px; align-items: start;
+}
+.brand-value-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--petrol-ice);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+}
+.brand-value h4 {
+  font-size: 15px; font-weight: 600;
+  color: var(--petrol-dark); margin-bottom: 4px;
+}
+.brand-value p {
+  font-size: 14px; color: var(--text-muted); line-height: 1.6;
+}
+
+/* ── SUB-BRANDS ── */
+.sub-brands { background: var(--petrol-ice); }
+.sub-brand-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin-top: 64px;
+}
+.sub-brand-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 32px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.sub-brand-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--petrol-medium);
+  transition: height 0.3s;
+}
+.sub-brand-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(19,47,53,0.1);
+}
+.sub-brand-card:hover::before { height: 6px; }
+.sub-brand-card.active::before { background: var(--cta-pink); }
+.sub-brand-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: var(--petrol-ice);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  color: var(--petrol-medium);
+}
+.sub-brand-card.active .sub-brand-icon { background: var(--pink-mist); color: var(--cta-pink); }
+.sub-brand-tag {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--petrol-medium);
+  margin-bottom: 8px;
+}
+.sub-brand-card.active .sub-brand-tag { color: var(--cta-pink); }
+.sub-brand-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--petrol-dark);
+  margin-bottom: 12px;
+}
+.sub-brand-card p {
+  font-size: 14px; color: var(--text-muted); line-height: 1.7;
+  margin-bottom: 20px;
+}
+.sub-brand-services {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+}
+.sub-brand-services li {
+  font-size: 13px; color: var(--text-secondary);
+  padding-left: 20px; position: relative;
+}
+.sub-brand-services li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--petrol-light);
+}
+.sub-brand-card.active .sub-brand-services li::before { background: var(--cta-pink); }
+.badge-live {
+  display: inline-block;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  background: var(--cta-pink); color: var(--white);
+  padding: 3px 10px; border-radius: 20px;
+  margin-left: 8px; vertical-align: middle;
+}
+.badge-planned {
+  display: inline-block;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+  background: var(--petrol-pale); color: var(--petrol-medium);
+  padding: 3px 10px; border-radius: 20px;
+  margin-left: 8px; vertical-align: middle;
+}
+
+/* ── PRODUCTS ── */
+.products { background: var(--white); }
+.product-showcase {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  margin-top: 64px; align-items: center;
+}
+.product-preview {
+  background: var(--petrol-dark);
+  border-radius: 20px; padding: 48px 40px;
+  position: relative; overflow: hidden;
+}
+.product-preview::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(58,133,133,0.2) 0%, transparent 60%);
+}
+.product-preview-inner { position: relative; z-index: 1; }
+.product-preview .preview-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--petrol-light);
+  margin-bottom: 20px;
+}
+.product-preview h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; color: var(--white);
+  margin-bottom: 24px; line-height: 1.3;
+}
+.product-metrics {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+  margin-bottom: 28px;
+}
+.product-metric { text-align: center; }
+.product-metric .val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px; color: var(--white);
+}
+.product-metric .lbl {
+  font-size: 11px; color: var(--petrol-light); margin-top: 4px;
+}
+.product-sample-items {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.product-sample-item {
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 14px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.product-sample-item .category { font-size: 13px; color: rgba(255,255,255,0.7); }
+.product-sample-item .severity {
+  font-size: 11px; font-weight: 600; padding: 4px 10px;
+  border-radius: 20px;
+}
+.severity-high { background: rgba(214,51,132,0.15); color: #f0a0c0; }
+.severity-mid { background: rgba(194,122,26,0.15); color: #e8c060; }
+
+.product-info { }
+.product-info h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px; color: var(--petrol-dark);
+  margin-bottom: 16px; line-height: 1.25;
+}
+.product-info > p {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.7;
+  margin-bottom: 32px;
+}
+.product-features {
+  list-style: none; display: flex; flex-direction: column; gap: 16px;
+  margin-bottom: 40px;
+}
+.product-features li {
+  display: flex; gap: 14px; align-items: start;
+  font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+}
+.product-features li .check {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: var(--petrol-ice); color: var(--petrol-medium);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 12px; font-weight: 700;
+}
+.pricing-box {
+  background: var(--petrol-ice); border-radius: 14px;
+  padding: 28px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+.pricing-left { }
+.pricing-regular {
+  font-size: 14px; color: var(--text-muted);
+  text-decoration: line-through;
+}
+.pricing-beta {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; color: var(--petrol-dark);
+}
+.pricing-beta span { font-size: 16px; font-weight: 400; color: var(--text-muted); }
+.pricing-note {
+  font-size: 12px; color: var(--petrol-medium); font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: var(--petrol-ice); }
+.testimonial-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  margin-top: 64px;
+}
+.testimonial-card {
+  background: var(--white);
+  border-radius: 16px; padding: 36px 28px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s;
+}
+.testimonial-card:hover { transform: translateY(-2px); }
+.testimonial-stars {
+  color: #f0a830; font-size: 16px; letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.testimonial-text {
+  font-size: 15px; line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.testimonial-author { display: flex; align-items: center; gap: 14px; }
+.testimonial-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--petrol-pale);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; color: var(--petrol-primary);
+}
+.testimonial-name { font-size: 14px; font-weight: 600; color: var(--petrol-dark); }
+.testimonial-role { font-size: 12px; color: var(--text-muted); }
+
+/* ── TEAM ── */
+.team { background: var(--white); }
+.team-content {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  margin-top: 64px; align-items: center;
+}
+.team-photo {
+  width: 100%; aspect-ratio: 4/5;
+  background: linear-gradient(145deg, var(--petrol-dark), var(--petrol-primary));
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.team-photo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(106,173,173,0.2) 0%, transparent 50%);
+}
+.team-photo-placeholder {
+  position: relative; z-index: 1;
+  text-align: center; color: rgba(255,255,255,0.4);
+  font-size: 14px;
+}
+.team-photo-placeholder .initials {
+  font-family: 'DM Serif Display', serif;
+  font-size: 72px; color: rgba(255,255,255,0.15);
+  margin-bottom: 8px;
+}
+.team-info h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; color: var(--petrol-dark);
+  margin-bottom: 8px;
+}
+.team-info .role {
+  font-size: 15px; color: var(--petrol-medium);
+  font-weight: 500; margin-bottom: 24px;
+}
+.team-info .bio {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.8;
+  margin-bottom: 32px;
+}
+.credentials {
+  display: flex; flex-direction: column; gap: 20px;
+  margin-bottom: 36px;
+}
+.credential {
+  display: flex; align-items: center; gap: 16px;
+}
+.credential-logo {
+  width: 64px; height: 40px;
+  background: var(--petrol-ice);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--petrol-dark);
+  flex-shrink: 0;
+}
+.credential-text {
+  font-size: 13px; color: var(--text-muted); line-height: 1.5;
+}
+.credential-text strong {
+  color: var(--text-secondary); font-weight: 600;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: linear-gradient(155deg, var(--petrol-dark) 0%, var(--petrol-primary) 100%);
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236aadad' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-section .section-title {
+  color: var(--white); margin-bottom: 16px;
+}
+.cta-section .section-subtitle {
+  color: rgba(255,255,255,0.65);
+  max-width: 520px; margin: 0 auto 40px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--petrol-dark); padding: 64px 40px 32px;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand img { height: 80px; margin-bottom: 16px; }
+.footer-brand p {
+  font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--petrol-light); margin-bottom: 16px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: rgba(255,255,255,0.5);
+  text-decoration: none; margin-bottom: 10px; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-bottom p {
+  font-size: 12px; color: rgba(255,255,255,0.3);
+}
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.delay-1 { transition-delay: 0.1s; }
+.fade-up.delay-2 { transition-delay: 0.2s; }
+.fade-up.delay-3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { order: -1; }
+  .hero-card { max-width: 360px; }
+  .brand-grid { grid-template-columns: 1fr; gap: 48px; }
+  .product-showcase { grid-template-columns: 1fr; }
+  .team-content { grid-template-columns: 1fr; }
+  .team-photo { max-width: 400px; margin: 0 auto; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  section { padding: 80px 24px; }
+  .nav-inner { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .sub-brand-cards { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="assets/logo/ai_solo_transparent.png" alt="AI Solo">
+    </a>
+    <div class="nav-links">
+      <a href="#story">Unsere Mission</a>
+      <a href="#services">Services</a>
+      <a href="#produkte">Produkte</a>
+      <a href="#referenzen">Referenzen</a>
+      <a href="#team">Team</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>KI, die für <em>Sie</em> arbeitet.<br>Nicht gegen Ihr Budget.</h1>
+      <p class="subtitle">AI Solo macht KI-gestützte Analysen und Strategien für Einzelpersonen, kleine und mittlere Unternehmen zugänglich — zu fairen Preisen, mit konkreten Handlungsempfehlungen.</p>
+      <div class="hero-buttons">
+        <a href="#produkte" class="btn-primary">Produkte entdecken &rarr;</a>
+        <a href="#story" class="btn-secondary">Unsere Mission</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-header">Beispielprodukt von AI Solo</div>
+        <div class="hero-card-title">Google Review Analyse:<br>Zahnarztpraxis M&uuml;nchen</div>
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Aktueller Score</div>
+            <div class="stat-sub">Google Bewertungen</div>
+          </div>
+          <div class="stat-value bad">3,2</div>
+        </div>
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Benchmark Top 5</div>
+            <div class="stat-sub">Zahnarztpraxen M&uuml;nchen</div>
+          </div>
+          <div class="stat-value good">4,6</div>
+        </div>
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Dringendste Ma&szlig;nahme</div>
+            <div class="stat-sub">Sofort umsetzbar</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;color:rgba(255,255,255,0.7);">Wartezeiten</div>
+            <div style="font-size:11px;color:#f0a0c0;">12 Beschwerden</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BRAND STORY ══ -->
+<section class="brand-story" id="story">
+  <div class="section-inner">
+    <div class="section-label fade-up">Unsere Mission</div>
+    <div class="section-title fade-up delay-1">AI f&uuml;r alle.<br>Gemeinsam gebaut. Fair bepreist.</div>
+    <div class="brand-grid">
+      <div>
+        <blockquote class="brand-quote fade-up">
+          Gro&szlig;e Unternehmen gewinnen nicht, weil sie schlauer sind. Sie gewinnen, weil sie sich die Werkzeuge leisten k&ouml;nnen, die sie schlauer aussehen lassen.
+        </blockquote>
+        <div class="brand-text fade-up delay-1">
+          <p>Ein Konzern investiert 50.000&nbsp;&euro; in ein Beratungsprojekt, das ihm sagt, was seine Google-Bewertungen l&auml;ngst verraten — wenn jemand sie richtig lesen w&uuml;rde.</p>
+          <p>Ein mittelst&auml;ndischer Unternehmer kann das nicht. Aber er verdient dieselbe Klarheit, dieselbe Strategie, denselben konkreten Plan, um besser zu werden.</p>
+          <p>Diese L&uuml;cke schlie&szlig;t AI Solo.</p>
+        </div>
+      </div>
+      <div class="brand-values fade-up delay-2">
+        <div class="brand-value">
+          <div class="brand-value-icon">&euro;</div>
+          <div>
+            <h4>Bezahlbar by Design</h4>
+            <p>Wir kalkulieren f&uuml;r den Einzelunternehmer, nicht f&uuml;r den Konzern. Wenn ein Service nicht ins Budget eines kleinen Unternehmens passt, &uuml;berdenken wir ihn.</p>
+          </div>
+        </div>
+        <div class="brand-value">
+          <div class="brand-value-icon">&check;</div>
+          <div>
+            <h4>Konkret, nicht abstrakt</h4>
+            <p>Keine 200-seitigen Strategiedecks. Wir liefern Copy-Paste-Aktionen. Antworten, die Sie heute posten k&ouml;nnen. Pl&auml;ne, die Sie diese Woche starten k&ouml;nnen.</p>
+          </div>
+        </div>
+        <div class="brand-value">
+          <div class="brand-value-icon">&hearts;</div>
+          <div>
+            <h4>Gemeinsam entwickelt</h4>
+            <p>Unsere Kunden formen, was wir bauen. Ihr Feedback wird zum n&auml;chsten Feature. Co-Creation ist kein Buzzword — es ist unser Gesch&auml;ftsmodell.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SUB-BRANDS ══ -->
+<section class="sub-brands" id="services">
+  <div class="section-inner">
+    <div class="section-label fade-up">Services</div>
+    <div class="section-title fade-up delay-1">Ein Dach. Drei Welten.</div>
+    <div class="section-subtitle fade-up delay-2">Unter dem Dach von AI Solo bringen spezialisierte Sub-Brands dieselbe Philosophie — bezahlbar, konkret, gemeinsam entwickelt — in verschiedene Lebensbereiche.</div>
+
+    <div class="sub-brand-cards">
+      <div class="sub-brand-card active fade-up">
+        <div class="sub-brand-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/><path d="M3 12h2m14 0h2"/><circle cx="8" cy="18" r="1"/><circle cx="16" cy="18" r="1"/></svg></div>
+        <div class="sub-brand-tag">Jetzt verf&uuml;gbar <span class="badge-live">Live</span></div>
+        <h3>Marketing Automation</h3>
+        <p>Reputation, Sichtbarkeit und Kundengewinnung — datenbasiert und automatisiert.</p>
+        <ul class="sub-brand-services">
+          <li>Google Review Analyse &amp; Aktionsplan</li>
+          <li>Individuelle Antwortvorlagen</li>
+          <li>Wettbewerbs-Benchmark</li>
+          <li>Score-Prognose &amp; Monitoring</li>
+        </ul>
+      </div>
+      <div class="sub-brand-card fade-up delay-1">
+        <div class="sub-brand-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="sub-brand-tag">In Entwicklung <span class="badge-planned">Geplant</span></div>
+        <h3>Legal Automation</h3>
+        <p>Vertr&auml;ge verstehen, Risiken erkennen, Compliance sicherstellen — ohne teure Anwaltsstunden.</p>
+        <ul class="sub-brand-services">
+          <li>Vertragsanalyse pro Dokument</li>
+          <li>Risikoerkennung &amp; Zusammenfassung</li>
+          <li>Compliance-Checks</li>
+          <li>Dokumentengenerierung</li>
+        </ul>
+      </div>
+      <div class="sub-brand-card fade-up delay-2">
+        <div class="sub-brand-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/><circle cx="12" cy="12" r="10" stroke-width="1.2" stroke-dasharray="2 3"/></svg></div>
+        <div class="sub-brand-tag">In Entwicklung <span class="badge-planned">Geplant</span></div>
+        <h3>Investing Automation</h3>
+        <p>Marktanalysen, Portfolio-Monitoring und Investment-Research — ohne Bloomberg-Terminal.</p>
+        <ul class="sub-brand-services">
+          <li>Marktanalyse &amp; Trends</li>
+          <li>Portfolio-&Uuml;berwachung</li>
+          <li>Investment-Research</li>
+          <li>Risiko-Bewertung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTS ══ -->
+<section class="products" id="produkte">
+  <div class="section-inner">
+    <div class="section-label fade-up">Produkte</div>
+    <div class="section-title fade-up delay-1">Google Review Analyse &amp; Aktionsplan</div>
+    <div class="section-subtitle fade-up delay-2">Ihr individueller Report — basierend auf allen &ouml;ffentlichen Google-Bewertungen Ihres Unternehmens.</div>
+
+    <div class="product-showcase">
+      <div class="product-preview fade-up">
+        <div class="product-preview-inner">
+          <div class="preview-badge">Beispiel-Analyse</div>
+          <h3>Was Ihre Bewertungen wirklich &uuml;ber Ihr Unternehmen sagen</h3>
+          <div class="product-metrics">
+            <div class="product-metric">
+              <div class="val">3,2</div>
+              <div class="lbl">Aktueller Score</div>
+            </div>
+            <div class="product-metric">
+              <div class="val">4,6</div>
+              <div class="lbl">Benchmark Top 5</div>
+            </div>
+            <div class="product-metric">
+              <div class="val">87</div>
+              <div class="lbl">Bewertungen</div>
+            </div>
+          </div>
+          <div class="product-sample-items">
+            <div class="product-sample-item">
+              <span class="category">Wartezeiten &amp; Terminvergabe</span>
+              <span class="severity severity-high">Sofort</span>
+            </div>
+            <div class="product-sample-item">
+              <span class="category">Kommunikation &amp; Aufkl&auml;rung</span>
+              <span class="severity severity-high">Sofort</span>
+            </div>
+            <div class="product-sample-item">
+              <span class="category">Freundlichkeit Personal</span>
+              <span class="severity severity-mid">Kurzfristig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info fade-up delay-1">
+        <h3>Alles, was Sie brauchen, um Ihren Score zu verbessern</h3>
+        <p>Wir analysieren jede einzelne Google-Bewertung Ihres Unternehmens und liefern Ihnen einen individuellen Report mit konkreten, sofort umsetzbaren Ma&szlig;nahmen.</p>
+
+        <ul class="product-features">
+          <li><span class="check">&check;</span>Individuelle Antwortvorlagen f&uuml;r alle negativen Bewertungen</li>
+          <li><span class="check">&check;</span>Vorlagen f&uuml;r Antworten auf positive Bewertungen</li>
+          <li><span class="check">&check;</span>Vollst&auml;ndige Bewertungsanalyse mit Beschwerdeschwerpunkten</li>
+          <li><span class="check">&check;</span>Priorisierter Aktionsplan (sofort / kurzfristig / mittelfristig)</li>
+          <li><span class="check">&check;</span>Score-Prognose f&uuml;r 6 und 12 Monate</li>
+          <li><span class="check">&check;</span>Benchmark vs. Top-5-Wettbewerber</li>
+        </ul>
+
+        <div class="pricing-box">
+          <div class="pricing-left">
+            <div class="pricing-regular">Regul&auml;r: 49,90 EUR</div>
+            <div class="pricing-beta">9,90 EUR <span>einmalig</span></div>
+            <div class="pricing-note">Einf&uuml;hrungspreis — limitiert</div>
+          </div>
+          <a href="https://www.aisolo.io/report/bestellen" class="btn-primary" target="_blank">
+            Jetzt bestellen &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testimonials" id="referenzen">
+  <div class="section-inner">
+    <div class="section-label fade-up">Referenzen</div>
+    <div class="section-title fade-up delay-1">Was unsere Kunden sagen</div>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&bdquo;Wir hatten 3,4 Sterne und wussten nicht, warum. Der Report hat genau aufgezeigt, wo die Probleme liegen. Die Antwortvorlagen haben wir am selben Tag gepostet — zwei Patienten haben ihre Bewertung daraufhin ge&auml;ndert.&ldquo;</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div>
+            <div class="testimonial-name">Dr. Stefan Krause</div>
+            <div class="testimonial-role">Zahnarztpraxis, M&uuml;nchen</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up delay-1">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&bdquo;F&uuml;r 9,90 Euro bekommt man eine Analyse, f&uuml;r die eine Agentur locker 500 Euro nehmen w&uuml;rde. Die konkreten Antwortvorlagen allein sind das Geld wert. Absolut empfehlenswert.&ldquo;</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MH</div>
+          <div>
+            <div class="testimonial-name">Maria Hoffmann</div>
+            <div class="testimonial-role">Friseursalon, Stuttgart</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up delay-2">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">&bdquo;Als Handwerker hatte ich Google-Bewertungen nie auf dem Schirm. Der Aktionsplan war so konkret, dass ich sofort anfangen konnte. Nach 3 Monaten: von 3,8 auf 4,3 Sterne.&ldquo;</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">TW</div>
+          <div>
+            <div class="testimonial-name">Thomas Weber</div>
+            <div class="testimonial-role">Elektro Weber GmbH, Hamburg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section class="team" id="team">
+  <div class="section-inner">
+    <div class="section-label fade-up">Team</div>
+    <div class="section-title fade-up delay-1">Erfahrung, die den Unterschied macht</div>
+    <div class="section-subtitle fade-up delay-2">Unser Team vereint &uuml;ber 20 Jahre Erfahrung in Strategieberatung, KI-Technologie und wissenschaftlicher Forschung.</div>
+
+    <div class="team-highlights" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px; margin-top:64px; margin-bottom:64px;">
+      <div class="team-stat fade-up" style="text-align:center; padding:40px 24px; background:var(--petrol-ice); border-radius:16px;">
+        <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--petrol-dark); margin-bottom:8px;">20+</div>
+        <div style="font-size:14px; color:var(--text-secondary); font-weight:500;">Jahre Branchenerfahrung</div>
+      </div>
+      <div class="team-stat fade-up delay-1" style="text-align:center; padding:40px 24px; background:var(--petrol-ice); border-radius:16px;">
+        <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--petrol-dark); margin-bottom:8px;">PhD</div>
+        <div style="font-size:14px; color:var(--text-secondary); font-weight:500;">Wissenschaftliche Expertise</div>
+      </div>
+      <div class="team-stat fade-up delay-2" style="text-align:center; padding:40px 24px; background:var(--petrol-ice); border-radius:16px;">
+        <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--petrol-dark); margin-bottom:8px;">KI</div>
+        <div style="font-size:14px; color:var(--text-secondary); font-weight:500;">Modernste Technologie</div>
+      </div>
+    </div>
+
+    <div class="fade-up" style="text-align:center; max-width:700px; margin:0 auto 48px;">
+      <p style="font-size:16px; line-height:1.8; color:var(--text-secondary);">Hinter AI Solo steht ein hochmotiviertes Team mit Wurzeln in der internationalen Strategieberatung und Spitzenforschung. Wir verbinden analytische Tiefe mit technologischer Exzellenz — und der &Uuml;berzeugung, dass KI-gest&uuml;tzte Analysen nicht nur Konzernen vorbehalten sein sollten.</p>
+    </div>
+
+    <div class="section-label fade-up" style="text-align:center; margin-bottom:32px;">Unser Hintergrund</div>
+
+    <div style="display:flex; justify-content:center; align-items:center; gap:64px; flex-wrap:wrap;" class="fade-up delay-1">
+      <!-- Stanford -->
+      <div style="text-align:center;">
+        <div style="width:180px; height:100px; background:#8C1515; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+          <svg width="140" height="50" viewBox="0 0 140 50">
+            <text x="70" y="22" text-anchor="middle" fill="#ffffff" font-family="'DM Serif Display',Georgia,serif" font-size="16" font-weight="700" letter-spacing="0.05em">STANFORD</text>
+            <text x="70" y="40" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="500" letter-spacing="0.08em">GRADUATE SCHOOL</text>
+          </svg>
+        </div>
+        <div style="font-size:13px; color:var(--text-muted);">Stanford University</div>
+      </div>
+      <!-- BCG -->
+      <div style="text-align:center;">
+        <div style="width:180px; height:100px; background:#00311a; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+          <svg width="140" height="50" viewBox="0 0 140 50">
+            <text x="70" y="22" text-anchor="middle" fill="#ffffff" font-family="'Plus Jakarta Sans',sans-serif" font-size="11" font-weight="600" letter-spacing="0.06em">BOSTON CONSULTING</text>
+            <text x="70" y="40" text-anchor="middle" fill="#ffffff" font-family="'Plus Jakarta Sans',sans-serif" font-size="18" font-weight="700" letter-spacing="0.1em">GROUP</text>
+          </svg>
+        </div>
+        <div style="font-size:13px; color:var(--text-muted);">BCG Alumni</div>
+      </div>
+      <!-- PhD -->
+      <div style="text-align:center;">
+        <div style="width:180px; height:100px; background:var(--petrol-dark); border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+          <svg width="140" height="50" viewBox="0 0 140 50">
+            <text x="70" y="22" text-anchor="middle" fill="var(--petrol-light)" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="500" letter-spacing="0.06em">PROMOTION</text>
+            <text x="70" y="42" text-anchor="middle" fill="#ffffff" font-family="'DM Serif Display',Georgia,serif" font-size="22" font-weight="700">PhD</text>
+          </svg>
+        </div>
+        <div style="font-size:13px; color:var(--text-muted);">Wissenschaftliche Forschung</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section" id="kontakt">
+  <div class="section-inner cta-inner">
+    <div class="section-label fade-up" style="color: var(--petrol-light);">Loslegen</div>
+    <div class="section-title fade-up delay-1">Bereit, Ihren Google-Score zu verbessern?</div>
+    <p class="section-subtitle fade-up delay-2">Bestellen Sie jetzt Ihre individuelle Analyse — zum Einf&uuml;hrungspreis von 9,90&nbsp;EUR statt 49,90&nbsp;EUR.</p>
+    <a href="#kontakt" class="btn-primary fade-up delay-3">
+      Jetzt Analyse bestellen &rarr;
+    </a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo/ai_solo_white_transparent.png" alt="AI Solo">
+        <p>AI Solo macht KI-gest&uuml;tzte Analysen und Strategien f&uuml;r Einzelpersonen, kleine und mittlere Unternehmen zug&auml;nglich — zu fairen Preisen.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Marketing Automation</a>
+        <a href="#services">Legal Automation</a>
+        <a href="#services">Investing Automation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Produkte</h4>
+        <a href="#produkte">Google Review Analyse</a>
+        <a href="#produkte">Review Monitoring</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>
+        <a href="https://www.aisolo.io">www.aisolo.io</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 AI Solo. Alle Rechte vorbehalten.</p>
+      <p><a href="impressum.html" style="color:rgba(255,255,255,0.3);text-decoration:none;">Impressum</a> &middot; <a href="datenschutz.html" style="color:rgba(255,255,255,0.3);text-decoration:none;">Datenschutz</a> &middot; <a href="agb.html" style="color:rgba(255,255,255,0.3);text-decoration:none;">AGB</a> &middot; <a href="widerruf.html" style="color:rgba(255,255,255,0.3);text-decoration:none;">Widerruf</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav shadow on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
