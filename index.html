@@ -230,12 +230,14 @@ section { padding: 120px 40px; }
 .sub-brand-cards {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
   margin-top: 64px;
+  align-items: stretch;
 }
 .sub-brand-card {
   background: var(--white);
   border-radius: 16px;
   padding: 40px 32px;
   border: 1px solid var(--border);
+  display: flex; flex-direction: column;
   transition: all 0.3s;
   position: relative; overflow: hidden;
 }
@@ -403,6 +405,46 @@ section { padding: 120px 40px; }
   margin-top: 4px;
 }
 
+/* ── WHY REVIEWS MATTER ── */
+.why-reviews-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  margin: 40px auto 56px;
+  max-width: 980px;
+  align-items: stretch;
+}
+.why-reviews-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--petrol-medium);
+  border-radius: 14px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.05);
+  display: flex; flex-direction: column;
+}
+.why-reviews-stat {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px; line-height: 1;
+  color: var(--petrol-primary);
+  margin-bottom: 6px;
+}
+.why-reviews-headline {
+  font-size: 15px; font-weight: 700;
+  color: var(--petrol-dark);
+  margin-bottom: 10px;
+}
+.why-reviews-body {
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--text-secondary);
+  flex: 1;
+}
+.why-reviews-source {
+  font-size: 11px; color: var(--text-muted);
+  margin-top: 16px; font-style: italic;
+}
+@media (max-width: 768px) {
+  .why-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
 /* ── CO-CREATION ── */
 .cocreation { background: var(--white); }
 .cocreation-intro {
@@ -412,7 +454,7 @@ section { padding: 120px 40px; }
 .cocreation-grid {
   display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px;
   margin-top: 48px;
-  align-items: start;
+  align-items: stretch;
 }
 .cc-rank-block {
   background: var(--petrol-ice);
@@ -500,6 +542,7 @@ section { padding: 120px 40px; }
 .cc-bar-fill.cc-cat-investing { background: var(--petrol-light); }
 .cc-bar-fill.cc-cat-other { background: var(--text-muted); }
 
+.cc-rank-block, .cc-form-block { height: 100%; display: flex; flex-direction: column; }
 .cc-form-block {
   background: var(--white);
   border: 1px solid var(--border);
@@ -507,6 +550,8 @@ section { padding: 120px 40px; }
   padding: 36px 32px;
   box-shadow: 0 4px 28px rgba(19,47,53,0.06);
 }
+.cc-form-block .cc-form { flex: 1; display: flex; flex-direction: column; }
+.cc-form-block .cc-form button { margin-top: auto; }
 .cc-form-block h3 {
   font-family: 'DM Serif Display', serif;
   font-size: 24px; color: var(--petrol-dark);
@@ -564,11 +609,13 @@ section { padding: 120px 40px; }
 .testimonial-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
   margin-top: 64px;
+  align-items: stretch;
 }
 .testimonial-card {
   background: var(--white);
   border-radius: 16px; padding: 36px 28px;
   border: 1px solid var(--border);
+  display: flex; flex-direction: column;
   transition: transform 0.2s;
 }
 .testimonial-card:hover { transform: translateY(-2px); }
@@ -655,6 +702,38 @@ section { padding: 120px 40px; }
 }
 .credential-text strong {
   color: var(--text-secondary); font-weight: 600;
+}
+
+/* ── CONTACT CARD ── */
+.contact-card {
+  display: inline-flex; align-items: center; gap: 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 28px;
+  text-decoration: none;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(19,47,53,0.12);
+}
+.contact-card-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--petrol-primary);
+  color: var(--white);
+  font-family: 'DM Serif Display', serif; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-card-body { text-align: left; }
+.contact-card-label {
+  font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-muted); font-weight: 600;
+}
+.contact-card-value {
+  font-size: 18px; color: var(--petrol-dark); font-weight: 600;
 }
 
 /* ── CTA SECTION ── */
@@ -820,9 +899,9 @@ section { padding: 120px 40px; }
           Gro&szlig;e Unternehmen gewinnen nicht, weil sie schlauer sind. Sie gewinnen, weil sie sich die Werkzeuge leisten k&ouml;nnen, die sie schlauer aussehen lassen.
         </blockquote>
         <div class="brand-text fade-up delay-1">
-          <p>Ein Konzern investiert 50.000&nbsp;&euro; in ein Beratungsprojekt, das ihm sagt, was seine Google-Bewertungen l&auml;ngst verraten — wenn jemand sie richtig lesen w&uuml;rde.</p>
-          <p>Ein mittelst&auml;ndischer Unternehmer kann das nicht. Aber er verdient dieselbe Klarheit, dieselbe Strategie, denselben konkreten Plan, um besser zu werden.</p>
-          <p>Diese L&uuml;cke schlie&szlig;t AI Solo.</p>
+          <p>Ein Konzern investiert 50.000&nbsp;&euro; in ein Beratungsprojekt, das ihm sagt, was &ouml;ffentliche Daten l&auml;ngst verraten &mdash; zum Beispiel seine Google-Bewertungen, seine Wettbewerber-Profile oder seine eigenen Vertr&auml;ge &mdash; wenn jemand sie richtig lesen w&uuml;rde.</p>
+          <p>Ein mittelst&auml;ndischer Unternehmer kann sich das nicht leisten. Aber er verdient dieselbe Klarheit, dieselbe Strategie, denselben konkreten Plan, um besser zu werden.</p>
+          <p>Diese L&uuml;cke schlie&szlig;t AI Solo &mdash; mit einer wachsenden Familie von KI-Produkten, von denen die Google-Review-Analyse nur das erste ist.</p>
         </div>
       </div>
       <div class="brand-values fade-up delay-2">
@@ -905,7 +984,33 @@ section { padding: 120px 40px; }
   <div class="section-inner">
     <div class="section-label fade-up">Online Shop</div>
     <div class="section-title fade-up delay-1">Google Review Analyse &amp; Aktionsplan</div>
-    <div class="section-subtitle fade-up delay-2">Ihr individueller Report — basierend auf allen &ouml;ffentlichen Google-Bewertungen Ihres Unternehmens.</div>
+    <div class="section-subtitle fade-up delay-2">Zum Beispiel: Ihr individueller Report &mdash; basierend auf allen &ouml;ffentlichen Google-Bewertungen Ihres Unternehmens. Weitere KI-Produkte folgen, sobald die Co-Creation-Community ihre Top-Vorschl&auml;ge gew&auml;hlt hat.</div>
+
+    <!-- Why reviews matter — two stat cards (customer + employee perspective) -->
+    <div class="why-reviews-grid fade-up delay-2">
+      <div class="why-reviews-card">
+        <div class="why-reviews-stat">97&nbsp;%</div>
+        <div class="why-reviews-headline">Kunden &amp; Patienten lesen Online-Bewertungen</div>
+        <div class="why-reviews-body">
+          77&nbsp;% entscheiden sich aktiv gegen ein Unternehmen mit
+          schlechten Bewertungen. Ein Score unter 4&nbsp;Sternen halbiert
+          die Zahl der Erstkontakte &mdash; die direkte Folge: weniger neue
+          Patienten, weniger neue Kunden.
+        </div>
+        <div class="why-reviews-source">Quelle: BrightLocal Local Consumer Review Survey 2026</div>
+      </div>
+      <div class="why-reviews-card">
+        <div class="why-reviews-stat">83&nbsp;%</div>
+        <div class="why-reviews-headline">Bewerber recherchieren Arbeitgeber-Bewertungen</div>
+        <div class="why-reviews-body">
+          Mitarbeiter wollen f&uuml;r ein gut wahrgenommenes Unternehmen
+          arbeiten. Aktive Reputationspflege reduziert die Fluktuation um
+          bis zu 28&nbsp;% &mdash; und steigert messbar Motivation und
+          Engagement der bestehenden Teams.
+        </div>
+        <div class="why-reviews-source">Quelle: Glassdoor Employer Branding Statistics 2025</div>
+      </div>
+    </div>
 
     <div class="product-showcase">
       <div class="product-preview fade-up">
@@ -1196,13 +1301,32 @@ section { padding: 120px 40px; }
   </div>
 </section>
 
+<!-- ══ KONTAKT ══ -->
+<section class="section" id="kontakt" style="background: var(--petrol-pale);">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label fade-up">Kontakt</div>
+    <h2 class="section-title fade-up delay-1">Sprechen Sie mit uns</h2>
+    <p class="section-subtitle fade-up delay-2" style="max-width:620px; margin:0 auto 36px;">
+      Fragen zu unseren Produkten, Feedback oder eine Idee f&uuml;r eine Zusammenarbeit?
+      Wir lesen jede E-Mail pers&ouml;nlich und antworten in der Regel innerhalb von 24&nbsp;Stunden.
+    </p>
+    <a href="mailto:hello@aisolo.io" class="contact-card fade-up delay-3">
+      <div class="contact-card-icon">@</div>
+      <div class="contact-card-body">
+        <div class="contact-card-label">E-Mail</div>
+        <div class="contact-card-value">hello@aisolo.io</div>
+      </div>
+    </a>
+  </div>
+</section>
+
 <!-- ══ CTA ══ -->
-<section class="cta-section" id="kontakt">
+<section class="cta-section" id="bestellen">
   <div class="section-inner cta-inner">
     <div class="section-label fade-up" style="color: var(--petrol-light);">Loslegen</div>
     <div class="section-title fade-up delay-1">Bereit, Ihren Google-Score zu verbessern?</div>
-    <p class="section-subtitle fade-up delay-2">Bestellen Sie jetzt Ihre individuelle Analyse &amp; Aktionsplan — zum Einf&uuml;hrungspreis von 9,90&nbsp;EUR statt 49,90&nbsp;EUR.</p>
-    <a href="#kontakt" class="btn-primary fade-up delay-3">
+    <p class="section-subtitle fade-up delay-2">Bestellen Sie zum Beispiel Ihre individuelle Google-Review-Analyse &amp; Aktionsplan — zum Einf&uuml;hrungspreis von 9,90&nbsp;EUR statt 49,90&nbsp;EUR.</p>
+    <a href="https://www.aisolo.io/report/bestellen" target="_blank" class="btn-primary fade-up delay-3">
       Jetzt Analyse &amp; Aktionsplan bestellen &rarr;
     </a>
   </div>
