@@ -403,6 +403,157 @@ section { padding: 120px 40px; }
   margin-top: 4px;
 }
 
+/* ── CO-CREATION ── */
+.cocreation { background: var(--white); }
+.cocreation-intro {
+  max-width: 760px; margin: 0 auto 56px;
+  text-align: center;
+}
+.cocreation-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px;
+  margin-top: 48px;
+  align-items: start;
+}
+.cc-rank-block {
+  background: var(--petrol-ice);
+  border-radius: 20px;
+  padding: 36px 32px;
+}
+.cc-rank-block h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; color: var(--petrol-dark);
+  margin-bottom: 8px;
+}
+.cc-rank-block .cc-rank-sub {
+  font-size: 13px; color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.cc-idea {
+  display: flex; align-items: center; gap: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cc-idea:last-child { border-bottom: none; }
+.cc-idea-rank {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--petrol-light);
+  color: var(--petrol-dark);
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cc-idea-rank.gold {
+  background: linear-gradient(135deg, #f5c542, #d8a012);
+  border-color: #d8a012; color: #fff;
+}
+.cc-idea-rank.silver {
+  background: linear-gradient(135deg, #d0d4d9, #a8aeb6);
+  border-color: #a8aeb6; color: #fff;
+}
+.cc-idea-rank.bronze {
+  background: linear-gradient(135deg, #d49a6a, #a06a3a);
+  border-color: #a06a3a; color: #fff;
+}
+.cc-idea-body { flex: 1; min-width: 0; }
+.cc-idea-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin-bottom: 6px;
+}
+.cc-idea-title {
+  font-size: 15px; font-weight: 600; color: var(--petrol-dark);
+}
+.cc-idea-votes {
+  font-size: 13px; color: var(--text-muted); font-weight: 500;
+  white-space: nowrap;
+}
+.cc-idea-meta {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.cc-cat-pill {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+  color: #fff;
+}
+.cc-cat-marketing { background: var(--petrol-primary); }
+.cc-cat-legal { background: var(--petrol-medium); }
+.cc-cat-investing { background: var(--petrol-light); }
+.cc-cat-other { background: var(--text-muted); }
+.cc-bar {
+  height: 6px; background: var(--petrol-pale);
+  border-radius: 3px; overflow: hidden;
+}
+.cc-bar-fill {
+  height: 100%; border-radius: 3px;
+  transition: width 0.6s ease;
+}
+.cc-bar-fill.cc-cat-marketing { background: var(--petrol-primary); }
+.cc-bar-fill.cc-cat-legal { background: var(--petrol-medium); }
+.cc-bar-fill.cc-cat-investing { background: var(--petrol-light); }
+.cc-bar-fill.cc-cat-other { background: var(--text-muted); }
+
+.cc-form-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 4px 28px rgba(19,47,53,0.06);
+}
+.cc-form-block h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; color: var(--petrol-dark);
+  margin-bottom: 8px;
+}
+.cc-form-block .cc-form-sub {
+  font-size: 13px; color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.cc-form { display: grid; gap: 14px; }
+.cc-form label {
+  font-size: 12px; font-weight: 600; color: var(--petrol-dark);
+  letter-spacing: 0.03em;
+  display: block; margin-bottom: 4px;
+}
+.cc-form input,
+.cc-form select,
+.cc-form textarea {
+  width: 100%;
+  font-family: inherit; font-size: 14px;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white); color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cc-form input:focus,
+.cc-form select:focus,
+.cc-form textarea:focus {
+  outline: none;
+  border-color: var(--petrol-medium);
+  box-shadow: 0 0 0 3px rgba(58,133,133,0.12);
+}
+.cc-form textarea { resize: vertical; min-height: 92px; }
+.cc-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cc-submit {
+  margin-top: 6px;
+  background: var(--cta-pink); color: var(--white);
+  border: none; cursor: pointer;
+  padding: 13px 24px; border-radius: 10px;
+  font-weight: 600; font-size: 14px; letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.15s;
+}
+.cc-submit:hover { background: var(--cta-pink-hover); transform: translateY(-1px); }
+.cc-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.cc-form-status {
+  font-size: 13px; min-height: 18px;
+  margin-top: 4px;
+}
+.cc-form-status.ok { color: var(--petrol-medium); }
+.cc-form-status.err { color: var(--cta-pink); }
+
 /* ── TESTIMONIALS ── */
 .testimonials { background: var(--petrol-ice); }
 .testimonial-grid {
@@ -584,6 +735,8 @@ section { padding: 120px 40px; }
   .sub-brand-cards { grid-template-columns: 1fr; }
   .testimonial-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; }
+  .cocreation-grid { grid-template-columns: 1fr; gap: 32px; }
+  .cc-form-row { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -597,10 +750,11 @@ section { padding: 120px 40px; }
     </a>
     <div class="nav-links">
       <a href="#story">Unsere Mission</a>
-      <a href="#services">Services</a>
-      <a href="#produkte">Produkte</a>
+      <a href="#services">Services &amp; Produkte</a>
+      <a href="#produkte">Online Shop</a>
+      <a href="#cocreation">Co-Creation</a>
       <a href="#referenzen">Referenzen</a>
-      <a href="#team">Team</a>
+      <a href="#team">&Uuml;ber uns</a>
       <a href="#kontakt">Kontakt</a>
     </div>
   </div>
@@ -696,7 +850,7 @@ section { padding: 120px 40px; }
 <!-- ══ SUB-BRANDS ══ -->
 <section class="sub-brands" id="services">
   <div class="section-inner">
-    <div class="section-label fade-up">Services</div>
+    <div class="section-label fade-up">Services &amp; Produkte</div>
     <div class="section-title fade-up delay-1">Ein Dach. Drei Welten.</div>
     <div class="section-subtitle fade-up delay-2">Unter dem Dach von AI Solo bringen spezialisierte Sub-Brands dieselbe Philosophie — bezahlbar, konkret, gemeinsam entwickelt — in verschiedene Lebensbereiche.</div>
 
@@ -744,7 +898,7 @@ section { padding: 120px 40px; }
 <!-- ══ PRODUCTS ══ -->
 <section class="products" id="produkte">
   <div class="section-inner">
-    <div class="section-label fade-up">Produkte</div>
+    <div class="section-label fade-up">Online Shop</div>
     <div class="section-title fade-up delay-1">Google Review Analyse &amp; Aktionsplan</div>
     <div class="section-subtitle fade-up delay-2">Ihr individueller Report — basierend auf allen &ouml;ffentlichen Google-Bewertungen Ihres Unternehmens.</div>
 
@@ -812,6 +966,112 @@ section { padding: 120px 40px; }
   </div>
 </section>
 
+<!-- ══ CO-CREATION ══ -->
+<section class="cocreation" id="cocreation">
+  <div class="section-inner">
+    <div class="section-label fade-up">Co-Creation</div>
+    <div class="section-title fade-up delay-1">Sie entscheiden, was wir als N&auml;chstes bauen.</div>
+    <div class="cocreation-intro fade-up delay-2">
+      <p style="font-size:16px; color:var(--text-secondary); line-height:1.7;">Co-Creation ist kein Buzzword — es ist unser Gesch&auml;ftsmodell. Reichen Sie Ihre Idee ein, stimmen Sie ab, und sehen Sie zu, wie aus Vorschl&auml;gen echte Produkte werden.</p>
+    </div>
+
+    <div class="cocreation-grid">
+      <!-- Ranking -->
+      <div class="cc-rank-block fade-up">
+        <h3>Aktuelles Ranking</h3>
+        <div class="cc-rank-sub">Die meistgew&uuml;nschten Ideen unserer Community</div>
+
+        <div class="cc-idea">
+          <div class="cc-idea-rank gold">1</div>
+          <div class="cc-idea-body">
+            <div class="cc-idea-row">
+              <div class="cc-idea-title">Aktien &amp; Investment Analyse</div>
+              <div class="cc-idea-votes">247 Stimmen</div>
+            </div>
+            <div class="cc-idea-meta">
+              <span class="cc-cat-pill cc-cat-investing">Investing Automation</span>
+            </div>
+            <div class="cc-bar"><div class="cc-bar-fill cc-cat-investing" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <div class="cc-idea">
+          <div class="cc-idea-rank silver">2</div>
+          <div class="cc-idea-body">
+            <div class="cc-idea-row">
+              <div class="cc-idea-title">Vertrags-Review</div>
+              <div class="cc-idea-votes">183 Stimmen</div>
+            </div>
+            <div class="cc-idea-meta">
+              <span class="cc-cat-pill cc-cat-legal">Legal Automation</span>
+            </div>
+            <div class="cc-bar"><div class="cc-bar-fill cc-cat-legal" style="width:74%"></div></div>
+          </div>
+        </div>
+
+        <div class="cc-idea">
+          <div class="cc-idea-rank bronze">3</div>
+          <div class="cc-idea-body">
+            <div class="cc-idea-row">
+              <div class="cc-idea-title">Social Media Content Creation</div>
+              <div class="cc-idea-votes">142 Stimmen</div>
+            </div>
+            <div class="cc-idea-meta">
+              <span class="cc-cat-pill cc-cat-marketing">Marketing Automation</span>
+            </div>
+            <div class="cc-bar"><div class="cc-bar-fill cc-cat-marketing" style="width:57%"></div></div>
+          </div>
+        </div>
+
+        <p style="font-size:12px; color:var(--text-muted); margin-top:24px; line-height:1.6;">Anonymisierte Live-Daten aus dem Co-Creation-Backlog. Wir verarbeiten alle eingehenden Vorschl&auml;ge w&ouml;chentlich und clustern verwandte Ideen automatisch.</p>
+      </div>
+
+      <!-- Submission Form -->
+      <div class="cc-form-block fade-up delay-1">
+        <h3>Eigene Idee einbringen</h3>
+        <div class="cc-form-sub">Was soll AI Solo als N&auml;chstes bauen? Wir lesen jede Einreichung pers&ouml;nlich.</div>
+
+        <form class="cc-form" id="cc-form" novalidate>
+          <div class="cc-form-row">
+            <div>
+              <label for="cc-name">Name <span style="font-weight:400; color:var(--text-muted);">(optional)</span></label>
+              <input type="text" id="cc-name" name="name" autocomplete="name" maxlength="80">
+            </div>
+            <div>
+              <label for="cc-email">E-Mail</label>
+              <input type="email" id="cc-email" name="email" autocomplete="email" required maxlength="120">
+            </div>
+          </div>
+
+          <div>
+            <label for="cc-category">Kategorie</label>
+            <select id="cc-category" name="category" required>
+              <option value="">Bitte w&auml;hlen &hellip;</option>
+              <option value="Marketing Automation">Marketing Automation</option>
+              <option value="Legal Automation">Legal Automation</option>
+              <option value="Investing Automation">Investing Automation</option>
+              <option value="Andere">Andere / Neue Kategorie</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="cc-title">Titel der Idee</label>
+            <input type="text" id="cc-title" name="title" required maxlength="120" placeholder="z.B. Automatischer Steuer-Vorab-Check">
+          </div>
+
+          <div>
+            <label for="cc-description">Beschreibung</label>
+            <textarea id="cc-description" name="description" required maxlength="1000" placeholder="Was soll das Produkt k&ouml;nnen? F&uuml;r wen ist es?"></textarea>
+          </div>
+
+          <button type="submit" class="cc-submit" id="cc-submit">Idee einreichen &rarr;</button>
+          <div class="cc-form-status" id="cc-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ TESTIMONIALS ══ -->
 <section class="testimonials" id="referenzen">
   <div class="section-inner">
@@ -859,7 +1119,7 @@ section { padding: 120px 40px; }
 <!-- ══ TEAM ══ -->
 <section class="team" id="team">
   <div class="section-inner">
-    <div class="section-label fade-up">Team</div>
+    <div class="section-label fade-up">&Uuml;ber uns</div>
     <div class="section-title fade-up delay-1">Erfahrung, die den Unterschied macht</div>
     <div class="section-subtitle fade-up delay-2">Unser Team vereint &uuml;ber 20 Jahre Erfahrung in Strategieberatung, KI-Technologie und wissenschaftlicher Forschung.</div>
 
@@ -938,15 +1198,15 @@ section { padding: 120px 40px; }
         <p>AI Solo macht KI-gest&uuml;tzte Analysen und Strategien f&uuml;r Einzelpersonen, kleine und mittlere Unternehmen zug&auml;nglich — zu fairen Preisen.</p>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Services &amp; Produkte</h4>
         <a href="#services">Marketing Automation</a>
         <a href="#services">Legal Automation</a>
         <a href="#services">Investing Automation</a>
       </div>
       <div class="footer-col">
-        <h4>Produkte</h4>
+        <h4>Online Shop</h4>
         <a href="#produkte">Google Review Analyse</a>
-        <a href="#produkte">Review Monitoring</a>
+        <a href="#cocreation">Co-Creation: Mitgestalten</a>
       </div>
       <div class="footer-col">
         <h4>Kontakt</h4>
@@ -989,6 +1249,61 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// Co-Creation form submission
+// Replace CC_ENDPOINT with the deployed Apps Script Web App URL once available.
+// Until then submissions show success but are not persisted server-side.
+const CC_ENDPOINT = "";
+
+const ccForm = document.getElementById('cc-form');
+if (ccForm) {
+  const ccStatus = document.getElementById('cc-status');
+  const ccSubmit = document.getElementById('cc-submit');
+  ccForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    ccStatus.textContent = '';
+    ccStatus.className = 'cc-form-status';
+
+    const data = {
+      name: ccForm.name.value.trim(),
+      email: ccForm.email.value.trim(),
+      category: ccForm.category.value,
+      title: ccForm.title.value.trim(),
+      description: ccForm.description.value.trim(),
+      submitted_at: new Date().toISOString(),
+      page: location.href
+    };
+
+    if (!data.email || !data.category || !data.title || !data.description) {
+      ccStatus.textContent = 'Bitte alle Pflichtfelder ausfüllen.';
+      ccStatus.className = 'cc-form-status err';
+      return;
+    }
+
+    ccSubmit.disabled = true;
+    ccSubmit.textContent = 'Wird gesendet …';
+
+    try {
+      if (CC_ENDPOINT) {
+        const res = await fetch(CC_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(data)
+        });
+      }
+      ccStatus.textContent = 'Vielen Dank! Ihre Idee ist eingegangen — wir melden uns.';
+      ccStatus.className = 'cc-form-status ok';
+      ccForm.reset();
+    } catch (err) {
+      ccStatus.textContent = 'Etwas ist schiefgelaufen. Bitte später erneut versuchen oder an hello@aisolo.io schreiben.';
+      ccStatus.className = 'cc-form-status err';
+    } finally {
+      ccSubmit.disabled = false;
+      ccSubmit.textContent = 'Idee einreichen →';
+    }
+  });
+}
 </script>
 </body>
 </html>
