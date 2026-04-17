@@ -64,6 +64,30 @@ body {
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--petrol-primary); }
+
+/* Hamburger (mobile only) */
+.nav-toggle {
+  display: none;
+  background: transparent; border: none; cursor: pointer;
+  width: 44px; height: 44px; padding: 10px;
+  align-items: center; justify-content: center;
+}
+.nav-toggle span {
+  display: block; width: 24px; height: 2px;
+  background: var(--petrol-dark); position: relative;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: ''; position: absolute; left: 0;
+  width: 24px; height: 2px; background: var(--petrol-dark);
+  transition: transform 0.25s, top 0.25s;
+}
+.nav-toggle span::before { top: -7px; }
+.nav-toggle span::after { top: 7px; }
+.nav-toggle[aria-expanded="true"] span { background: transparent; }
+.nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
 .nav-cta {
   background: var(--cta-pink); color: var(--white) !important;
   padding: 10px 24px; border-radius: 8px;
@@ -804,7 +828,8 @@ section { padding: 120px 40px; }
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual { order: -1; }
+  .hero-visual { order: 2; }
+  .hero-text  { order: 1; }
   .hero-card { max-width: 360px; }
   .brand-grid { grid-template-columns: 1fr; gap: 48px; }
   .product-showcase { grid-template-columns: 1fr; }
@@ -813,13 +838,52 @@ section { padding: 120px 40px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  section { padding: 80px 24px; }
-  .nav-inner { padding: 14px 24px; }
-  .nav-links { display: none; }
+  section { padding: 64px 20px; }
+  .hero-inner { padding: 100px 20px 72px; gap: 32px; }
+  .nav-inner { padding: 10px 18px; }
+  .nav-logo img { height: 56px; }
+  .nav-links {
+    display: none; position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    flex-direction: column; gap: 0; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(19,47,53,0.08);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a {
+    width: 100%; padding: 14px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links a:last-child { border-bottom: none; }
+  .nav-toggle { display: inline-flex; }
+  .hero-buttons { gap: 12px; }
+  .btn-primary, .btn-secondary { padding: 14px 22px; font-size: 14px; }
+  .hero-card { padding: 28px 22px; }
+  .brand-quote { font-size: 22px; padding-left: 18px; }
   .sub-brand-cards { grid-template-columns: 1fr; }
+  .sub-brand-card { padding: 32px 24px; }
   .testimonial-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr; }
+  .testimonial-card { padding: 28px 22px; }
+  .why-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+  .product-preview { padding: 32px 22px; }
+  .product-metrics { gap: 12px; }
+  .product-metric .val { font-size: 26px; }
+  .pricing-box { padding: 22px 20px; }
+  .pricing-beta { font-size: 30px; }
+  .team-info h3 { font-size: 28px; }
+  .contact-card { padding: 16px 20px; gap: 14px; }
+  .contact-card-value { font-size: 16px; }
+  .footer { padding: 48px 20px 24px; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom {
+    flex-direction: column; gap: 10px; text-align: center;
+    align-items: flex-start;
+  }
   .cocreation-grid { grid-template-columns: 1fr; gap: 32px; }
+  .cc-rank-block, .cc-form-block { padding: 28px 22px; }
   .cc-form-row { grid-template-columns: 1fr; }
 }
 </style>
@@ -832,7 +896,10 @@ section { padding: 120px 40px; }
     <a href="#" class="nav-logo">
       <img src="assets/logo/ai_solo_transparent.png" alt="AI Solo">
     </a>
-    <div class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Menü" aria-controls="navLinks" aria-expanded="false">
+      <span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
       <a href="#story">Unsere Mission</a>
       <a href="#services">Services &amp; Produkte</a>
       <a href="#produkte">Online Shop</a>
@@ -1381,6 +1448,22 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 });
+
+// Mobile hamburger toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
