@@ -665,6 +665,23 @@ section { padding: 120px 40px; }
 
 /* ── TEAM ── */
 .team { background: var(--white); }
+.team-highlights {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin: 64px 0;
+}
+.team-stat {
+  text-align: center; padding: 40px 24px;
+  background: var(--petrol-ice); border-radius: 16px;
+  min-width: 0;
+}
+.team-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px; color: var(--petrol-dark);
+  margin-bottom: 8px; line-height: 1.1;
+}
+.team-stat-label {
+  font-size: 14px; color: var(--text-secondary); font-weight: 500;
+}
 .team-content {
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
   margin-top: 64px; align-items: center;
@@ -865,6 +882,9 @@ section { padding: 120px 40px; }
   .brand-quote { font-size: 22px; padding-left: 18px; }
   .sub-brand-cards { grid-template-columns: 1fr; }
   .sub-brand-card { padding: 32px 24px; }
+  .team-highlights { grid-template-columns: 1fr; gap: 16px; margin: 40px 0; }
+  .team-stat { padding: 28px 20px; }
+  .team-stat-num { font-size: 40px; }
   .testimonial-grid { grid-template-columns: 1fr; }
   .testimonial-card { padding: 28px 22px; }
   .why-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -1314,18 +1334,18 @@ section { padding: 120px 40px; }
     <div class="section-title fade-up delay-1">Erfahrung, die den Unterschied macht</div>
     <div class="section-subtitle fade-up delay-2">Unser Team vereint &uuml;ber 20 Jahre Erfahrung in Strategieberatung, KI-Technologie und wissenschaftlicher Forschung.</div>
 
-    <div class="team-highlights" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:32px; margin-top:64px; margin-bottom:64px;">
-      <div class="team-stat fade-up" style="text-align:center; padding:40px 24px; background:var(--petrol-ice); border-radius:16px;">
-        <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--petrol-dark); margin-bottom:8px;">20+</div>
-        <div style="font-size:14px; color:var(--text-secondary); font-weight:500;">Jahre Branchenerfahrung</div>
+    <div class="team-highlights">
+      <div class="team-stat fade-up">
+        <div class="team-stat-num">20+</div>
+        <div class="team-stat-label">Jahre Branchenerfahrung</div>
       </div>
-      <div class="team-stat fade-up delay-1" style="text-align:center; padding:40px 24px; background:var(--petrol-ice); border-radius:16px;">
-        <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--petrol-dark); margin-bottom:8px;">PhD</div>
-        <div style="font-size:14px; color:var(--text-secondary); font-weight:500;">Wissenschaftliche Expertise</div>
+      <div class="team-stat fade-up delay-1">
+        <div class="team-stat-num">PhD</div>
+        <div class="team-stat-label">Wissenschaftliche Expertise</div>
       </div>
-      <div class="team-stat fade-up delay-2" style="text-align:center; padding:40px 24px; background:var(--petrol-ice); border-radius:16px;">
-        <div style="font-family:'DM Serif Display',serif; font-size:48px; color:var(--petrol-dark); margin-bottom:8px;">KI</div>
-        <div style="font-size:14px; color:var(--text-secondary); font-weight:500;">Modernste Technologie</div>
+      <div class="team-stat fade-up delay-2">
+        <div class="team-stat-num">KI</div>
+        <div class="team-stat-label">Modernste Technologie</div>
       </div>
     </div>
 
