@@ -1250,10 +1250,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Co-Creation form submission
-// Replace CC_ENDPOINT with the deployed Apps Script Web App URL once available.
-// Until then submissions show success but are not persisted server-side.
-const CC_ENDPOINT = "";
+// Co-Creation form submission — wired to Apps Script Web App.
+const CC_ENDPOINT = "https://script.google.com/macros/s/AKfycbyWFjWh7wWxFvVnBxCV9r4EAF20-KO7l2xOcjhtAGL6ZmY3dKVdnRDMIKzg2s_x_phz/exec";
 
 const ccForm = document.getElementById('cc-form');
 if (ccForm) {
