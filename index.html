@@ -918,6 +918,90 @@ section { padding: 120px 40px; }
   max-width: 520px; margin: 0 auto 40px;
 }
 
+/* ── PRODUCT SLIDER (CTA) ── */
+.cta-slider { position: relative; max-width: 720px; margin: 0 auto; }
+.cta-slider-track {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; gap: 0;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.cta-slider-track::-webkit-scrollbar { display: none; }
+.cta-slide {
+  flex: 0 0 100%; scroll-snap-align: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+.cta-slide-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 320px;
+  backdrop-filter: blur(8px);
+}
+.cta-slide-status {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.cta-slide-status.live {
+  background: var(--cta-pink); color: var(--white);
+}
+.cta-slide-status.dev {
+  background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.85);
+}
+.cta-slide-name {
+  font-size: 26px; font-weight: 700; color: var(--white); margin: 0 0 8px;
+  font-family: 'Playfair Display', serif;
+}
+.cta-slide-tag {
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--petrol-light); font-weight: 600; margin-bottom: 14px;
+}
+.cta-slide-desc {
+  color: rgba(255,255,255,0.78); font-size: 15px; line-height: 1.55;
+  max-width: 460px; margin: 0 0 22px;
+}
+.cta-slide-price {
+  color: var(--white); font-weight: 700; font-size: 17px; margin-bottom: 18px;
+}
+.cta-slide .btn-primary { display: inline-flex; align-items: center; }
+.cta-slide .btn-secondary-soon {
+  display: inline-flex; align-items: center;
+  padding: 14px 26px; border-radius: 10px;
+  background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.22);
+  font-weight: 600; font-size: 14px; cursor: not-allowed;
+}
+.cta-slider-arrows {
+  display: flex; justify-content: center; align-items: center;
+  gap: 14px; margin-top: 22px;
+}
+.cta-slider-arrow {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.22);
+  color: var(--white); font-size: 18px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cta-slider-arrow:hover { background: rgba(255,255,255,0.20); transform: translateY(-1px); }
+.cta-slider-dots {
+  display: inline-flex; gap: 8px; align-items: center;
+}
+.cta-slider-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.25); border: none; cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cta-slider-dot.active { background: var(--cta-pink); transform: scale(1.3); }
+@media (max-width: 768px) {
+  .cta-slide-card { padding: 26px 20px; min-height: 300px; }
+  .cta-slide-name { font-size: 22px; }
+  .cta-slide-desc { font-size: 14px; }
+}
+
 /* ── FOOTER ── */
 .footer {
   background: var(--petrol-dark); padding: 64px 40px 32px;
@@ -1167,7 +1251,7 @@ section { padding: 120px 40px; }
       <div class="sub-brand-card fade-up delay-1">
         <div class="sub-brand-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <div class="sub-brand-tag">In Entwicklung <span class="badge-planned">Geplant</span></div>
-        <h3>Legal Automatisierung</h3>
+        <h3>Vertrags-Automatisierung</h3>
         <p>Vertr&auml;ge verstehen, Risiken erkennen, Compliance sicherstellen — ohne teure Anwaltsstunden.</p>
         <ul class="sub-brand-services">
           <li>Vertragsanalyse pro Dokument</li>
@@ -1223,7 +1307,7 @@ section { padding: 120px 40px; }
         <div class="product-tile-status status-dev">In Entwicklung</div>
         <div class="product-tile-icon">&sect;</div>
         <div class="product-tile-name">Vertrags-Review</div>
-        <div class="product-tile-tag">Legal Automatisierung</div>
+        <div class="product-tile-tag">Vertrags-Automatisierung</div>
         <div class="product-tile-desc">Zweitgr&ouml;&szlig;ter Wunsch der Community. Versteckte Klauseln, Risiken und Verhandlungs-Spielraum &mdash; in Minuten statt Stunden.</div>
         <div class="product-tile-price">Bald verf&uuml;gbar</div>
       </button>
@@ -1397,7 +1481,7 @@ section { padding: 120px 40px; }
               <div class="cc-idea-votes">24% aller Vorschl&auml;ge</div>
             </div>
             <div class="cc-idea-meta">
-              <span class="cc-cat-pill cc-cat-legal">Legal Automatisierung</span>
+              <span class="cc-cat-pill cc-cat-legal">Vertrags-Automatisierung</span>
             </div>
             <div class="cc-bar"><div class="cc-bar-fill cc-cat-legal" style="width:73%"></div></div>
           </div>
@@ -1456,7 +1540,7 @@ section { padding: 120px 40px; }
             <select id="cc-category" name="category" required>
               <option value="">Bitte w&auml;hlen &hellip;</option>
               <option value="Marketing Automation">Marketing Automatisierung</option>
-              <option value="Legal Automation">Legal Automatisierung</option>
+              <option value="Legal Automation">Vertrags-Automatisierung</option>
               <option value="Investing Automation">Investment Automatisierung</option>
               <option value="Andere">Andere / Neue Kategorie</option>
             </select>
@@ -1608,11 +1692,57 @@ section { padding: 120px 40px; }
 <section class="cta-section" id="bestellen">
   <div class="section-inner cta-inner">
     <div class="section-label fade-up" style="color: var(--petrol-light);">Loslegen</div>
-    <div class="section-title fade-up delay-1">Bereit, Ihren Google-Score zu verbessern?</div>
-    <p class="section-subtitle fade-up delay-2">Bestellen Sie zum Beispiel Ihre individuelle Google-Review-Analyse &amp; Aktionsplan — zum Einf&uuml;hrungspreis von 9,90&nbsp;EUR statt 49,90&nbsp;EUR.</p>
-    <a href="https://www.aisolo.io/report/bestellen" target="_blank" class="btn-primary fade-up delay-3">
-      Jetzt Analyse &amp; Aktionsplan bestellen &rarr;
-    </a>
+    <div class="section-title fade-up delay-1">Entdecken Sie unsere Produkte</div>
+    <p class="section-subtitle fade-up delay-2">Aktuell verf&uuml;gbar &mdash; und ein Blick auf das, was als N&auml;chstes kommt. Wischen Sie durch unser Angebot.</p>
+
+    <div class="cta-slider fade-up delay-3" id="ctaSlider">
+      <div class="cta-slider-track" id="ctaSliderTrack">
+
+        <div class="cta-slide">
+          <div class="cta-slide-card">
+            <span class="cta-slide-status live">Live</span>
+            <h3 class="cta-slide-name">Google Review Analyse</h3>
+            <div class="cta-slide-tag">Reputation Automatisierung</div>
+            <p class="cta-slide-desc">Individueller Report mit Aktionsplan, basierend auf allen &ouml;ffentlichen Google-Bewertungen Ihres Unternehmens. Zum Einf&uuml;hrungspreis von 9,90&nbsp;EUR statt 49,90&nbsp;EUR.</p>
+            <div class="cta-slide-price">ab 9,90&nbsp;EUR</div>
+            <a href="https://www.aisolo.io/report/bestellen" target="_blank" class="btn-primary">Jetzt bestellen &rarr;</a>
+          </div>
+        </div>
+
+        <div class="cta-slide">
+          <div class="cta-slide-card">
+            <span class="cta-slide-status dev">In Entwicklung</span>
+            <h3 class="cta-slide-name">Aktien &amp; Investment Analyse</h3>
+            <div class="cta-slide-tag">Investment Automatisierung</div>
+            <p class="cta-slide-desc">Top-Vorschlag aus dem Co-Creation-Ranking. KI-gest&uuml;tzte Bewertung von Aktien, ETFs und Portfolios &mdash; bezahlbar f&uuml;r Privatanleger.</p>
+            <div class="cta-slide-price">Bald verf&uuml;gbar</div>
+            <a href="#cocreation" class="btn-secondary-soon">Priorit&auml;t mitgestalten &rarr;</a>
+          </div>
+        </div>
+
+        <div class="cta-slide">
+          <div class="cta-slide-card">
+            <span class="cta-slide-status dev">In Entwicklung</span>
+            <h3 class="cta-slide-name">Vertrags-Review</h3>
+            <div class="cta-slide-tag">Vertrags-Automatisierung</div>
+            <p class="cta-slide-desc">Zweitgr&ouml;&szlig;ter Wunsch der Community. Versteckte Klauseln, Risiken und Verhandlungs-Spielraum &mdash; in Minuten statt Stunden.</p>
+            <div class="cta-slide-price">Bald verf&uuml;gbar</div>
+            <a href="#cocreation" class="btn-secondary-soon">Priorit&auml;t mitgestalten &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta-slider-arrows">
+        <button type="button" class="cta-slider-arrow" id="ctaPrev" aria-label="Vorheriges Produkt">&larr;</button>
+        <div class="cta-slider-dots" id="ctaDots">
+          <button type="button" class="cta-slider-dot active" data-idx="0" aria-label="Produkt 1"></button>
+          <button type="button" class="cta-slider-dot" data-idx="1" aria-label="Produkt 2"></button>
+          <button type="button" class="cta-slider-dot" data-idx="2" aria-label="Produkt 3"></button>
+        </div>
+        <button type="button" class="cta-slider-arrow" id="ctaNext" aria-label="N&auml;chstes Produkt">&rarr;</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1627,7 +1757,7 @@ section { padding: 120px 40px; }
       <div class="footer-col">
         <h4>Services &amp; Produkte</h4>
         <a href="#services">Marketing Automatisierung</a>
-        <a href="#services">Legal Automatisierung</a>
+        <a href="#services">Vertrags-Automatisierung</a>
         <a href="#services">Investment Automatisierung</a>
       </div>
       <div class="footer-col">
@@ -1756,6 +1886,44 @@ if (ccForm) {
     }
   });
 }
+
+// ── CTA product slider ──
+(function () {
+  const track = document.getElementById('ctaSliderTrack');
+  const dots  = document.querySelectorAll('#ctaDots .cta-slider-dot');
+  const prev  = document.getElementById('ctaPrev');
+  const next  = document.getElementById('ctaNext');
+  if (!track || !dots.length) return;
+
+  const slideCount = track.children.length;
+  let current = 0;
+
+  function goTo(idx) {
+    current = (idx + slideCount) % slideCount;
+    const slideWidth = track.clientWidth;
+    track.scrollTo({ left: slideWidth * current, behavior: 'smooth' });
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  prev.addEventListener('click', () => goTo(current - 1));
+  next.addEventListener('click', () => goTo(current + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+  // Sync dots when user swipes manually
+  let scrollTimer;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const idx = Math.round(track.scrollLeft / track.clientWidth);
+      if (idx !== current) {
+        current = idx;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+    }, 80);
+  });
+
+  window.addEventListener('resize', () => goTo(current));
+})();
 </script>
 </body>
 </html>
