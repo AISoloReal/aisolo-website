@@ -196,6 +196,7 @@ body {
 
   var params = new URLSearchParams(window.location.search);
   var sessionId = params.get("session_id");
+  var preview = params.get("preview");
   var pending = document.getElementById("statusPending");
   var ready = document.getElementById("statusReady");
   var fallback = document.getElementById("statusFallback");
@@ -207,6 +208,14 @@ body {
     fallback.classList.remove("active");
     el.classList.add("active");
   }
+
+  if (preview === "pending") { show(pending); return; }
+  if (preview === "ready") {
+    btn.setAttribute("href", "#preview-mode");
+    show(ready);
+    return;
+  }
+  if (preview === "fallback") { show(fallback); return; }
 
   if (!sessionId || !sessionId.indexOf) {
     show(fallback);
