@@ -99,6 +99,34 @@ body {
   font-size: 15px;
 }
 .back-link:hover { text-decoration: underline; }
+.download-btn {
+  display: inline-block;
+  background: var(--petrol-primary);
+  color: #fff;
+  padding: 16px 36px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  margin: 8px 0 4px;
+  box-shadow: 0 4px 12px rgba(26,79,85,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.download-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(26,79,85,0.32); }
+.spinner {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(26,79,85,0.15);
+  border-top-color: var(--petrol-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.status-pending, .status-ready, .status-fallback { display: none; }
+.status-pending.active, .status-ready.active, .status-fallback.active { display: block; }
 .legal-footer {
   background: var(--petrol-dark);
   color: rgba(255,255,255,0.4);
@@ -120,25 +148,103 @@ body {
   <div class="thank-you-inner">
     <div class="thank-you-icon">&#10003;</div>
     <h1>Vielen Dank f&uuml;r Ihren Kauf!</h1>
-    <p>
-      Ihre Bestellung wurde erfolgreich abgeschlossen. Wir bereiten Ihren
-      individuellen Analysebericht vor.
-    </p>
-    <div class="highlight">
-      <p>
-        Sie erhalten in wenigen Minuten eine E-Mail mit Ihrem
-        pers&ouml;nlichen Download-Link an die bei der Bestellung
-        angegebene E-Mail-Adresse.
+
+    <div id="statusPending" class="status-pending active">
+      <p><span class="spinner"></span>Ihr Bericht wird vorbereitet &hellip;</p>
+      <p style="font-size: 14px; color: var(--text-muted); margin-top: 16px;">
+        Das dauert nur wenige Sekunden.
       </p>
     </div>
-    <p style="font-size: 14px; color: var(--text-muted);">
-      Der Download-Link ist 72 Stunden g&uuml;ltig. Falls Sie keine E-Mail
-      erhalten, pr&uuml;fen Sie bitte Ihren Spam-Ordner oder kontaktieren
-      Sie uns unter <a href="mailto:hello@aisolo.io" style="color:var(--petrol-primary);">hello@aisolo.io</a>.
-    </p>
+
+    <div id="statusReady" class="status-ready">
+      <p>Ihr individueller Analysebericht steht jetzt zum Download bereit:</p>
+      <div style="margin: 24px 0;">
+        <a id="downloadBtn" href="#" class="download-btn" download>
+          Bericht herunterladen &rarr;
+        </a>
+      </div>
+      <p style="font-size: 14px; color: var(--text-muted);">
+        Der Link wurde zus&auml;tzlich an Ihre E-Mail-Adresse gesendet und
+        ist 72 Stunden g&uuml;ltig (max. 3 Downloads).
+      </p>
+    </div>
+
+    <div id="statusFallback" class="status-fallback">
+      <div class="highlight">
+        <p>
+          Sie erhalten in wenigen Minuten eine E-Mail mit Ihrem
+          pers&ouml;nlichen Download-Link an die bei der Bestellung
+          angegebene E-Mail-Adresse.
+        </p>
+      </div>
+      <p style="font-size: 14px; color: var(--text-muted);">
+        Der Download-Link ist 72 Stunden g&uuml;ltig. Falls Sie keine E-Mail
+        erhalten, pr&uuml;fen Sie bitte Ihren Spam-Ordner oder kontaktieren
+        Sie uns unter <a href="mailto:hello@aisolo.io" style="color:var(--petrol-primary);">hello@aisolo.io</a>.
+      </p>
+    </div>
+
     <a href="index.html" class="back-link">&larr; Zur&uuml;ck zur Startseite</a>
   </div>
 </main>
+
+<script>
+(function () {
+  var WORKER_URL = "https://aisolo-checkout.ai-solo-account.workers.dev";
+  var POLL_INTERVAL_MS = 1500;
+  var MAX_WAIT_MS = 25000;
+
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get("session_id");
+  var pending = document.getElementById("statusPending");
+  var ready = document.getElementById("statusReady");
+  var fallback = document.getElementById("statusFallback");
+  var btn = document.getElementById("downloadBtn");
+
+  function show(el) {
+    pending.classList.remove("active");
+    ready.classList.remove("active");
+    fallback.classList.remove("active");
+    el.classList.add("active");
+  }
+
+  if (!sessionId || !sessionId.indexOf) {
+    show(fallback);
+    return;
+  }
+
+  var started = Date.now();
+
+  function poll() {
+    fetch(WORKER_URL + "/lookup?session_id=" + encodeURIComponent(sessionId))
+      .then(function (r) {
+        if (r.status === 200) return r.json();
+        return null;
+      })
+      .then(function (data) {
+        if (data && data.status === "ready" && data.downloadUrl) {
+          btn.setAttribute("href", data.downloadUrl);
+          show(ready);
+          return;
+        }
+        if (Date.now() - started > MAX_WAIT_MS) {
+          show(fallback);
+          return;
+        }
+        setTimeout(poll, POLL_INTERVAL_MS);
+      })
+      .catch(function () {
+        if (Date.now() - started > MAX_WAIT_MS) {
+          show(fallback);
+        } else {
+          setTimeout(poll, POLL_INTERVAL_MS);
+        }
+      });
+  }
+
+  poll();
+})();
+</script>
 
 <footer class="legal-footer">
   <p>&copy; 2026 AI Solo &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a></p>
