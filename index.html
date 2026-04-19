@@ -879,6 +879,70 @@ section { padding: 120px 40px; }
   .launch-signup-form { flex-direction: column; }
   .launch-signup-form button { width: 100%; }
 }
+
+/* ── Notify-on-launch modal ── */
+.notify-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(19, 47, 53, 0.55);
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.notify-modal.show { display: flex; }
+.notify-modal-box {
+  background: var(--white); border-radius: 14px;
+  padding: 28px 28px 24px; max-width: 460px; width: 100%;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+  position: relative;
+}
+.notify-modal-close {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none; cursor: pointer;
+  font-size: 24px; line-height: 1; color: var(--petrol-primary);
+}
+.notify-modal-eyebrow {
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--petrol-medium); font-weight: 600; margin-bottom: 6px;
+}
+.notify-modal h3 {
+  font-family: var(--font-serif); font-size: 22px; line-height: 1.25;
+  color: var(--petrol-primary); margin: 0 0 8px;
+}
+.notify-modal-sub {
+  font-size: 14px; color: var(--text); margin: 0 0 18px; line-height: 1.5;
+}
+.notify-modal-form { display: flex; flex-direction: column; gap: 10px; }
+.notify-modal-form input[type="email"] {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 15px; outline: none; transition: border-color 0.15s;
+}
+.notify-modal-form input[type="email"]:focus { border-color: var(--cta-pink); }
+.notify-modal-form button {
+  background: var(--cta-pink); color: var(--white); border: none;
+  padding: 12px 18px; border-radius: 8px; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s, transform 0.1s;
+}
+.notify-modal-form button:hover { background: var(--cta-pink-hover); }
+.notify-modal-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+.notify-modal-consent {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12px; color: var(--text-muted); line-height: 1.4;
+}
+.notify-modal-consent input { margin-top: 2px; flex-shrink: 0; }
+.notify-modal-status { font-size: 13px; margin-top: 8px; min-height: 18px; }
+.notify-modal-status.err { color: #b91c1c; }
+.notify-modal-status.ok  { color: var(--petrol-medium); }
+.notify-modal-success {
+  display: none; text-align: center; padding: 8px 0 4px;
+}
+.notify-modal-success.show { display: block; }
+.notify-modal-success-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--petrol-pale); color: var(--petrol-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 26px; margin-bottom: 12px;
+}
+
 .cc-form-status.ok { color: var(--petrol-medium); }
 .cc-form-status.err { color: var(--cta-pink); }
 
@@ -1461,7 +1525,7 @@ section { padding: 120px 40px; }
         </ul>
         <div class="soon-cta-row">
           <a href="#cocreation" class="btn-primary">Priorit&auml;t mitgestalten &rarr;</a>
-          <a href="mailto:hello@aisolo.io?subject=Interesse%20Aktien-%26-Investment-Analyse" class="btn-secondary-dark">Bei Launch benachrichtigen</a>
+          <button type="button" class="btn-secondary-dark" data-notify-launch data-product-slug="aktien-investment-analyse" data-product-name="Aktien &amp; Investment Analyse">Bei Launch benachrichtigen</button>
         </div>
       </div>
     </div>
@@ -1478,7 +1542,7 @@ section { padding: 120px 40px; }
         </ul>
         <div class="soon-cta-row">
           <a href="#cocreation" class="btn-primary">Priorit&auml;t mitgestalten &rarr;</a>
-          <a href="mailto:hello@aisolo.io?subject=Interesse%20Vertrags-Review" class="btn-secondary-dark">Bei Launch benachrichtigen</a>
+          <button type="button" class="btn-secondary-dark" data-notify-launch data-product-slug="vertrags-review" data-product-name="Vertrags-Review">Bei Launch benachrichtigen</button>
         </div>
       </div>
     </div>
@@ -1963,6 +2027,41 @@ section { padding: 120px 40px; }
   </div>
 </section>
 
+<!-- ── Notify-on-launch modal (shared by all "in development" products) ── -->
+<div class="notify-modal" id="notifyModal" role="dialog" aria-modal="true" aria-labelledby="notifyModalTitle">
+  <div class="notify-modal-box">
+    <button type="button" class="notify-modal-close" id="notifyModalClose" aria-label="Schlie&szlig;en">&times;</button>
+    <div id="notifyModalForm">
+      <div class="notify-modal-eyebrow">Bei Launch benachrichtigen</div>
+      <h3 id="notifyModalTitle">Produkt</h3>
+      <p class="notify-modal-sub">
+        Hinterlassen Sie Ihre E-Mail &mdash; wir melden uns, sobald dieses Produkt live geht.
+        Keine Newsletter, kein Spam.
+      </p>
+      <form class="notify-modal-form" id="notifyForm" novalidate>
+        <input type="email" id="nfEmail" placeholder="ihre@email.de" required autocomplete="email">
+        <label class="notify-modal-consent">
+          <input type="checkbox" id="nfConsent" required>
+          <span>
+            Ich stimme zu, dass AI Solo meine E-Mail-Adresse speichert, um mich
+            &uuml;ber den Launch dieses Produkts zu informieren. Abmeldung jederzeit per Antwort-Mail.
+          </span>
+        </label>
+        <button type="submit" id="nfSubmit">Benachrichtigen &rarr;</button>
+        <div class="notify-modal-status" id="nfStatus" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+    <div class="notify-modal-success" id="notifyModalSuccess">
+      <div class="notify-modal-success-icon">&check;</div>
+      <h3>Eingetragen!</h3>
+      <p class="notify-modal-sub">
+        Sie h&ouml;ren von uns, sobald <span id="nfSuccessProduct">das Produkt</span> live geht.
+        Ihre Customer-ID haben wir Ihnen per E-Mail geschickt.
+      </p>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -2194,6 +2293,104 @@ if (ccForm) {
       status.textContent = 'Etwas ist schiefgelaufen. Bitte später erneut versuchen.';
       submit.disabled = false;
       submit.textContent = 'Ich bin dabei →';
+    }
+  });
+})();
+
+// ── Notify-on-launch modal (per-product fan signup) ──
+(function () {
+  const modal     = document.getElementById('notifyModal');
+  const closeBtn  = document.getElementById('notifyModalClose');
+  const titleEl   = document.getElementById('notifyModalTitle');
+  const formWrap  = document.getElementById('notifyModalForm');
+  const successEl = document.getElementById('notifyModalSuccess');
+  const successProductEl = document.getElementById('nfSuccessProduct');
+  const form      = document.getElementById('notifyForm');
+  const email     = document.getElementById('nfEmail');
+  const consent   = document.getElementById('nfConsent');
+  const submit    = document.getElementById('nfSubmit');
+  const status    = document.getElementById('nfStatus');
+  if (!modal || !form) return;
+
+  const ENDPOINT = 'https://aisolo-checkout.ai-solo-account.workers.dev/api/fan-signup';
+  let currentSlug = '';
+  let currentName = '';
+
+  function open(slug, name) {
+    currentSlug = slug;
+    currentName = name;
+    titleEl.innerHTML = name;
+    formWrap.style.display = '';
+    successEl.classList.remove('show');
+    form.reset();
+    status.textContent = '';
+    status.className = 'notify-modal-status';
+    submit.disabled = false;
+    submit.textContent = 'Benachrichtigen \u2192';
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => email.focus(), 80);
+  }
+  function close() {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-notify-launch]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      open(btn.dataset.productSlug || 'unknown', btn.dataset.productName || 'Produkt');
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('show')) close();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'notify-modal-status';
+    status.textContent = '';
+
+    const data = {
+      email:         email.value.trim(),
+      consent:       consent.checked,
+      source:        'website-product-launch-notify',
+      interest_tags: [currentSlug],
+      product_name:  currentName,
+      ts:            new Date().toISOString(),
+    };
+
+    if (!data.email || !data.consent) {
+      status.className = 'notify-modal-status err';
+      status.textContent = 'Bitte E-Mail eingeben und Zustimmung geben.';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      status.className = 'notify-modal-status err';
+      status.textContent = 'Bitte g\u00fcltige E-Mail-Adresse angeben.';
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Sende \u2026';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      successProductEl.innerHTML = currentName;
+      formWrap.style.display = 'none';
+      successEl.classList.add('show');
+    } catch (err) {
+      status.className = 'notify-modal-status err';
+      status.textContent = 'Etwas ist schiefgelaufen. Bitte sp\u00e4ter erneut versuchen.';
+      submit.disabled = false;
+      submit.textContent = 'Benachrichtigen \u2192';
     }
   });
 })();
