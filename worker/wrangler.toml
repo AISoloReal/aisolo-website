@@ -1,0 +1,23 @@
+name = "aisolo-checkout"
+main = "src/worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+STRIPE_PRICE_ID = "price_1TMxzeQbcTGIHi84ZnNt5fXJ"
+SITE_URL = "https://www.aisolo.io"
+WORKER_URL = "https://aisolo-checkout.ai-solo-account.workers.dev"
+SENDER_EMAIL = "hello@aisolo.io"
+SENDER_NAME = "AI Solo"
+
+# Secrets (set via: wrangler secret put STRIPE_SECRET_KEY)
+# STRIPE_SECRET_KEY
+# STRIPE_WEBHOOK_SECRET
+# RESEND_API_KEY
+
+[[r2_buckets]]
+binding = "REPORTS"
+bucket_name = "aisolo-reports"
+
+[[kv_namespaces]]
+binding = "TOKENS"
+id = "46c6f9fafa20436e84e8700050d64812"
