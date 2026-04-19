@@ -746,6 +746,65 @@ section { padding: 120px 40px; }
   font-size: 13px; min-height: 18px;
   margin-top: 4px;
 }
+
+/* ── TEASER REQUEST FORM (product detail) ── */
+.teaser-request {
+  margin-top: 28px;
+  background: var(--petrol-pale);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 26px;
+}
+.teaser-request-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 6px;
+}
+.teaser-request-badge {
+  background: var(--petrol-primary); color: var(--white);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  padding: 4px 10px; border-radius: 999px; text-transform: uppercase;
+}
+.teaser-request h4 {
+  margin: 0; font-size: 18px; color: var(--petrol-dark);
+}
+.teaser-request-sub {
+  font-size: 13px; color: var(--text-muted); margin: 4px 0 18px;
+  line-height: 1.5;
+}
+.teaser-request .cc-form-row { grid-template-columns: 2fr 1fr; }
+.teaser-request .consent-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.45;
+}
+.teaser-request .consent-row input {
+  width: auto; margin: 2px 0 0; flex-shrink: 0;
+}
+.teaser-request .cc-submit { background: var(--petrol-primary); }
+.teaser-request .cc-submit:hover { background: var(--petrol-dark); }
+.teaser-request-success {
+  display: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  text-align: center;
+}
+.teaser-request-success.show { display: block; }
+.teaser-request-success .check-circle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--petrol-primary); color: var(--white);
+  font-size: 22px; margin-bottom: 12px;
+}
+.teaser-request-success h4 {
+  margin: 0 0 6px; color: var(--petrol-dark); font-size: 17px;
+}
+.teaser-request-success p {
+  margin: 0; font-size: 14px; color: var(--text-muted); line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .teaser-request { padding: 22px 18px; }
+  .teaser-request .cc-form-row { grid-template-columns: 1fr; }
+}
 .cc-form-status.ok { color: var(--petrol-medium); }
 .cc-form-status.err { color: var(--cta-pink); }
 
@@ -1438,6 +1497,58 @@ section { padding: 120px 40px; }
             Jetzt bestellen &rarr;
           </a>
         </div>
+
+        <!-- ── Inbound: free teaser request ── -->
+        <div class="teaser-request" id="teaserRequest">
+          <div class="teaser-request-head">
+            <span class="teaser-request-badge">Kostenlos</span>
+            <h4>Erst kostenlosen Teaser-Report anfordern</h4>
+          </div>
+          <p class="teaser-request-sub">
+            Noch unsicher? Tragen Sie Ihr Unternehmen ein und Sie erhalten innerhalb von 24&nbsp;Stunden
+            einen kostenfreien Teaser-Report mit Score, Benchmark und ersten Hinweisen &mdash; ohne Verpflichtung.
+          </p>
+          <form class="cc-form" id="teaserRequestForm" novalidate>
+            <div>
+              <label for="trCompany">Unternehmen *</label>
+              <input type="text" id="trCompany" name="company" required maxlength="120" placeholder="z. B. Praxis Dr. Mustermann">
+            </div>
+            <div class="cc-form-row">
+              <div>
+                <label for="trCity">Ort *</label>
+                <input type="text" id="trCity" name="city" required maxlength="80" placeholder="z. B. Stuttgart">
+              </div>
+              <div>
+                <label for="trMaps">Google-Maps-Link (optional)</label>
+                <input type="url" id="trMaps" name="maps_url" maxlength="500" placeholder="https://maps.app.goo.gl/&hellip;">
+              </div>
+            </div>
+            <div>
+              <label for="trEmail">E-Mail *</label>
+              <input type="email" id="trEmail" name="email" required maxlength="120" placeholder="ihre@email.de">
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" id="trConsent" name="consent" required>
+              <span>
+                Ich stimme zu, dass AI Solo meine Angaben verwendet, um den kostenlosen Teaser-Report
+                zu erstellen und an die angegebene E-Mail zu senden. Datenschutz: keine Weitergabe an Dritte.
+              </span>
+            </label>
+            <button type="submit" class="cc-submit" id="trSubmit">
+              Kostenlosen Teaser-Report anfordern &rarr;
+            </button>
+            <div class="cc-form-status" id="trStatus" role="status" aria-live="polite"></div>
+          </form>
+          <div class="teaser-request-success" id="teaserRequestSuccess">
+            <div class="check-circle">&check;</div>
+            <h4>Vielen Dank &mdash; Anfrage erhalten!</h4>
+            <p>
+              Sie erhalten Ihren pers&ouml;nlichen Teaser-Report innerhalb von 24&nbsp;Stunden an die
+              angegebene E-Mail-Adresse. Bei Fragen: <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
     </div><!-- /#prod-google-reviews -->
@@ -1923,6 +2034,63 @@ if (ccForm) {
   });
 
   window.addEventListener('resize', () => goTo(current));
+})();
+
+// ── Teaser request form (inbound) ──
+(function () {
+  const form    = document.getElementById('teaserRequestForm');
+  const status  = document.getElementById('trStatus');
+  const submit  = document.getElementById('trSubmit');
+  const success = document.getElementById('teaserRequestSuccess');
+  if (!form) return;
+
+  const ENDPOINT = 'https://aisolo-checkout.ai-solo-account.workers.dev/api/teaser-request';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'cc-form-status';
+    status.textContent = '';
+
+    const data = {
+      company:  document.getElementById('trCompany').value.trim(),
+      city:     document.getElementById('trCity').value.trim(),
+      maps_url: document.getElementById('trMaps').value.trim(),
+      email:    document.getElementById('trEmail').value.trim(),
+      consent:  document.getElementById('trConsent').checked,
+      source:   'website-google-reviews',
+      ts:       new Date().toISOString(),
+    };
+
+    if (!data.company || !data.city || !data.email || !data.consent) {
+      status.className = 'cc-form-status err';
+      status.textContent = 'Bitte fülle alle Pflichtfelder aus und stimme der Verarbeitung zu.';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      status.className = 'cc-form-status err';
+      status.textContent = 'Bitte eine gültige E-Mail-Adresse angeben.';
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Sende …';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.style.display = 'none';
+      success.classList.add('show');
+    } catch (err) {
+      status.className = 'cc-form-status err';
+      status.textContent = 'Etwas ist schiefgelaufen. Bitte später erneut versuchen oder an hello@aisolo.io schreiben.';
+      submit.disabled = false;
+      submit.textContent = 'Kostenlosen Teaser-Report anfordern →';
+    }
+  });
 })();
 </script>
 </body>
