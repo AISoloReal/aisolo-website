@@ -805,6 +805,80 @@ section { padding: 120px 40px; }
   .teaser-request { padding: 22px 18px; }
   .teaser-request .cc-form-row { grid-template-columns: 1fr; }
 }
+
+/* ── LAUNCH SIGNUP (fans / VIP list) ── */
+.launch-signup {
+  background: var(--petrol-pale);
+  padding: 56px 0;
+  border-top: 1px solid var(--border);
+}
+.launch-signup-inner {
+  max-width: 720px; margin: 0 auto; padding: 0 24px;
+  text-align: center;
+}
+.launch-signup .section-label {
+  color: var(--petrol-primary); margin-bottom: 8px;
+}
+.launch-signup h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px; color: var(--petrol-dark);
+  margin: 0 0 10px; line-height: 1.25;
+}
+.launch-signup-sub {
+  font-size: 15px; color: var(--text-muted);
+  margin: 0 auto 26px; max-width: 540px; line-height: 1.55;
+}
+.launch-signup-form {
+  display: flex; gap: 10px; justify-content: center;
+  flex-wrap: wrap; max-width: 520px; margin: 0 auto;
+}
+.launch-signup-form input[type="email"] {
+  flex: 1 1 280px;
+  padding: 13px 16px; border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--white); color: var(--text);
+  font-family: inherit; font-size: 14px;
+}
+.launch-signup-form input[type="email"]:focus {
+  outline: none; border-color: var(--petrol-medium);
+  box-shadow: 0 0 0 3px rgba(58,133,133,0.12);
+}
+.launch-signup-form button {
+  background: var(--cta-pink); color: var(--white);
+  border: none; cursor: pointer;
+  padding: 13px 22px; border-radius: 10px;
+  font-weight: 600; font-size: 14px;
+  transition: background 0.2s, transform 0.15s;
+}
+.launch-signup-form button:hover { background: var(--cta-pink-hover); transform: translateY(-1px); }
+.launch-signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+.launch-signup-consent {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12px; color: var(--text-muted); line-height: 1.45;
+  max-width: 520px; margin: 14px auto 0; text-align: left;
+}
+.launch-signup-consent input { margin-top: 2px; flex-shrink: 0; }
+.launch-signup-status {
+  font-size: 13px; min-height: 20px;
+  margin-top: 12px; color: var(--petrol-primary);
+}
+.launch-signup-status.err { color: #b91c1c; }
+.launch-signup-success {
+  display: none;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px 24px; max-width: 480px;
+  margin: 0 auto; text-align: center;
+}
+.launch-signup-success.show { display: block; }
+.launch-signup-success p {
+  margin: 0; color: var(--text); font-size: 14px; line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .launch-signup { padding: 40px 0; }
+  .launch-signup h2 { font-size: 24px; }
+  .launch-signup-form { flex-direction: column; }
+  .launch-signup-form button { width: 100%; }
+}
 .cc-form-status.ok { color: var(--petrol-medium); }
 .cc-form-status.err { color: var(--cta-pink); }
 
@@ -1858,6 +1932,37 @@ section { padding: 120px 40px; }
 </section>
 
 <!-- ══ FOOTER ══ -->
+<!-- ══ LAUNCH SIGNUP (fans / VIP list) ══ -->
+<section class="launch-signup" id="launch-signup">
+  <div class="launch-signup-inner">
+    <div class="section-label fade-up">Launch-Updates</div>
+    <h2 class="fade-up delay-1">Erfahren Sie als Erstes von neuen Produkten</h2>
+    <p class="launch-signup-sub fade-up delay-2">
+      Tragen Sie sich ein und Sie h&ouml;ren von uns, sobald wir ein neues KI-Produkt
+      ver&ouml;ffentlichen &mdash; kein Newsletter, keine Werbung dazwischen. Nur Launch-Infos.
+    </p>
+    <form class="launch-signup-form fade-up delay-3" id="launchSignupForm" novalidate>
+      <input type="email" id="lsEmail" name="email" required maxlength="120" placeholder="ihre@email.de">
+      <button type="submit" id="lsSubmit">Ich bin dabei &rarr;</button>
+    </form>
+    <label class="launch-signup-consent fade-up delay-3">
+      <input type="checkbox" id="lsConsent" required>
+      <span>
+        Ich stimme zu, dass AI Solo meine E-Mail-Adresse speichert, um mich &uuml;ber
+        Produkt-Launches zu informieren. Ich kann mich jederzeit per Antwort-Mail abmelden.
+      </span>
+    </label>
+    <div class="launch-signup-status" id="lsStatus" role="status" aria-live="polite"></div>
+    <div class="launch-signup-success" id="launchSignupSuccess">
+      <p>
+        <strong>Willkommen im Verteiler!</strong><br>
+        Sie h&ouml;ren von uns, sobald das n&auml;chste Produkt live geht. Eine
+        Best&auml;tigungsmail ist unterwegs.
+      </p>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-top">
@@ -2034,6 +2139,63 @@ if (ccForm) {
   });
 
   window.addEventListener('resize', () => goTo(current));
+})();
+
+// ── Launch signup (fans) ──
+(function () {
+  const form    = document.getElementById('launchSignupForm');
+  const email   = document.getElementById('lsEmail');
+  const consent = document.getElementById('lsConsent');
+  const submit  = document.getElementById('lsSubmit');
+  const status  = document.getElementById('lsStatus');
+  const success = document.getElementById('launchSignupSuccess');
+  if (!form) return;
+
+  const ENDPOINT = 'https://aisolo-checkout.ai-solo-account.workers.dev/api/fan-signup';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'launch-signup-status';
+    status.textContent = '';
+
+    const data = {
+      email:   email.value.trim(),
+      consent: consent.checked,
+      source:  'website-launch-signup',
+      ts:      new Date().toISOString(),
+    };
+
+    if (!data.email || !data.consent) {
+      status.className = 'launch-signup-status err';
+      status.textContent = 'Bitte E-Mail eingeben und Zustimmung geben.';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      status.className = 'launch-signup-status err';
+      status.textContent = 'Bitte gültige E-Mail-Adresse angeben.';
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Sende …';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.style.display = 'none';
+      document.querySelector('.launch-signup-consent').style.display = 'none';
+      success.classList.add('show');
+    } catch (err) {
+      status.className = 'launch-signup-status err';
+      status.textContent = 'Etwas ist schiefgelaufen. Bitte später erneut versuchen.';
+      submit.disabled = false;
+      submit.textContent = 'Ich bin dabei →';
+    }
+  });
 })();
 
 // ── Teaser request form (inbound) ──
