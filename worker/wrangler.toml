@@ -2,10 +2,14 @@ name = "aisolo-checkout"
 main = "src/worker.js"
 compatibility_date = "2024-01-01"
 
+routes = [
+  { pattern = "api.aisolo.io", custom_domain = true }
+]
+
 [vars]
-STRIPE_PRICE_ID = "price_1TMxzeQbcTGIHi84ZnNt5fXJ"
+STRIPE_PRICE_ID = "price_1TMxYkHnenwdxOhY2cXgdYjX"
 SITE_URL = "https://www.aisolo.io"
-WORKER_URL = "https://aisolo-checkout.ai-solo-account.workers.dev"
+WORKER_URL = "https://api.aisolo.io"
 SENDER_EMAIL = "hello@aisolo.io"
 SENDER_NAME = "AI Solo"
 
