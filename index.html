@@ -785,7 +785,8 @@ section { padding: 120px 40px; }
   font-size: 13px; color: var(--text-muted); margin: 4px 0 18px;
   line-height: 1.5;
 }
-.teaser-request .cc-form-row { grid-template-columns: 2fr 1fr; }
+.teaser-request .cc-form-row { grid-template-columns: 1.3fr 1fr; align-items: end; }
+.teaser-request .cc-form-row label { min-height: 20px; }
 .teaser-request .consent-row {
   display: flex; align-items: flex-start; gap: 10px;
   font-size: 12px; color: var(--text-muted); line-height: 1.45;
@@ -1655,11 +1656,11 @@ section { padding: 120px 40px; }
         <div class="teaser-request" id="teaserRequest">
           <div class="teaser-request-head">
             <span class="teaser-request-badge">Kostenlos</span>
-            <h4>Erst kostenlosen Teaser-Report anfordern</h4>
+            <h4>Erst eine kostenlose Vorschau anfordern</h4>
           </div>
           <p class="teaser-request-sub">
             Noch unsicher? Tragen Sie Ihr Unternehmen ein und Sie erhalten innerhalb von 24&nbsp;Stunden
-            einen kostenfreien Teaser-Report mit Score, Benchmark und ersten Hinweisen &mdash; ohne Verpflichtung.
+            eine kostenfreie Vorschau mit Score, Benchmark und ersten Hinweisen &mdash; ohne Verpflichtung.
           </p>
           <form class="cc-form" id="teaserRequestForm" novalidate>
             <div>
@@ -1672,7 +1673,7 @@ section { padding: 120px 40px; }
                 <input type="text" id="trCity" name="city" required maxlength="80" placeholder="z. B. Stuttgart">
               </div>
               <div>
-                <label for="trMaps">Google-Maps-Link (optional)</label>
+                <label for="trMaps">Maps-Link (optional)</label>
                 <input type="url" id="trMaps" name="maps_url" maxlength="500" placeholder="https://maps.app.goo.gl/&hellip;">
               </div>
             </div>
@@ -1683,12 +1684,12 @@ section { padding: 120px 40px; }
             <label class="consent-row">
               <input type="checkbox" id="trConsent" name="consent" required>
               <span>
-                Ich stimme zu, dass AI Solo meine Angaben verwendet, um den kostenlosen Teaser-Report
+                Ich stimme zu, dass AI Solo meine Angaben verwendet, um die kostenlose Vorschau
                 zu erstellen und an die angegebene E-Mail zu senden. Datenschutz: keine Weitergabe an Dritte.
               </span>
             </label>
             <button type="submit" class="cc-submit" id="trSubmit">
-              Kostenlosen Teaser-Report anfordern &rarr;
+              Kostenlose Vorschau anfordern &rarr;
             </button>
             <div class="cc-form-status" id="trStatus" role="status" aria-live="polite"></div>
           </form>
@@ -1696,7 +1697,7 @@ section { padding: 120px 40px; }
             <div class="check-circle">&check;</div>
             <h4>Vielen Dank &mdash; Anfrage erhalten!</h4>
             <p>
-              Sie erhalten Ihren pers&ouml;nlichen Teaser-Report innerhalb von 24&nbsp;Stunden an die
+              Sie erhalten Ihre pers&ouml;nliche Vorschau innerhalb von 24&nbsp;Stunden an die
               angegebene E-Mail-Adresse. Bei Fragen: <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>.
             </p>
           </div>
@@ -2462,7 +2463,7 @@ if (ccForm) {
       status.className = 'cc-form-status err';
       status.textContent = 'Etwas ist schiefgelaufen. Bitte später erneut versuchen oder an hello@aisolo.io schreiben.';
       submit.disabled = false;
-      submit.textContent = 'Kostenlosen Teaser-Report anfordern →';
+      submit.textContent = 'Kostenlose Vorschau anfordern →';
     }
   });
 })();

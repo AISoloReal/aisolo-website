@@ -494,17 +494,17 @@ async function handleTeaserRequest(request, env) {
         body: JSON.stringify({
           from: `${env.SENDER_NAME || "AI Solo"} <${env.SENDER_EMAIL || "hello@aisolo.io"}>`,
           to: [email],
-          subject: "Ihre Teaser-Report-Anfrage bei AI Solo",
+          subject: "Ihre Vorschau-Anfrage bei AI Solo",
           text:
 `Hallo,
 
 vielen Dank für Ihre Anfrage.
 
-Wir erstellen aktuell Ihren persönlichen Teaser-Report für:
+Wir erstellen aktuell Ihre persönliche Vorschau für:
   Unternehmen: ${company}
   Ort: ${city}
 
-Sie erhalten den Report innerhalb von 24 Stunden an diese E-Mail-Adresse.
+Sie erhalten die Vorschau innerhalb von 24 Stunden an diese E-Mail-Adresse.
 
 Bei Fragen einfach auf diese Mail antworten oder an hello@aisolo.io schreiben.
 
