@@ -618,20 +618,22 @@ section { padding: 120px 40px; }
 }
 
 /* ── GEO 2x2 QUADRANT GRID ── */
-/* Key: min-height on the grid forces 1fr-rows to actually distribute equally
-   (without a defined grid height, 1fr collapses to content-min and rows differ). */
+/* Key: minmax(MIN, 1fr) for both rows guarantees equal row heights even when
+   row-1 and row-2 natural content heights differ, AND forces cells to stretch
+   to a real pixel value so align-self: stretch + height:100% on items
+   actually have something to fill. */
 .geo-quad-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(560px, 1fr));
   gap: 28px;
   margin: 40px 0 0;
-  min-height: calc(2 * 560px + 28px);
   align-items: stretch;
 }
 .geo-quad-grid > * {
   margin: 0;
   min-width: 0;
+  height: 100%;
   align-self: stretch;
   display: flex;
   flex-direction: column;
