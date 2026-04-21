@@ -362,10 +362,26 @@ section { padding: 120px 40px; }
   background: var(--petrol-ice);
 }
 .product-tile.in-development {
-  background: #f7f8f9;
-  opacity: 0.78;
+  background: var(--petrol-dark);
+  border-color: var(--petrol-dark);
+  opacity: 1;
 }
-.product-tile.in-development:hover { opacity: 0.92; }
+.product-tile.in-development:hover {
+  border-color: var(--petrol-primary);
+  box-shadow: 0 12px 32px rgba(19,47,53,0.25);
+}
+.product-tile.in-development .product-tile-name  { color: var(--white); }
+.product-tile.in-development .product-tile-tag   { color: var(--petrol-light); }
+.product-tile.in-development .product-tile-desc  { color: rgba(255,255,255,0.85); }
+.product-tile.in-development .product-tile-icon {
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.2);
+}
+.product-tile.in-development .status-dev {
+  background: rgba(255,255,255,0.15);
+  color: var(--white);
+}
 .product-tile-status {
   position: absolute; top: 16px; right: 16px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
@@ -407,7 +423,7 @@ section { padding: 120px 40px; }
   color: var(--petrol-dark);
   margin-top: 4px;
 }
-.product-tile.in-development .product-tile-price { color: var(--text-muted); }
+.product-tile.in-development .product-tile-price { color: var(--white); }
 
 /* Detail panels */
 .product-detail[hidden] { display: none; }
@@ -1722,7 +1738,7 @@ section { padding: 120px 40px; }
         <div class="product-tile-icon">&euro;</div>
         <div class="product-tile-name">Aktienanalyse f&uuml;r bessere Investment-Entscheidungen</div>
         <div class="product-tile-tag">Meine KI</div>
-        <div class="product-tile-desc">KI-gest&uuml;tzte Bewertung von Aktien, ETFs und Portfolios f&uuml;r Privatanleger &mdash; fundamentale Kennzahlen, Risiko-Szenarien und konkrete Handlungsempfehlungen statt abstrakter Charts.</div>
+        <div class="product-tile-desc">KI-gest&uuml;tzte Bewertung einzelner Aktien &uuml;ber f&uuml;nf Dimensionen &mdash; Technik, Fundamentals, Sentiment, Risiko und Investment-These &mdash; mit konkreter Handlungsempfehlung statt abstrakter Charts.</div>
         <div class="product-tile-price">Bald verf&uuml;gbar</div>
       </button>
 
@@ -1743,11 +1759,13 @@ section { padding: 120px 40px; }
       <div class="soon-card">
         <div class="soon-badge">In Entwicklung</div>
         <h3>Aktienanalyse f&uuml;r bessere Investment-Entscheidungen</h3>
-        <p>Mit 33&nbsp;% aller Stimmen die meistgew&uuml;nschte Idee unserer Co-Creation-Community. Wir bauen eine erste Version, die fundamentale und KI-gest&uuml;tzte Analyse von Aktien, ETFs und Portfolios f&uuml;r Privatanleger zug&auml;nglich macht &mdash; bezahlbar, konkret, ohne Finanzberatungs-Jargon.</p>
+        <p>Mit 33&nbsp;% aller Stimmen die meistgew&uuml;nschte Idee unserer Co-Creation-Community. Wir bauen eine erste Version, die jede einzelne Aktie in f&uuml;nf Dimensionen bewertet &mdash; bezahlbar, konkret, ohne Finanzberatungs-Jargon.</p>
         <ul class="product-features">
-          <li><span class="check">&check;</span>Fundamentale Kennzahlen verst&auml;ndlich erkl&auml;rt</li>
-          <li><span class="check">&check;</span>Risiko-Bewertung und Sensitivit&auml;ts-Szenarien</li>
-          <li><span class="check">&check;</span>Konkrete Handlungsempfehlungen statt abstrakter Charts</li>
+          <li><span class="check">&check;</span>Technische Analyse &mdash; Trend, Momentum, Muster</li>
+          <li><span class="check">&check;</span>Fundamentalanalyse &mdash; Kennzahlen, Moat, Bewertung</li>
+          <li><span class="check">&check;</span>Sentiment &amp; Momentum &mdash; Analysten, News, Insider</li>
+          <li><span class="check">&check;</span>Risikoprofil &mdash; Szenarien, Volatilit&auml;t, Positionsgr&ouml;&szlig;e</li>
+          <li><span class="check">&check;</span>Investment-These &mdash; Bull/Bear-Case, Einstieg, Stop, Ziel</li>
         </ul>
         <div class="soon-cta-row">
           <a href="#cocreation" class="btn-primary">Priorit&auml;t mitgestalten &rarr;</a>
@@ -2276,7 +2294,7 @@ section { padding: 120px 40px; }
             <span class="cta-slide-status dev">In Entwicklung</span>
             <h3 class="cta-slide-name">Aktienanalyse f&uuml;r bessere Investment-Entscheidungen</h3>
             <div class="cta-slide-tag">Meine KI</div>
-            <p class="cta-slide-desc">KI-gest&uuml;tzte Bewertung von Aktien, ETFs und Portfolios f&uuml;r Privatanleger &mdash; fundamentale Kennzahlen, Risiko-Szenarien und konkrete Handlungsempfehlungen.</p>
+            <p class="cta-slide-desc">KI-gest&uuml;tzte Bewertung einzelner Aktien &uuml;ber f&uuml;nf Dimensionen &mdash; Technik, Fundamentals, Sentiment, Risiko und Investment-These &mdash; mit konkreter Handlungsempfehlung.</p>
             <div class="cta-slide-price">Bald verf&uuml;gbar</div>
             <a href="#cocreation" class="btn-secondary-soon">Priorit&auml;t mitgestalten &rarr;</a>
           </div>
