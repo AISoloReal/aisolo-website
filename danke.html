@@ -127,6 +127,8 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 .status-pending, .status-ready, .status-fallback { display: none; }
 .status-pending.active, .status-ready.active, .status-fallback.active { display: block; }
+#statusInbound { display: none; }
+#statusInbound.active { display: block; }
 .legal-footer {
   background: var(--petrol-dark);
   color: rgba(255,255,255,0.4);
@@ -184,6 +186,21 @@ body {
       </p>
     </div>
 
+    <div id="statusInbound" class="status-fallback">
+      <div class="highlight">
+        <p>
+          Ihre Bestellung ist eingegangen. Wir erstellen Ihren individuellen
+          Report und schicken ihn innerhalb von 24&ndash;48&nbsp;Stunden als
+          PDF an die bei der Bestellung angegebene E-Mail-Adresse.
+        </p>
+      </div>
+      <p style="font-size: 14px; color: var(--text-muted);">
+        Eine Best&auml;tigung haben wir bereits an Ihre E-Mail geschickt. Falls Sie
+        keine erhalten, pr&uuml;fen Sie bitte Ihren Spam-Ordner oder kontaktieren
+        Sie uns unter <a href="mailto:hello@aisolo.io" style="color:var(--petrol-primary);">hello@aisolo.io</a>.
+      </p>
+    </div>
+
     <a href="index.html" class="back-link">&larr; Zur&uuml;ck zur Startseite</a>
   </div>
 </main>
@@ -197,16 +214,26 @@ body {
   var params = new URLSearchParams(window.location.search);
   var sessionId = params.get("session_id");
   var preview = params.get("preview");
+  var inbound = params.get("inbound") === "1";
   var pending = document.getElementById("statusPending");
   var ready = document.getElementById("statusReady");
   var fallback = document.getElementById("statusFallback");
+  var inboundEl = document.getElementById("statusInbound");
   var btn = document.getElementById("downloadBtn");
 
   function show(el) {
     pending.classList.remove("active");
     ready.classList.remove("active");
     fallback.classList.remove("active");
+    inboundEl.classList.remove("active");
     el.classList.add("active");
+  }
+
+  // Inbound orders (from /bestellen.html) have no pre-built report —
+  // just confirm receipt and promise delivery by email.
+  if (inbound || preview === "inbound") {
+    show(inboundEl);
+    return;
   }
 
   if (preview === "pending") { show(pending); return; }

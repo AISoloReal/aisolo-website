@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<title>Bestellung — AI Solo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --petrol-primary: #1a4f55;
+  --petrol-dark: #132f35;
+  --petrol-medium: #3a8585;
+  --petrol-light: #6aadad;
+  --petrol-pale: #d6e8e8;
+  --cta-pink: #d63384;
+  --cta-pink-hover: #b52a6f;
+  --text: #171717;
+  --text-secondary: #404040;
+  --text-muted: #737373;
+  --border: #e5e5e5;
+  --white: #ffffff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.65;
+  background: #f6f7f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.legal-nav {
+  background: var(--petrol-dark);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.legal-nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
+.legal-nav a:hover { color: #fff; }
+.legal-nav .logo { height: 48px; }
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 72px;
+}
+.order-card {
+  background: var(--white);
+  max-width: 620px;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--petrol-medium);
+  padding: 40px 44px 36px;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.05);
+}
+.order-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--petrol-medium);
+  margin-bottom: 10px;
+}
+.order-card h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 28px;
+  color: var(--petrol-dark);
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+.order-sub {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--petrol-pale);
+  border-radius: 10px;
+  margin-bottom: 28px;
+}
+.price-regular {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.price-now {
+  font-weight: 700;
+  color: var(--petrol-dark);
+  font-size: 22px;
+}
+.price-now span { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+.price-note {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.order-form { display: grid; gap: 16px; }
+.order-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--petrol-dark);
+  margin-bottom: 6px;
+}
+.order-form input[type="text"],
+.order-form input[type="email"],
+.order-form input[type="url"] {
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.order-form input:focus {
+  outline: none;
+  border-color: var(--petrol-medium);
+  box-shadow: 0 0 0 3px rgba(58,133,133,0.15);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) {
+  .form-row { grid-template-columns: 1fr; }
+  .order-card { padding: 28px 22px; }
+}
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.consent-row input { margin-top: 3px; flex-shrink: 0; }
+.consent-row a { color: var(--petrol-primary); }
+.order-submit {
+  margin-top: 8px;
+  background: var(--cta-pink);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 15px 28px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.order-submit:hover { background: var(--cta-pink-hover); transform: translateY(-1px); }
+.order-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.order-status {
+  margin-top: 8px;
+  font-size: 13px;
+  min-height: 18px;
+}
+.order-status.err { color: var(--cta-pink); }
+.order-status.ok { color: var(--petrol-medium); }
+.reassurance {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.reassurance strong { color: var(--text-secondary); }
+.back-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--petrol-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+.legal-footer {
+  background: var(--petrol-dark);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 24px 40px;
+  font-size: 13px;
+}
+.legal-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.unknown-product {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--text-secondary);
+}
+.unknown-product h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  color: var(--petrol-dark);
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a href="index.html"><img src="assets/logo/ai_solo_white_transparent.png" alt="AI Solo" class="logo"></a>
+  <a href="index.html">Startseite</a>
+</nav>
+
+<main>
+  <div class="order-card" id="orderCard">
+    <div class="order-badge" id="orderBadge">Bestellung</div>
+    <h1 id="orderTitle">Ihren Report bestellen</h1>
+    <p class="order-sub" id="orderSub">
+      Tragen Sie Ihr Unternehmen ein &mdash; wir finden Sie in Google&nbsp;Maps,
+      erstellen Ihren individuellen Report und senden ihn per E-Mail.
+    </p>
+
+    <div class="price-row">
+      <span class="price-regular" id="priceRegular">Regul&auml;r: 49,90&nbsp;EUR</span>
+      <span class="price-now" id="priceNow">9,90&nbsp;EUR <span>einmalig</span></span>
+      <span class="price-note">Einf&uuml;hrungspreis</span>
+    </div>
+
+    <form class="order-form" id="orderForm" novalidate>
+      <div>
+        <label for="company">Unternehmen *</label>
+        <input type="text" id="company" name="company" required maxlength="120"
+               placeholder="z. B. Praxis Dr. Mustermann">
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="city">Ort *</label>
+          <input type="text" id="city" name="city" required maxlength="80"
+                 placeholder="z. B. Stuttgart">
+        </div>
+        <div id="mapsField">
+          <label for="mapsUrl">Google&nbsp;Maps-Link (optional)</label>
+          <input type="url" id="mapsUrl" name="maps_url" maxlength="500"
+                 placeholder="https://maps.app.goo.gl/&hellip;">
+        </div>
+        <div id="websiteField" style="display:none;">
+          <label for="websiteUrl">Website-URL *</label>
+          <input type="url" id="websiteUrl" name="website_url" maxlength="500"
+                 placeholder="https://ihre-website.de">
+        </div>
+      </div>
+
+      <div>
+        <label for="email">E-Mail *</label>
+        <input type="email" id="email" name="email" required maxlength="120"
+               placeholder="ihre@email.de">
+      </div>
+
+      <label class="consent-row">
+        <input type="checkbox" id="consent" name="consent" required>
+        <span>
+          Ich stimme zu, dass AI&nbsp;Solo meine Angaben verwendet, um den bestellten Report
+          zu erstellen und an die angegebene E-Mail zu senden. Es gelten die
+          <a href="agb.html" target="_blank">AGB</a>,
+          <a href="datenschutz.html" target="_blank">Datenschutz</a> und
+          <a href="widerruf.html" target="_blank">Widerrufsbelehrung</a>.
+          Mit Bereitstellung des Reports erlischt mein Widerrufsrecht.
+        </span>
+      </label>
+
+      <button type="submit" class="order-submit" id="orderSubmit">
+        Weiter zur Zahlung &rarr;
+      </button>
+      <div class="order-status" id="orderStatus" role="status" aria-live="polite"></div>
+    </form>
+
+    <div class="reassurance">
+      <strong>Was passiert nach der Zahlung?</strong><br>
+      Sie erhalten eine Best&auml;tigung per E-Mail. Wir bauen Ihren Report innerhalb von
+      24&ndash;48&nbsp;Stunden und schicken ihn anschlie&szlig;end als PDF an die oben
+      angegebene Adresse.
+    </div>
+
+    <a href="index.html" class="back-link">&larr; Zur&uuml;ck zur Startseite</a>
+  </div>
+
+  <div class="order-card unknown-product" id="unknownProductCard" style="display:none;">
+    <h1>Produkt nicht gefunden</h1>
+    <p>Bitte w&auml;hlen Sie ein Produkt auf der <a href="index.html">Startseite</a>.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var WORKER_URL = "https://api.aisolo.io";
+
+  var PRODUCTS = {
+    reviews: {
+      badge: "Google Reviews Analyse",
+      title: "Google-Review-Report bestellen",
+      sub: "Tragen Sie Ihr Unternehmen ein &mdash; wir finden Sie in Google Maps, " +
+           "analysieren jede einzelne Bewertung und senden Ihnen den Report als PDF.",
+      priceRegular: "Regulär: 49,90 EUR",
+      priceNow: "9,90 EUR",
+      mapsMode: "optional"    // maps link field shown, optional
+    },
+    geo: {
+      badge: "GEO Audit mit Remote-Umsetzung",
+      title: "GEO-Audit bestellen",
+      sub: "Tragen Sie Ihre Website ein &mdash; wir prüfen, wie sichtbar Ihr " +
+           "Unternehmen in ChatGPT, Claude, Perplexity &amp; Co. ist und liefern " +
+           "Audit-Report plus konkrete Umsetzungsvorschläge.",
+      priceRegular: "Regulär: 69,90 EUR",
+      priceNow: "19,90 EUR",
+      mapsMode: "website"    // website field shown instead of maps, required
+    }
+  };
+
+  var params = new URLSearchParams(window.location.search);
+  var product = (params.get("product") || "").toLowerCase();
+  var config = PRODUCTS[product];
+
+  if (!config) {
+    document.getElementById("orderCard").style.display = "none";
+    document.getElementById("unknownProductCard").style.display = "block";
+    return;
+  }
+
+  // Hydrate product-specific copy
+  document.getElementById("orderBadge").textContent = config.badge;
+  document.getElementById("orderTitle").textContent = config.title;
+  document.getElementById("orderSub").innerHTML = config.sub;
+  document.getElementById("priceRegular").innerHTML = config.priceRegular;
+  document.getElementById("priceNow").innerHTML = config.priceNow + ' <span>einmalig</span>';
+  document.title = config.title + " — AI Solo";
+
+  // Field toggling (maps vs website)
+  var mapsField = document.getElementById("mapsField");
+  var websiteField = document.getElementById("websiteField");
+  var mapsInput = document.getElementById("mapsUrl");
+  var websiteInput = document.getElementById("websiteUrl");
+  if (config.mapsMode === "website") {
+    mapsField.style.display = "none";
+    websiteField.style.display = "";
+    mapsInput.removeAttribute("required");
+    websiteInput.setAttribute("required", "required");
+  }
+
+  var form = document.getElementById("orderForm");
+  var submitBtn = document.getElementById("orderSubmit");
+  var statusEl = document.getElementById("orderStatus");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    statusEl.className = "order-status";
+    statusEl.textContent = "";
+
+    var company = document.getElementById("company").value.trim();
+    var city    = document.getElementById("city").value.trim();
+    var email   = document.getElementById("email").value.trim();
+    var consent = document.getElementById("consent").checked;
+    var mapsUrl    = mapsInput.value.trim();
+    var websiteUrl = websiteInput.value.trim();
+
+    if (!company || !city || !email) {
+      statusEl.className = "order-status err";
+      statusEl.textContent = "Bitte füllen Sie alle Pflichtfelder aus.";
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      statusEl.className = "order-status err";
+      statusEl.textContent = "Bitte geben Sie eine gültige E-Mail-Adresse an.";
+      return;
+    }
+    if (config.mapsMode === "website" && !websiteUrl) {
+      statusEl.className = "order-status err";
+      statusEl.textContent = "Bitte geben Sie Ihre Website-URL an.";
+      return;
+    }
+    if (!consent) {
+      statusEl.className = "order-status err";
+      statusEl.textContent = "Bitte bestätigen Sie die Einwilligung.";
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Einen Moment …";
+
+    var payload = {
+      product: product,
+      company: company,
+      city: city,
+      email: email,
+      maps_url: mapsUrl,
+      website_url: websiteUrl,
+      consent: true,
+      source: "website-order"
+    };
+
+    fetch(WORKER_URL + "/api/order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.data && res.data.checkout_url) {
+          window.location.href = res.data.checkout_url;
+          return;
+        }
+        var msg = (res.data && res.data.error) || "Etwas ist schiefgelaufen. Bitte erneut versuchen.";
+        statusEl.className = "order-status err";
+        statusEl.textContent = msg;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Weiter zur Zahlung &rarr;";
+      })
+      .catch(function () {
+        statusEl.className = "order-status err";
+        statusEl.textContent = "Verbindungsfehler. Bitte erneut versuchen.";
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Weiter zur Zahlung &rarr;";
+      });
+  });
+})();
+</script>
+
+<footer class="legal-footer">
+  <p>&copy; 2026 AI Solo &middot; <a href="impressum.html">Impressum</a> &middot; <a href="datenschutz.html">Datenschutz</a> &middot; <a href="agb.html">AGB</a> &middot; <a href="widerruf.html">Widerruf</a></p>
+</footer>
+
+</body>
+</html>
