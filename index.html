@@ -619,49 +619,72 @@ section { padding: 120px 40px; }
   .why-geo-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 
-/* ── GEO 2x2 QUADRANT GRID ── */
-/* Key: minmax(MIN, 1fr) for both rows guarantees equal row heights even when
-   row-1 and row-2 natural content heights differ, AND forces cells to stretch
-   to a real pixel value so align-self: stretch + height:100% on items
-   actually have something to fill. */
-.geo-quad-grid {
+/* ── GEO 3-TILE GRID (matches .why-geo-grid KPI card look) ── */
+.geo-tri-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 1fr;
-  gap: 28px;
-  margin: 40px 0 0;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+  margin: 40px auto 0;
+  max-width: 1180px;
   align-items: stretch;
 }
-.geo-quad-grid > * {
+.geo-tri-grid > * {
+  background: var(--white) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 4px solid var(--cta-pink) !important;
+  border-radius: 14px !important;
+  padding: 28px 26px 24px !important;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.05) !important;
+  display: flex; flex-direction: column;
   margin: 0;
   min-width: 0;
-  min-height: 720px;
-  height: 100%;
-  align-self: stretch;
-  display: flex;
+}
+@media (max-width: 980px) {
+  .geo-tri-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* Inner overrides for unified card look inside .geo-tri-grid */
+.geo-tri-grid .geo-info-card h3 { font-size: 20px; margin-bottom: 12px; }
+.geo-tri-grid .geo-info-card > p { font-size: 13.5px; margin-bottom: 14px; }
+.geo-tri-grid .geo-info-card .product-features li { font-size: 13px; }
+.geo-tri-grid .geo-info-card .pricing-box {
+  margin-top: auto;
+  padding: 14px 16px;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
-/* Kill the existing centered alignment from .product-preview (was in .product-showcase) */
-.geo-quad-grid .product-preview {
-  padding: 36px 32px;
-  border-radius: 16px;
+.geo-tri-grid .geo-info-card .pricing-beta { font-size: 24px; }
+.geo-tri-grid .geo-info-card .pricing-box .btn-primary { width: 100%; text-align: center; }
+
+.geo-tri-grid .geo-free-callout { box-shadow: none !important; }
+.geo-tri-grid .geo-free-badge { color: var(--cta-pink); }
+.geo-tri-grid .geo-free-title { color: var(--petrol-dark); font-size: 20px; }
+.geo-tri-grid .geo-free-counter {
+  background: rgba(214,51,132,0.08);
+  border: 1px solid rgba(214,51,132,0.25);
+  align-self: stretch;
 }
-.geo-quad-grid .product-preview-inner {
-  height: 100%;
-  display: flex; flex-direction: column;
+.geo-tri-grid .geo-free-counter-num { color: var(--cta-pink); font-size: 44px; }
+.geo-tri-grid .geo-free-counter-lbl { color: var(--petrol-dark); }
+.geo-tri-grid .geo-free-body { color: var(--text-secondary); font-size: 13.5px; }
+.geo-tri-grid .geo-free-body code {
+  background: var(--petrol-pale); color: var(--petrol-dark);
 }
-.geo-quad-grid .product-preview h3 { font-size: 22px; margin-bottom: 22px; }
-.geo-quad-grid .product-preview .product-metrics { margin-bottom: 22px; }
-.geo-quad-grid .product-preview .product-metric .val { font-size: 28px; }
-.geo-quad-grid .product-preview .product-sample-items { margin-top: auto; }
-@media (max-width: 900px) {
-  .geo-quad-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    min-height: 0;
-  }
-  .geo-quad-grid > * { height: auto; align-self: auto; }
+.geo-tri-grid .geo-free-strike { color: var(--text-muted); opacity: 1; }
+.geo-tri-grid .geo-free-rules {
+  border-top: 1px solid var(--border);
+  margin-top: auto;
 }
+.geo-tri-grid .geo-free-rules li { color: var(--text-secondary); font-size: 12.5px; }
+.geo-tri-grid .geo-free-rules li::before { color: var(--cta-pink); }
+
+.geo-tri-grid .teaser-request { margin-top: 0; }
+.geo-tri-grid .teaser-request h4 { font-size: 18px; }
+.geo-tri-grid .teaser-request .cc-form-row { grid-template-columns: 1fr; }
+.geo-tri-grid .teaser-request .cc-submit { background: var(--cta-pink); }
+.geo-tri-grid .teaser-request .cc-submit:hover { background: var(--cta-pink-hover); }
 
 /* ── GEO INFO CARD (TL quadrant) ── */
 .geo-info-card {
@@ -1881,9 +1904,9 @@ section { padding: 120px 40px; }
       </div>
     </div>
 
-    <div class="geo-quad-grid">
+    <div class="geo-tri-grid">
 
-      <!-- Quadrant TL: Produkt-Info + Pricing -->
+      <!-- Karte 1: Produkt-Info + Pricing -->
       <div class="geo-info-card fade-up">
         <h3>Sichtbar werden, wo Ihre Kunden heute suchen</h3>
         <p>Wir analysieren Ihre Website auf Zitierf&auml;higkeit durch KI-Suchmaschinen und liefern Ihnen einen vollst&auml;ndigen Audit mit Aktionsplan plus einsetzbare <code>llms.txt</code>- und JSON-LD-Snippets.</p>
@@ -1907,44 +1930,8 @@ section { padding: 120px 40px; }
         </div>
       </div>
 
-      <!-- Quadrant TR: Beispiel-Analyse -->
-      <div class="product-preview fade-up delay-1">
-        <div class="product-preview-inner">
-          <div class="preview-badge">Beispiel-Analyse</div>
-          <h3>Wie sichtbar Ihre Website in ChatGPT, Perplexity &amp; Co. wirklich ist</h3>
-          <div class="product-metrics">
-            <div class="product-metric">
-              <div class="val">42</div>
-              <div class="lbl">GEO-Score aktuell</div>
-            </div>
-            <div class="product-metric">
-              <div class="val">81</div>
-              <div class="lbl">Ziel-Score</div>
-            </div>
-            <div class="product-metric">
-              <div class="val">11</div>
-              <div class="lbl">Handlungsfelder</div>
-            </div>
-          </div>
-          <div class="product-sample-items">
-            <div class="product-sample-item">
-              <span class="category">llms.txt fehlt komplett</span>
-              <span class="severity severity-high">Sofort</span>
-            </div>
-            <div class="product-sample-item">
-              <span class="category">JSON-LD Schema unvollst&auml;ndig</span>
-              <span class="severity severity-high">Sofort</span>
-            </div>
-            <div class="product-sample-item">
-              <span class="category">E-E-A-T-Signale d&uuml;nn</span>
-              <span class="severity severity-mid">Kurzfristig</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quadrant BL: Co-Creation free-offer callout with static counter -->
-      <div class="geo-free-callout fade-up">
+      <!-- Karte 2: Co-Creation free-offer callout with static counter -->
+      <div class="geo-free-callout fade-up delay-1">
         <div class="geo-free-badge">CO-CREATION-ANGEBOT &mdash; BEGRENZT</div>
         <div class="geo-free-title">Umsetzung aktuell komplett kostenlos</div>
         <div class="geo-free-counter">
@@ -1965,8 +1952,8 @@ section { padding: 120px 40px; }
         </ul>
       </div>
 
-      <!-- Quadrant BR: Inbound free GEO teaser request -->
-      <div class="teaser-request fade-up delay-1" id="teaserRequestGeo">
+      <!-- Karte 3: Inbound free GEO teaser request -->
+      <div class="teaser-request fade-up delay-2" id="teaserRequestGeo">
         <div class="teaser-request-head">
           <span class="teaser-request-badge">Kostenlos</span>
           <h4>Erst eine kostenlose Vorschau anfordern</h4>
@@ -2012,7 +1999,7 @@ section { padding: 120px 40px; }
         </div>
       </div>
 
-    </div><!-- /.geo-quad-grid -->
+    </div><!-- /.geo-tri-grid -->
     </div><!-- /#prod-geo -->
   </div>
 </section>
@@ -2856,35 +2843,6 @@ if (ccForm) {
   window.addEventListener('hashchange', maybeActivate);
 })();
 
-// ── GEO quadrant equal-height enforcer ──
-// grid-auto-rows:1fr + min-height fall back to content-sized when content
-// exceeds the min. This measures all 4 cells natural heights and stretches
-// everything to the tallest, guaranteeing equal rows.
-(function () {
-  const grid = document.querySelector('.geo-quad-grid');
-  if (!grid) return;
-  const cells = Array.from(grid.children);
-  if (cells.length < 2) return;
-
-  function equalize() {
-    if (window.innerWidth <= 900) {
-      cells.forEach(c => { c.style.minHeight = ''; });
-      return;
-    }
-    cells.forEach(c => { c.style.minHeight = ''; });
-    let max = 0;
-    cells.forEach(c => { if (c.offsetHeight > max) max = c.offsetHeight; });
-    if (max > 0) cells.forEach(c => { c.style.minHeight = max + 'px'; });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(equalize, 50));
-  } else {
-    setTimeout(equalize, 50);
-  }
-  window.addEventListener('resize', equalize);
-  window.addEventListener('load', equalize);
-})();
 </script>
 </body>
 </html>
