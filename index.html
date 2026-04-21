@@ -605,6 +605,117 @@ section { padding: 120px 40px; }
   .why-reviews-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 
+/* ── WHY GEO (3-column variant) ── */
+.why-geo-grid {
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 1180px;
+  gap: 22px;
+}
+.why-geo-grid .why-reviews-card { border-left-color: var(--cta-pink); }
+.why-geo-grid .why-reviews-stat { color: var(--cta-pink); }
+@media (max-width: 980px) {
+  .why-geo-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ── GEO CO-CREATION FREE-OFFER CALLOUT ── */
+.geo-free-callout {
+  background: linear-gradient(135deg, var(--cta-pink) 0%, #b52a6f 100%);
+  color: var(--white);
+  border-radius: 16px;
+  padding: 28px 30px 24px;
+  margin: 28px 0 0;
+  box-shadow: 0 10px 32px rgba(214,51,132,0.22);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "badge   counter"
+    "title   counter"
+    "body    counter"
+    "rules   rules";
+  column-gap: 28px;
+  row-gap: 10px;
+  align-items: start;
+}
+.geo-free-badge {
+  grid-area: badge;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+.geo-free-title {
+  grid-area: title;
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; line-height: 1.15;
+}
+.geo-free-body {
+  grid-area: body;
+  font-size: 14.5px; line-height: 1.6;
+  color: rgba(255,255,255,0.95);
+}
+.geo-free-body code {
+  background: rgba(255,255,255,0.18);
+  padding: 1px 6px; border-radius: 4px;
+  font-size: 13px;
+}
+.geo-free-strike {
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+.geo-free-counter {
+  grid-area: counter;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 14px;
+  padding: 18px 22px;
+  text-align: center;
+  min-width: 150px;
+  align-self: center;
+}
+.geo-free-counter-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 54px; line-height: 1;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.geo-free-counter-lbl {
+  font-size: 12px; line-height: 1.35;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+.geo-free-rules {
+  grid-area: rules;
+  list-style: none; padding: 0; margin: 8px 0 0;
+  display: flex; flex-wrap: wrap; gap: 10px 18px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  padding-top: 14px;
+}
+.geo-free-rules li {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.92);
+  position: relative;
+  padding-left: 16px;
+}
+.geo-free-rules li::before {
+  content: "\2713";
+  position: absolute; left: 0; top: 0;
+  color: var(--white);
+  font-weight: 700;
+}
+@media (max-width: 720px) {
+  .geo-free-callout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "badge"
+      "title"
+      "counter"
+      "body"
+      "rules";
+    padding: 24px 22px 20px;
+  }
+  .geo-free-counter { justify-self: start; min-width: 140px; }
+  .geo-free-title { font-size: 22px; }
+}
+
 /* ── CO-CREATION ── */
 .cocreation { background: var(--white); }
 .cocreation-intro {
@@ -1516,13 +1627,13 @@ section { padding: 120px 40px; }
         <div class="product-tile-price">Bald verf&uuml;gbar</div>
       </button>
 
-      <button class="product-tile in-development" data-target="prod-geo" type="button">
-        <div class="product-tile-status status-dev">In Entwicklung</div>
+      <button class="product-tile" data-target="prod-geo" type="button">
+        <div class="product-tile-status status-live">Live</div>
         <div class="product-tile-icon">&#9678;</div>
         <div class="product-tile-name">GEO Audit mit Remote-Umsetzung</div>
         <div class="product-tile-tag">Marketing Optimierung</div>
         <div class="product-tile-desc">Werden Sie in ChatGPT, Perplexity &amp; Co. sichtbar. Bezahlter Audit plus Remote-Umsetzung (llms.txt, JSON-LD, On-Page-Edits) &mdash; f&uuml;r die ersten Kunden ist die Umsetzung in der Lernphase inklusive.</div>
-        <div class="product-tile-price">Bald verf&uuml;gbar</div>
+        <div class="product-tile-price">ab 19,90&nbsp;EUR</div>
       </button>
     </div>
 
@@ -1542,23 +1653,6 @@ section { padding: 120px 40px; }
         <div class="soon-cta-row">
           <a href="#cocreation" class="btn-primary">Priorit&auml;t mitgestalten &rarr;</a>
           <button type="button" class="btn-secondary-dark" data-notify-launch data-product-slug="aktienanalyse" data-product-name="Aktienanalyse f&uuml;r bessere Investment-Entscheidungen">Bei Launch benachrichtigen</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-detail product-detail-soon" id="prod-geo" hidden>
-      <div class="soon-card">
-        <div class="soon-badge">In Entwicklung</div>
-        <h3>GEO Audit mit Remote-Umsetzung</h3>
-        <p>Ihre Website wird in ChatGPT, Perplexity, Claude und Gemini sichtbar. Wir pr&uuml;fen, wie KI-Suchmaschinen Ihre Seite &quot;lesen&quot;, und setzen die wichtigsten Verbesserungen direkt f&uuml;r Sie um &mdash; llms.txt, JSON-LD-Schema und gezielte On-Page-Edits. F&uuml;r die ersten Kunden ist die Remote-Umsetzung in der Lernphase inklusive.</p>
-        <ul class="product-features">
-          <li><span class="check">&check;</span>Bezahlter Audit mit konkretem Ma&szlig;nahmenkatalog</li>
-          <li><span class="check">&check;</span>Remote-Umsetzung: llms.txt, JSON-LD, On-Page-Edits</li>
-          <li><span class="check">&check;</span>F&uuml;r Erstkunden in der Lernphase: Umsetzung inklusive</li>
-        </ul>
-        <div class="soon-cta-row">
-          <a href="#cocreation" class="btn-primary">Priorit&auml;t mitgestalten &rarr;</a>
-          <button type="button" class="btn-secondary-dark" data-notify-launch data-product-slug="geo-audit" data-product-name="GEO Audit mit Remote-Umsetzung">Bei Launch benachrichtigen</button>
         </div>
       </div>
     </div>
@@ -1706,6 +1800,177 @@ section { padding: 120px 40px; }
       </div>
     </div>
     </div><!-- /#prod-google-reviews -->
+
+    <!-- Live product detail (GEO Audit mit Remote-Umsetzung) -->
+    <div class="product-detail" id="prod-geo" hidden>
+
+    <!-- Why GEO matters — three stat cards (AI search visibility) -->
+    <div class="why-reviews-grid why-geo-grid fade-up delay-2">
+      <div class="why-reviews-card">
+        <div class="why-reviews-stat">&gt;400&nbsp;Mio.</div>
+        <div class="why-reviews-headline">Nutzer suchen w&ouml;chentlich &uuml;ber ChatGPT</div>
+        <div class="why-reviews-body">
+          Immer mehr Kaufentscheidungen starten nicht mehr bei Google, sondern
+          bei ChatGPT, Claude, Perplexity oder Gemini. Wer dort nicht zitiert
+          wird, taucht im ersten Kontakt mit potenziellen Kunden schlicht nicht
+          mehr auf.
+        </div>
+        <div class="why-reviews-source">Quelle: OpenAI, Stand 2025</div>
+      </div>
+      <div class="why-reviews-card">
+        <div class="why-reviews-stat">~50&nbsp;%</div>
+        <div class="why-reviews-headline">der Google-Suchen zeigen bereits AI Overviews</div>
+        <div class="why-reviews-body">
+          Die KI-Antwort oben auf der Suchergebnisseite beantwortet den Nutzer
+          h&auml;ufig direkt &mdash; Klicks auf klassische Treffer brechen weg.
+          Sichtbar ist nur noch, wer von der KI als Quelle verwendet wird.
+        </div>
+        <div class="why-reviews-source">Quelle: Google Search Trends, US-Markt 2025</div>
+      </div>
+      <div class="why-reviews-card">
+        <div class="why-reviews-stat">&minus;25&nbsp;%</div>
+        <div class="why-reviews-headline">Klassische Suchanfragen bis 2026</div>
+        <div class="why-reviews-body">
+          Gartner prognostiziert einen R&uuml;ckgang klassischer Suchvolumen um
+          rund 25&nbsp;% bis 2026 &mdash; zugunsten KI-basierter Antworten.
+          Unternehmen ohne GEO-Strategie verlieren messbar Reichweite.
+        </div>
+        <div class="why-reviews-source">Quelle: Gartner, Future of Search 2024</div>
+      </div>
+    </div>
+
+    <div class="product-showcase">
+      <div class="product-preview fade-up">
+        <div class="product-preview-inner">
+          <div class="preview-badge">Beispiel-Analyse</div>
+          <h3>Wie sichtbar Ihre Website in ChatGPT, Perplexity &amp; Co. wirklich ist</h3>
+          <div class="product-metrics">
+            <div class="product-metric">
+              <div class="val">42</div>
+              <div class="lbl">GEO-Score aktuell</div>
+            </div>
+            <div class="product-metric">
+              <div class="val">81</div>
+              <div class="lbl">Ziel-Score</div>
+            </div>
+            <div class="product-metric">
+              <div class="val">11</div>
+              <div class="lbl">Handlungsfelder</div>
+            </div>
+          </div>
+          <div class="product-sample-items">
+            <div class="product-sample-item">
+              <span class="category">llms.txt fehlt komplett</span>
+              <span class="severity severity-high">Sofort</span>
+            </div>
+            <div class="product-sample-item">
+              <span class="category">JSON-LD Schema unvollst&auml;ndig</span>
+              <span class="severity severity-high">Sofort</span>
+            </div>
+            <div class="product-sample-item">
+              <span class="category">E-E-A-T-Signale d&uuml;nn</span>
+              <span class="severity severity-mid">Kurzfristig</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info fade-up delay-1">
+        <h3>Sichtbar werden, wo Ihre Kunden heute suchen</h3>
+        <p>Wir analysieren Ihre Website auf Zitierf&auml;higkeit durch KI-Suchmaschinen und liefern Ihnen einen vollst&auml;ndigen Audit mit Aktionsplan plus einsetzbare <code>llms.txt</code>- und JSON-LD-Snippets. F&uuml;r die ersten Kunden setzen wir die Ma&szlig;nahmen in der Lernphase direkt mit um &mdash; kostenlos.</p>
+
+        <ul class="product-features">
+          <li><span class="check">&check;</span>Vollst&auml;ndiger GEO-Audit mit Score, Benchmark und 11 Handlungsfeldern</li>
+          <li><span class="check">&check;</span>Fertige <code>llms.txt</code> und JSON-LD-Snippets zum Einf&uuml;gen</li>
+          <li><span class="check">&check;</span>On-Page-Empfehlungen f&uuml;r bessere Zitierf&auml;higkeit</li>
+          <li><span class="check">&check;</span>Priorisierter Aktionsplan (sofort / kurzfristig / mittelfristig)</li>
+          <li><span class="check">&check;</span>E-E-A-T-Analyse (Expertise, Experience, Authority, Trust)</li>
+          <li><span class="check">&check;</span>Remote-Umsetzung durch AI Solo &mdash; aktuell inklusive</li>
+        </ul>
+
+        <!-- ── Co-Creation free-offer callout with static counter ── -->
+        <div class="geo-free-callout fade-up delay-2">
+          <div class="geo-free-badge">CO-CREATION-ANGEBOT &mdash; BEGRENZT</div>
+          <div class="geo-free-title">Umsetzung aktuell komplett kostenlos</div>
+          <div class="geo-free-body">
+            F&uuml;r die ersten zehn Kunden &uuml;bernimmt AI Solo die Remote-Umsetzung
+            (<code>llms.txt</code>, JSON-LD-Schema, On-Page-Edits) in der Lernphase
+            komplett kostenlos &mdash; regul&auml;r
+            <span class="geo-free-strike">299&nbsp;&ndash;&nbsp;699&nbsp;EUR</span>.
+            Nur f&uuml;r Kunden, die einen Audit-Report gekauft haben. First come, first serve.
+          </div>
+          <div class="geo-free-counter">
+            <div class="geo-free-counter-num">9</div>
+            <div class="geo-free-counter-lbl">von 10 Pl&auml;tzen noch frei</div>
+          </div>
+          <ul class="geo-free-rules">
+            <li>Voraussetzung: gekaufter GEO-Audit-Report</li>
+            <li>Reihenfolge der Anmeldung &mdash; first come, first serve</li>
+            <li>Abwicklung komplett remote &uuml;ber hello@aisolo.io</li>
+          </ul>
+        </div>
+
+        <div class="pricing-box">
+          <div class="pricing-left">
+            <div class="pricing-regular">Regul&auml;r: 69,90 EUR</div>
+            <div class="pricing-beta">19,90 EUR <span>einmalig</span></div>
+            <div class="pricing-note">Einf&uuml;hrungspreis — limitiert</div>
+          </div>
+          <a href="https://api.aisolo.io/kaufen?product=geo" class="btn-primary" target="_blank">
+            Jetzt bestellen &rarr;
+          </a>
+        </div>
+
+        <!-- ── Inbound: free GEO teaser request ── -->
+        <div class="teaser-request" id="teaserRequestGeo">
+          <div class="teaser-request-head">
+            <span class="teaser-request-badge">Kostenlos</span>
+            <h4>Erst eine kostenlose Vorschau anfordern</h4>
+          </div>
+          <p class="teaser-request-sub">
+            Noch unsicher? Tragen Sie Ihre Website ein und Sie erhalten innerhalb von 24&nbsp;Stunden
+            eine kostenfreie Vorschau mit GEO-Score, Benchmark und ersten Hinweisen &mdash; ohne Verpflichtung.
+          </p>
+          <form class="cc-form" id="teaserRequestGeoForm" novalidate>
+            <div>
+              <label for="trgCompany">Unternehmen *</label>
+              <input type="text" id="trgCompany" name="company" required maxlength="120" placeholder="z. B. Praxis Dr. Mustermann">
+            </div>
+            <div class="cc-form-row">
+              <div>
+                <label for="trgDomain">Website-Domain *</label>
+                <input type="text" id="trgDomain" name="domain" required maxlength="200" placeholder="z. B. www.ihre-firma.de">
+              </div>
+              <div>
+                <label for="trgEmail">E-Mail *</label>
+                <input type="email" id="trgEmail" name="email" required maxlength="120" placeholder="ihre@email.de">
+              </div>
+            </div>
+            <label class="consent-row">
+              <input type="checkbox" id="trgConsent" name="consent" required>
+              <span>
+                Ich stimme zu, dass AI Solo meine Angaben verwendet, um die kostenlose GEO-Vorschau
+                zu erstellen und an die angegebene E-Mail zu senden. Datenschutz: keine Weitergabe an Dritte.
+              </span>
+            </label>
+            <button type="submit" class="cc-submit" id="trgSubmit">
+              Kostenlose Vorschau anfordern &rarr;
+            </button>
+            <div class="cc-form-status" id="trgStatus" role="status" aria-live="polite"></div>
+          </form>
+          <div class="teaser-request-success" id="teaserRequestGeoSuccess">
+            <div class="check-circle">&check;</div>
+            <h4>Vielen Dank &mdash; Anfrage erhalten!</h4>
+            <p>
+              Sie erhalten Ihre pers&ouml;nliche GEO-Vorschau innerhalb von 24&nbsp;Stunden an die
+              angegebene E-Mail-Adresse. Bei Fragen: <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div><!-- /#prod-geo -->
   </div>
 </section>
 
@@ -2094,6 +2359,7 @@ section { padding: 120px 40px; }
       <div class="footer-col">
         <h4>Online Shop</h4>
         <a href="#produkte">Google Review Analyse</a>
+        <a href="#geo">GEO Audit mit Remote-Umsetzung</a>
         <a href="#cocreation">Co-Creation: Mitgestalten</a>
       </div>
       <div class="footer-col">
@@ -2466,6 +2732,85 @@ if (ccForm) {
       submit.textContent = 'Kostenlose Vorschau anfordern →';
     }
   });
+})();
+
+// ── GEO teaser request form (inbound, website-geo) ──
+(function () {
+  const form    = document.getElementById('teaserRequestGeoForm');
+  const status  = document.getElementById('trgStatus');
+  const submit  = document.getElementById('trgSubmit');
+  const success = document.getElementById('teaserRequestGeoSuccess');
+  if (!form) return;
+
+  const ENDPOINT = 'https://api.aisolo.io/api/teaser-request';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'cc-form-status';
+    status.textContent = '';
+
+    const domainRaw = document.getElementById('trgDomain').value.trim();
+    const data = {
+      company:  document.getElementById('trgCompany').value.trim(),
+      city:     '',
+      maps_url: domainRaw,
+      email:    document.getElementById('trgEmail').value.trim(),
+      consent:  document.getElementById('trgConsent').checked,
+      source:   'website-geo',
+      ts:       new Date().toISOString(),
+    };
+
+    if (!data.company || !domainRaw || !data.email || !data.consent) {
+      status.className = 'cc-form-status err';
+      status.textContent = 'Bitte fülle alle Pflichtfelder aus und stimme der Verarbeitung zu.';
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      status.className = 'cc-form-status err';
+      status.textContent = 'Bitte eine gültige E-Mail-Adresse angeben.';
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Sende …';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      form.style.display = 'none';
+      success.classList.add('show');
+    } catch (err) {
+      status.className = 'cc-form-status err';
+      status.textContent = 'Etwas ist schiefgelaufen. Bitte später erneut versuchen oder an hello@aisolo.io schreiben.';
+      submit.disabled = false;
+      submit.textContent = 'Kostenlose Vorschau anfordern →';
+    }
+  });
+})();
+
+// ── Deep-link: /#geo or /#produkte?geo activates the GEO product tile ──
+(function () {
+  function activateGeoTile() {
+    const geoTile = document.querySelector('.product-tile[data-target="prod-geo"]');
+    if (!geoTile) return;
+    geoTile.click();
+    const section = document.getElementById('produkte');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function maybeActivate() {
+    const h = (window.location.hash || '').toLowerCase();
+    if (h === '#geo') activateGeoTile();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', maybeActivate);
+  } else {
+    maybeActivate();
+  }
+  window.addEventListener('hashchange', maybeActivate);
 })();
 </script>
 </body>
