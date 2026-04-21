@@ -361,27 +361,6 @@ section { padding: 120px 40px; }
   box-shadow: 0 8px 28px rgba(26,79,85,0.12);
   background: var(--petrol-ice);
 }
-.product-tile.in-development {
-  background: var(--petrol-dark);
-  border-color: var(--petrol-dark);
-  opacity: 1;
-}
-.product-tile.in-development:hover {
-  border-color: var(--petrol-primary);
-  box-shadow: 0 12px 32px rgba(19,47,53,0.25);
-}
-.product-tile.in-development .product-tile-name  { color: var(--white); }
-.product-tile.in-development .product-tile-tag   { color: var(--petrol-light); }
-.product-tile.in-development .product-tile-desc  { color: rgba(255,255,255,0.85); }
-.product-tile.in-development .product-tile-icon {
-  background: rgba(255,255,255,0.08);
-  color: var(--white);
-  border-color: rgba(255,255,255,0.2);
-}
-.product-tile.in-development .status-dev {
-  background: rgba(255,255,255,0.15);
-  color: var(--white);
-}
 .product-tile-status {
   position: absolute; top: 16px; right: 16px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
@@ -423,7 +402,6 @@ section { padding: 120px 40px; }
   color: var(--petrol-dark);
   margin-top: 4px;
 }
-.product-tile.in-development .product-tile-price { color: var(--white); }
 
 /* Detail panels */
 .product-detail[hidden] { display: none; }
@@ -735,6 +713,123 @@ section { padding: 120px 40px; }
 .reviews-bi-grid .product-info .pricing-beta { font-size: 28px; }
 .reviews-bi-grid .teaser-request { margin-top: 0; }
 .reviews-bi-grid .teaser-request h4 { font-size: 18px; }
+
+/* ── INVESTING: process card (right side of bi-grid) ── */
+.reviews-bi-grid .process-card h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--petrol-dark);
+  margin-bottom: 4px;
+}
+.process-sub {
+  font-size: 13.5px; color: var(--text-muted);
+  margin-bottom: 22px;
+}
+.process-steps {
+  list-style: none; counter-reset: step;
+  display: flex; flex-direction: column; gap: 14px;
+  margin-bottom: 22px;
+}
+.process-steps li {
+  counter-increment: step;
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 13.5px; color: var(--text-secondary);
+  line-height: 1.55;
+}
+.process-steps li::before {
+  content: counter(step);
+  width: 28px; height: 28px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--petrol-primary); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 15px;
+}
+.process-steps li strong { color: var(--petrol-dark); font-weight: 600; }
+.process-note {
+  background: var(--petrol-ice);
+  border-left: 3px solid var(--petrol-medium);
+  padding: 12px 14px;
+  font-size: 12.5px; color: var(--text-secondary);
+  line-height: 1.5;
+  border-radius: 6px;
+  margin-top: auto;
+}
+
+/* ── INVESTING: bundle grid (3 tiers) ── */
+.bundle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+  margin: 22px auto 0;
+  max-width: 1180px;
+  align-items: stretch;
+}
+.bundle-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--petrol-medium);
+  border-radius: 14px;
+  padding: 28px 26px 24px;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.05);
+  display: flex; flex-direction: column;
+  min-width: 0;
+  text-align: left;
+  position: relative;
+}
+.bundle-card-emph {
+  border-left-color: var(--petrol-primary);
+  background: var(--petrol-ice);
+}
+.bundle-card-best {
+  border-left-color: var(--cta-pink);
+  background: linear-gradient(180deg, #fff 0%, #fff 55%, rgba(214,51,132,0.05) 100%);
+}
+.bundle-card-best::before {
+  content: "BESTE WAHL";
+  position: absolute; top: -10px; right: 18px;
+  background: var(--cta-pink); color: var(--white);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 4px 10px; border-radius: 999px;
+}
+.bundle-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--petrol-dark);
+  margin-bottom: 2px;
+}
+.bundle-credits {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--petrol-medium);
+  margin-bottom: 16px;
+}
+.bundle-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; color: var(--petrol-dark);
+  line-height: 1.1;
+}
+.bundle-price span {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; font-weight: 400; color: var(--text-muted);
+  margin-left: 4px;
+}
+.bundle-per {
+  font-size: 13px; color: var(--petrol-medium);
+  font-weight: 500;
+  margin-top: 6px;
+}
+.bundle-card-best .bundle-per { color: var(--cta-pink); font-weight: 700; }
+.bundle-body {
+  font-size: 13.5px; color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 16px 0 20px;
+  flex: 1;
+}
+.bundle-card .btn-primary {
+  width: 100%; justify-content: center; text-align: center;
+}
+@media (max-width: 860px) {
+  .bundle-grid { grid-template-columns: 1fr; gap: 16px; }
+}
 
 /* ── GEO INFO CARD (TL quadrant) ── */
 .geo-info-card {
@@ -1720,7 +1815,7 @@ section { padding: 120px 40px; }
   <div class="section-inner">
     <div class="section-label fade-up">Online Shop</div>
     <div class="section-title fade-up delay-1">Unsere KI-Produkte</div>
-    <div class="section-subtitle fade-up delay-2">W&auml;hlen Sie ein Produkt, um Details, Funktionen und Preis zu sehen. Heute ist die Google-Review-Analyse live &mdash; weitere Produkte aus dem Co-Creation-Ranking sind in Vorbereitung.</div>
+    <div class="section-subtitle fade-up delay-2">W&auml;hlen Sie ein Produkt, um Details, Funktionen und Preise zu sehen. Alle drei Produkte sind live &mdash; zum Einf&uuml;hrungspreis buchbar.</div>
 
     <!-- ── Product tiles (Kacheln) ── -->
     <div class="product-tiles fade-up delay-2">
@@ -1733,13 +1828,13 @@ section { padding: 120px 40px; }
         <div class="product-tile-price">ab 9,90&nbsp;EUR</div>
       </button>
 
-      <button class="product-tile in-development" data-target="prod-investing" type="button">
-        <div class="product-tile-status status-dev">In Entwicklung</div>
+      <button class="product-tile" data-target="prod-investing" type="button">
+        <div class="product-tile-status status-live">Live</div>
         <div class="product-tile-icon">&euro;</div>
         <div class="product-tile-name">Aktienanalyse f&uuml;r bessere Investment-Entscheidungen</div>
         <div class="product-tile-tag">Meine KI</div>
         <div class="product-tile-desc">KI-gest&uuml;tzte Bewertung einzelner Aktien &uuml;ber f&uuml;nf Dimensionen &mdash; Technik, Fundamentals, Sentiment, Risiko und Investment-These &mdash; mit konkreter Handlungsempfehlung statt abstrakter Charts.</div>
-        <div class="product-tile-price">Bald verf&uuml;gbar</div>
+        <div class="product-tile-price">4,90&nbsp;/ 19,90&nbsp;/ 29,90&nbsp;EUR</div>
       </button>
 
       <button class="product-tile" data-target="prod-geo" type="button">
@@ -1754,24 +1849,73 @@ section { padding: 120px 40px; }
 
     <!-- ── Detail panels (one shown at a time) ── -->
 
-    <!-- Coming-soon panels (hidden by default) -->
-    <div class="product-detail product-detail-soon" id="prod-investing" hidden>
-      <div class="soon-card">
-        <div class="soon-badge">In Entwicklung</div>
-        <h3>Aktienanalyse f&uuml;r bessere Investment-Entscheidungen</h3>
-        <p>Mit 33&nbsp;% aller Stimmen die meistgew&uuml;nschte Idee unserer Co-Creation-Community. Wir bauen eine erste Version, die jede einzelne Aktie in f&uuml;nf Dimensionen bewertet &mdash; bezahlbar, konkret, ohne Finanzberatungs-Jargon.</p>
-        <ul class="product-features">
-          <li><span class="check">&check;</span>Technische Analyse &mdash; Trend, Momentum, Muster</li>
-          <li><span class="check">&check;</span>Fundamentalanalyse &mdash; Kennzahlen, Moat, Bewertung</li>
-          <li><span class="check">&check;</span>Sentiment &amp; Momentum &mdash; Analysten, News, Insider</li>
-          <li><span class="check">&check;</span>Risikoprofil &mdash; Szenarien, Volatilit&auml;t, Positionsgr&ouml;&szlig;e</li>
-          <li><span class="check">&check;</span>Investment-These &mdash; Bull/Bear-Case, Einstieg, Stop, Ziel</li>
-        </ul>
-        <div class="soon-cta-row">
-          <a href="#cocreation" class="btn-primary">Priorit&auml;t mitgestalten &rarr;</a>
-          <button type="button" class="btn-secondary-dark" data-notify-launch data-product-slug="aktienanalyse" data-product-name="Aktienanalyse f&uuml;r bessere Investment-Entscheidungen">Bei Launch benachrichtigen</button>
+    <!-- Live product detail (Aktienanalyse) -->
+    <div class="product-detail" id="prod-investing" hidden>
+
+      <div class="reviews-bi-grid">
+
+        <!-- Karte 1: Produkt-Info + 5 Dimensionen -->
+        <div class="product-info fade-up">
+          <h3>Klare Handlungsempfehlung statt abstrakter Charts</h3>
+          <p>Wir bewerten jede einzelne Aktie &uuml;ber f&uuml;nf Dimensionen und liefern einen verst&auml;ndlichen PDF-Report mit konkretem Einstieg, Stop-Loss und Kursziel &mdash; ohne Finanzberatungs-Jargon.</p>
+
+          <ul class="product-features">
+            <li><span class="check">&check;</span><span><strong>Technische Analyse</strong> &mdash; Trend, Momentum, Chartmuster</span></li>
+            <li><span class="check">&check;</span><span><strong>Fundamentalanalyse</strong> &mdash; Kennzahlen, Moat, Bewertung</span></li>
+            <li><span class="check">&check;</span><span><strong>Sentiment &amp; Momentum</strong> &mdash; Analysten, News, Insider-Trades</span></li>
+            <li><span class="check">&check;</span><span><strong>Risikoprofil</strong> &mdash; Szenarien, Volatilit&auml;t, Positionsgr&ouml;&szlig;e</span></li>
+            <li><span class="check">&check;</span><span><strong>Investment-These</strong> &mdash; Bull/Bear-Case, Einstieg, Stop, Ziel</span></li>
+          </ul>
         </div>
+
+        <!-- Karte 2: So funktioniert's -->
+        <div class="process-card fade-up delay-1">
+          <h4>So funktioniert&rsquo;s</h4>
+          <div class="process-sub">Vom Bundle bis zum ersten Report in unter 24&nbsp;Stunden.</div>
+          <ol class="process-steps">
+            <li><span><strong>Bundle w&auml;hlen</strong> &mdash; ein, f&uuml;nf oder zehn Analysen. Credits sind sechs Monate ab Erstkauf g&uuml;ltig.</span></li>
+            <li><span><strong>Ticker senden</strong> &mdash; Sie mailen uns den gew&uuml;nschten Ticker (z.&nbsp;B. AAPL, SAP, NVDA) &mdash; wir generieren den Report.</span></li>
+            <li><span><strong>PDF empfangen</strong> &mdash; innerhalb von 24&nbsp;Stunden per E-Mail, inkl. Bewertung, Einstieg und Stop-Loss.</span></li>
+          </ol>
+          <div class="process-note">
+            Kein Abo, keine automatische Verl&auml;ngerung. Nicht genutzte Credits verfallen sechs Monate nach Erstkauf.
+          </div>
+        </div>
+
       </div>
+
+      <!-- Bundle-Picker: 3 Tiers -->
+      <div class="bundle-grid fade-up delay-2">
+
+        <div class="bundle-card">
+          <div class="bundle-name">Schnupper</div>
+          <div class="bundle-credits">1 Analyse</div>
+          <div class="bundle-price">4,90&nbsp;<span>EUR</span></div>
+          <div class="bundle-per">4,90&nbsp;EUR / Analyse</div>
+          <div class="bundle-body">Zum Testen &mdash; eine einzelne Aktien-Analyse ohne Commitment.</div>
+          <a href="mailto:hello@aisolo.io?subject=Aktienanalyse%20Bundle%20-%20Schnupper" class="btn-primary">Bundle w&auml;hlen &rarr;</a>
+        </div>
+
+        <div class="bundle-card bundle-card-emph">
+          <div class="bundle-name">Standard</div>
+          <div class="bundle-credits">5 Analysen</div>
+          <div class="bundle-price">19,90&nbsp;<span>EUR</span></div>
+          <div class="bundle-per">3,98&nbsp;EUR / Analyse</div>
+          <div class="bundle-body">F&uuml;nf Aktien Ihrer Wahl &mdash; genug f&uuml;r eine kleine Watchlist oder einen ersten Depot-Check.</div>
+          <a href="mailto:hello@aisolo.io?subject=Aktienanalyse%20Bundle%20-%20Standard" class="btn-primary">Bundle w&auml;hlen &rarr;</a>
+        </div>
+
+        <div class="bundle-card bundle-card-best">
+          <div class="bundle-name">Power</div>
+          <div class="bundle-credits">10 Analysen</div>
+          <div class="bundle-price">29,90&nbsp;<span>EUR</span></div>
+          <div class="bundle-per">2,99&nbsp;EUR / Analyse &mdash; bester Preis</div>
+          <div class="bundle-body">F&uuml;r das ganze Depot oder eine gr&ouml;&szlig;ere Watchlist &mdash; zehn Analysen flexibel abrufbar &uuml;ber sechs Monate.</div>
+          <a href="mailto:hello@aisolo.io?subject=Aktienanalyse%20Bundle%20-%20Power" class="btn-primary">Bundle w&auml;hlen &rarr;</a>
+        </div>
+
+      </div>
+
     </div>
 
     <!-- Live product detail (Google Reviews) — visible by default -->
@@ -2291,12 +2435,12 @@ section { padding: 120px 40px; }
 
         <div class="cta-slide">
           <div class="cta-slide-card">
-            <span class="cta-slide-status dev">In Entwicklung</span>
+            <span class="cta-slide-status live">Live</span>
             <h3 class="cta-slide-name">Aktienanalyse f&uuml;r bessere Investment-Entscheidungen</h3>
             <div class="cta-slide-tag">Meine KI</div>
             <p class="cta-slide-desc">KI-gest&uuml;tzte Bewertung einzelner Aktien &uuml;ber f&uuml;nf Dimensionen &mdash; Technik, Fundamentals, Sentiment, Risiko und Investment-These &mdash; mit konkreter Handlungsempfehlung.</p>
-            <div class="cta-slide-price">Bald verf&uuml;gbar</div>
-            <a href="#cocreation" class="btn-secondary-soon">Priorit&auml;t mitgestalten &rarr;</a>
+            <div class="cta-slide-price">ab 4,90&nbsp;EUR</div>
+            <a href="#produkte" class="btn-primary">Bundle w&auml;hlen &rarr;</a>
           </div>
         </div>
 
