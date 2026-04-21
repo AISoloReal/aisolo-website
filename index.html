@@ -617,39 +617,109 @@ section { padding: 120px 40px; }
   .why-geo-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 
-/* ── GEO CO-CREATION FREE-OFFER CALLOUT ── */
+/* ── GEO 2x2 QUADRANT GRID ── */
+.geo-quad-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 28px;
+  margin: 40px 0 0;
+  align-items: stretch;
+}
+.geo-quad-grid > * {
+  margin: 0;
+  min-width: 0;   /* allow flex/grid children to shrink */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/* Kill the existing centered alignment from .product-preview (was in .product-showcase) */
+.geo-quad-grid .product-preview {
+  padding: 36px 32px;
+  border-radius: 16px;
+}
+.geo-quad-grid .product-preview-inner {
+  height: 100%;
+  display: flex; flex-direction: column;
+}
+.geo-quad-grid .product-preview h3 { font-size: 22px; margin-bottom: 22px; }
+.geo-quad-grid .product-preview .product-metrics { margin-bottom: 22px; }
+.geo-quad-grid .product-preview .product-metric .val { font-size: 28px; }
+.geo-quad-grid .product-preview .product-sample-items { margin-top: auto; }
+@media (max-width: 900px) {
+  .geo-quad-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .geo-quad-grid > * { height: auto; }
+}
+
+/* ── GEO INFO CARD (TL quadrant) ── */
+.geo-info-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 30px 28px;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.05);
+}
+.geo-info-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; line-height: 1.25;
+  color: var(--petrol-dark);
+  margin-bottom: 14px;
+}
+.geo-info-card > p {
+  font-size: 14px; line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+.geo-info-card .product-features { margin-bottom: 22px; }
+.geo-info-card .product-features li { font-size: 13.5px; }
+.geo-info-card .pricing-box { margin-top: auto; padding: 20px 22px; }
+.geo-info-card .pricing-beta { font-size: 30px; }
+
+/* ── GEO CO-CREATION FREE-OFFER CALLOUT (BL quadrant) ── */
 .geo-free-callout {
   background: linear-gradient(135deg, var(--cta-pink) 0%, #b52a6f 100%);
   color: var(--white);
   border-radius: 16px;
   padding: 28px 30px 24px;
-  margin: 28px 0 0;
   box-shadow: 0 10px 32px rgba(214,51,132,0.22);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "badge   counter"
-    "title   counter"
-    "body    counter"
-    "rules   rules";
-  column-gap: 28px;
-  row-gap: 10px;
-  align-items: start;
+  gap: 10px;
 }
 .geo-free-badge {
-  grid-area: badge;
   font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.85);
 }
 .geo-free-title {
-  grid-area: title;
   font-family: 'DM Serif Display', serif;
-  font-size: 26px; line-height: 1.15;
+  font-size: 24px; line-height: 1.2;
+  margin: 2px 0 6px;
+}
+.geo-free-counter {
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 14px;
+  padding: 14px 20px;
+  text-align: center;
+  align-self: flex-start;
+  min-width: 170px;
+  margin: 4px 0 6px;
+}
+.geo-free-counter-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px; line-height: 1;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.geo-free-counter-lbl {
+  font-size: 12px; line-height: 1.35;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
 }
 .geo-free-body {
-  grid-area: body;
-  font-size: 14.5px; line-height: 1.6;
+  font-size: 14px; line-height: 1.55;
   color: rgba(255,255,255,0.95);
 }
 .geo-free-body code {
@@ -661,59 +731,22 @@ section { padding: 120px 40px; }
   text-decoration: line-through;
   opacity: 0.75;
 }
-.geo-free-counter {
-  grid-area: counter;
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.28);
-  border-radius: 14px;
-  padding: 18px 22px;
-  text-align: center;
-  min-width: 150px;
-  align-self: center;
-}
-.geo-free-counter-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 54px; line-height: 1;
-  color: var(--white);
-  margin-bottom: 6px;
-}
-.geo-free-counter-lbl {
-  font-size: 12px; line-height: 1.35;
-  color: rgba(255,255,255,0.9);
-  font-weight: 500;
-}
 .geo-free-rules {
-  grid-area: rules;
-  list-style: none; padding: 0; margin: 8px 0 0;
-  display: flex; flex-wrap: wrap; gap: 10px 18px;
+  list-style: none; padding: 14px 0 0; margin: auto 0 0;
+  display: flex; flex-direction: column; gap: 6px;
   border-top: 1px solid rgba(255,255,255,0.25);
-  padding-top: 14px;
 }
 .geo-free-rules li {
   font-size: 12.5px;
   color: rgba(255,255,255,0.92);
   position: relative;
-  padding-left: 16px;
+  padding-left: 18px;
 }
 .geo-free-rules li::before {
   content: "\2713";
   position: absolute; left: 0; top: 0;
   color: var(--white);
   font-weight: 700;
-}
-@media (max-width: 720px) {
-  .geo-free-callout {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "badge"
-      "title"
-      "counter"
-      "body"
-      "rules";
-    padding: 24px 22px 20px;
-  }
-  .geo-free-counter { justify-self: start; min-width: 140px; }
-  .geo-free-title { font-size: 22px; }
 }
 
 /* ── CO-CREATION ── */
@@ -1839,8 +1872,34 @@ section { padding: 120px 40px; }
       </div>
     </div>
 
-    <div class="product-showcase">
-      <div class="product-preview fade-up">
+    <div class="geo-quad-grid">
+
+      <!-- Quadrant TL: Produkt-Info + Pricing -->
+      <div class="geo-info-card fade-up">
+        <h3>Sichtbar werden, wo Ihre Kunden heute suchen</h3>
+        <p>Wir analysieren Ihre Website auf Zitierf&auml;higkeit durch KI-Suchmaschinen und liefern Ihnen einen vollst&auml;ndigen Audit mit Aktionsplan plus einsetzbare <code>llms.txt</code>- und JSON-LD-Snippets.</p>
+        <ul class="product-features">
+          <li><span class="check">&check;</span>GEO-Audit mit Score, Benchmark und 11 Handlungsfeldern</li>
+          <li><span class="check">&check;</span>Fertige <code>llms.txt</code> und JSON-LD-Snippets zum Einf&uuml;gen</li>
+          <li><span class="check">&check;</span>On-Page-Empfehlungen f&uuml;r bessere Zitierf&auml;higkeit</li>
+          <li><span class="check">&check;</span>Priorisierter Aktionsplan (sofort / kurzfristig / mittelfristig)</li>
+          <li><span class="check">&check;</span>E-E-A-T-Analyse (Expertise, Experience, Authority, Trust)</li>
+          <li><span class="check">&check;</span>Remote-Umsetzung durch AI Solo &mdash; aktuell inklusive</li>
+        </ul>
+        <div class="pricing-box">
+          <div class="pricing-left">
+            <div class="pricing-regular">Regul&auml;r: 69,90 EUR</div>
+            <div class="pricing-beta">19,90 EUR <span>einmalig</span></div>
+            <div class="pricing-note">Einf&uuml;hrungspreis — limitiert</div>
+          </div>
+          <a href="https://api.aisolo.io/kaufen?product=geo" class="btn-primary" target="_blank">
+            Jetzt bestellen &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Quadrant TR: Beispiel-Analyse -->
+      <div class="product-preview fade-up delay-1">
         <div class="product-preview-inner">
           <div class="preview-badge">Beispiel-Analyse</div>
           <h3>Wie sichtbar Ihre Website in ChatGPT, Perplexity &amp; Co. wirklich ist</h3>
@@ -1875,101 +1934,76 @@ section { padding: 120px 40px; }
         </div>
       </div>
 
-      <div class="product-info fade-up delay-1">
-        <h3>Sichtbar werden, wo Ihre Kunden heute suchen</h3>
-        <p>Wir analysieren Ihre Website auf Zitierf&auml;higkeit durch KI-Suchmaschinen und liefern Ihnen einen vollst&auml;ndigen Audit mit Aktionsplan plus einsetzbare <code>llms.txt</code>- und JSON-LD-Snippets. F&uuml;r die ersten Kunden setzen wir die Ma&szlig;nahmen in der Lernphase direkt mit um &mdash; kostenlos.</p>
-
-        <ul class="product-features">
-          <li><span class="check">&check;</span>Vollst&auml;ndiger GEO-Audit mit Score, Benchmark und 11 Handlungsfeldern</li>
-          <li><span class="check">&check;</span>Fertige <code>llms.txt</code> und JSON-LD-Snippets zum Einf&uuml;gen</li>
-          <li><span class="check">&check;</span>On-Page-Empfehlungen f&uuml;r bessere Zitierf&auml;higkeit</li>
-          <li><span class="check">&check;</span>Priorisierter Aktionsplan (sofort / kurzfristig / mittelfristig)</li>
-          <li><span class="check">&check;</span>E-E-A-T-Analyse (Expertise, Experience, Authority, Trust)</li>
-          <li><span class="check">&check;</span>Remote-Umsetzung durch AI Solo &mdash; aktuell inklusive</li>
+      <!-- Quadrant BL: Co-Creation free-offer callout with static counter -->
+      <div class="geo-free-callout fade-up">
+        <div class="geo-free-badge">CO-CREATION-ANGEBOT &mdash; BEGRENZT</div>
+        <div class="geo-free-title">Umsetzung aktuell komplett kostenlos</div>
+        <div class="geo-free-counter">
+          <div class="geo-free-counter-num">9</div>
+          <div class="geo-free-counter-lbl">von 10 Pl&auml;tzen noch frei</div>
+        </div>
+        <div class="geo-free-body">
+          F&uuml;r die ersten zehn Kunden &uuml;bernimmt AI Solo die Remote-Umsetzung
+          (<code>llms.txt</code>, JSON-LD-Schema, On-Page-Edits) in der Lernphase
+          komplett kostenlos &mdash; regul&auml;r
+          <span class="geo-free-strike">299&nbsp;&ndash;&nbsp;699&nbsp;EUR</span>.
+          Nur f&uuml;r Kunden, die einen Audit-Report gekauft haben. First come, first serve.
+        </div>
+        <ul class="geo-free-rules">
+          <li>Voraussetzung: gekaufter GEO-Audit-Report</li>
+          <li>Reihenfolge der Anmeldung &mdash; first come, first serve</li>
+          <li>Abwicklung komplett remote &uuml;ber hello@aisolo.io</li>
         </ul>
-
-        <!-- ── Co-Creation free-offer callout with static counter ── -->
-        <div class="geo-free-callout fade-up delay-2">
-          <div class="geo-free-badge">CO-CREATION-ANGEBOT &mdash; BEGRENZT</div>
-          <div class="geo-free-title">Umsetzung aktuell komplett kostenlos</div>
-          <div class="geo-free-body">
-            F&uuml;r die ersten zehn Kunden &uuml;bernimmt AI Solo die Remote-Umsetzung
-            (<code>llms.txt</code>, JSON-LD-Schema, On-Page-Edits) in der Lernphase
-            komplett kostenlos &mdash; regul&auml;r
-            <span class="geo-free-strike">299&nbsp;&ndash;&nbsp;699&nbsp;EUR</span>.
-            Nur f&uuml;r Kunden, die einen Audit-Report gekauft haben. First come, first serve.
-          </div>
-          <div class="geo-free-counter">
-            <div class="geo-free-counter-num">9</div>
-            <div class="geo-free-counter-lbl">von 10 Pl&auml;tzen noch frei</div>
-          </div>
-          <ul class="geo-free-rules">
-            <li>Voraussetzung: gekaufter GEO-Audit-Report</li>
-            <li>Reihenfolge der Anmeldung &mdash; first come, first serve</li>
-            <li>Abwicklung komplett remote &uuml;ber hello@aisolo.io</li>
-          </ul>
-        </div>
-
-        <div class="pricing-box">
-          <div class="pricing-left">
-            <div class="pricing-regular">Regul&auml;r: 69,90 EUR</div>
-            <div class="pricing-beta">19,90 EUR <span>einmalig</span></div>
-            <div class="pricing-note">Einf&uuml;hrungspreis — limitiert</div>
-          </div>
-          <a href="https://api.aisolo.io/kaufen?product=geo" class="btn-primary" target="_blank">
-            Jetzt bestellen &rarr;
-          </a>
-        </div>
-
-        <!-- ── Inbound: free GEO teaser request ── -->
-        <div class="teaser-request" id="teaserRequestGeo">
-          <div class="teaser-request-head">
-            <span class="teaser-request-badge">Kostenlos</span>
-            <h4>Erst eine kostenlose Vorschau anfordern</h4>
-          </div>
-          <p class="teaser-request-sub">
-            Noch unsicher? Tragen Sie Ihre Website ein und Sie erhalten innerhalb von 24&nbsp;Stunden
-            eine kostenfreie Vorschau mit GEO-Score, Benchmark und ersten Hinweisen &mdash; ohne Verpflichtung.
-          </p>
-          <form class="cc-form" id="teaserRequestGeoForm" novalidate>
-            <div>
-              <label for="trgCompany">Unternehmen *</label>
-              <input type="text" id="trgCompany" name="company" required maxlength="120" placeholder="z. B. Praxis Dr. Mustermann">
-            </div>
-            <div class="cc-form-row">
-              <div>
-                <label for="trgDomain">Website-Domain *</label>
-                <input type="text" id="trgDomain" name="domain" required maxlength="200" placeholder="z. B. www.ihre-firma.de">
-              </div>
-              <div>
-                <label for="trgEmail">E-Mail *</label>
-                <input type="email" id="trgEmail" name="email" required maxlength="120" placeholder="ihre@email.de">
-              </div>
-            </div>
-            <label class="consent-row">
-              <input type="checkbox" id="trgConsent" name="consent" required>
-              <span>
-                Ich stimme zu, dass AI Solo meine Angaben verwendet, um die kostenlose GEO-Vorschau
-                zu erstellen und an die angegebene E-Mail zu senden. Datenschutz: keine Weitergabe an Dritte.
-              </span>
-            </label>
-            <button type="submit" class="cc-submit" id="trgSubmit">
-              Kostenlose Vorschau anfordern &rarr;
-            </button>
-            <div class="cc-form-status" id="trgStatus" role="status" aria-live="polite"></div>
-          </form>
-          <div class="teaser-request-success" id="teaserRequestGeoSuccess">
-            <div class="check-circle">&check;</div>
-            <h4>Vielen Dank &mdash; Anfrage erhalten!</h4>
-            <p>
-              Sie erhalten Ihre pers&ouml;nliche GEO-Vorschau innerhalb von 24&nbsp;Stunden an die
-              angegebene E-Mail-Adresse. Bei Fragen: <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>.
-            </p>
-          </div>
-        </div>
-
       </div>
-    </div>
+
+      <!-- Quadrant BR: Inbound free GEO teaser request -->
+      <div class="teaser-request fade-up delay-1" id="teaserRequestGeo">
+        <div class="teaser-request-head">
+          <span class="teaser-request-badge">Kostenlos</span>
+          <h4>Erst eine kostenlose Vorschau anfordern</h4>
+        </div>
+        <p class="teaser-request-sub">
+          Noch unsicher? Tragen Sie Ihre Website ein und Sie erhalten innerhalb von 24&nbsp;Stunden
+          eine kostenfreie Vorschau mit GEO-Score, Benchmark und ersten Hinweisen &mdash; ohne Verpflichtung.
+        </p>
+        <form class="cc-form" id="teaserRequestGeoForm" novalidate>
+          <div>
+            <label for="trgCompany">Unternehmen *</label>
+            <input type="text" id="trgCompany" name="company" required maxlength="120" placeholder="z. B. Praxis Dr. Mustermann">
+          </div>
+          <div class="cc-form-row">
+            <div>
+              <label for="trgDomain">Website-Domain *</label>
+              <input type="text" id="trgDomain" name="domain" required maxlength="200" placeholder="z. B. www.ihre-firma.de">
+            </div>
+            <div>
+              <label for="trgEmail">E-Mail *</label>
+              <input type="email" id="trgEmail" name="email" required maxlength="120" placeholder="ihre@email.de">
+            </div>
+          </div>
+          <label class="consent-row">
+            <input type="checkbox" id="trgConsent" name="consent" required>
+            <span>
+              Ich stimme zu, dass AI Solo meine Angaben verwendet, um die kostenlose GEO-Vorschau
+              zu erstellen und an die angegebene E-Mail zu senden. Datenschutz: keine Weitergabe an Dritte.
+            </span>
+          </label>
+          <button type="submit" class="cc-submit" id="trgSubmit">
+            Kostenlose Vorschau anfordern &rarr;
+          </button>
+          <div class="cc-form-status" id="trgStatus" role="status" aria-live="polite"></div>
+        </form>
+        <div class="teaser-request-success" id="teaserRequestGeoSuccess">
+          <div class="check-circle">&check;</div>
+          <h4>Vielen Dank &mdash; Anfrage erhalten!</h4>
+          <p>
+            Sie erhalten Ihre pers&ouml;nliche GEO-Vorschau innerhalb von 24&nbsp;Stunden an die
+            angegebene E-Mail-Adresse. Bei Fragen: <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>.
+          </p>
+        </div>
+      </div>
+
+    </div><!-- /.geo-quad-grid -->
     </div><!-- /#prod-geo -->
   </div>
 </section>
