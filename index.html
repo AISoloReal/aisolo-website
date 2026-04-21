@@ -618,18 +618,21 @@ section { padding: 120px 40px; }
 }
 
 /* ── GEO 2x2 QUADRANT GRID ── */
+/* Key: min-height on the grid forces 1fr-rows to actually distribute equally
+   (without a defined grid height, 1fr collapses to content-min and rows differ). */
 .geo-quad-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 28px;
   margin: 40px 0 0;
+  min-height: calc(2 * 560px + 28px);
   align-items: stretch;
 }
 .geo-quad-grid > * {
   margin: 0;
-  min-width: 0;   /* allow flex/grid children to shrink */
-  height: 100%;
+  min-width: 0;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
 }
@@ -650,8 +653,9 @@ section { padding: 120px 40px; }
   .geo-quad-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+    min-height: 0;
   }
-  .geo-quad-grid > * { height: auto; }
+  .geo-quad-grid > * { height: auto; align-self: auto; }
 }
 
 /* ── GEO INFO CARD (TL quadrant) ── */
