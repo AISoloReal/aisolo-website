@@ -52,15 +52,17 @@ body {
 }
 .nav.scrolled { box-shadow: 0 2px 24px rgba(19,47,53,0.08); }
 .nav-inner {
-  max-width: 1200px; margin: 0 auto;
+  max-width: 1440px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 40px;
+  padding: 12px 32px;
+  gap: 48px;
 }
 .nav-logo img { height: 160px; }
-.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links { display: flex; gap: 26px; align-items: center; flex-wrap: nowrap; }
 .nav-links a {
   text-decoration: none; color: var(--text-secondary);
   font-size: 16px; font-weight: 500; letter-spacing: 0.01em;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--petrol-primary); }
@@ -625,7 +627,7 @@ section { padding: 120px 40px; }
 .geo-quad-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(2, minmax(560px, 1fr));
+  grid-auto-rows: 1fr;
   gap: 28px;
   margin: 40px 0 0;
   align-items: stretch;
@@ -633,6 +635,7 @@ section { padding: 120px 40px; }
 .geo-quad-grid > * {
   margin: 0;
   min-width: 0;
+  min-height: 720px;
   height: 100%;
   align-self: stretch;
   display: flex;
@@ -2851,6 +2854,36 @@ if (ccForm) {
     maybeActivate();
   }
   window.addEventListener('hashchange', maybeActivate);
+})();
+
+// ── GEO quadrant equal-height enforcer ──
+// grid-auto-rows:1fr + min-height fall back to content-sized when content
+// exceeds the min. This measures all 4 cells natural heights and stretches
+// everything to the tallest, guaranteeing equal rows.
+(function () {
+  const grid = document.querySelector('.geo-quad-grid');
+  if (!grid) return;
+  const cells = Array.from(grid.children);
+  if (cells.length < 2) return;
+
+  function equalize() {
+    if (window.innerWidth <= 900) {
+      cells.forEach(c => { c.style.minHeight = ''; });
+      return;
+    }
+    cells.forEach(c => { c.style.minHeight = ''; });
+    let max = 0;
+    cells.forEach(c => { if (c.offsetHeight > max) max = c.offsetHeight; });
+    if (max > 0) cells.forEach(c => { c.style.minHeight = max + 'px'; });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(equalize, 50));
+  } else {
+    setTimeout(equalize, 50);
+  }
+  window.addEventListener('resize', equalize);
+  window.addEventListener('load', equalize);
 })();
 </script>
 </body>
