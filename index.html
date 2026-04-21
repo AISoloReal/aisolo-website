@@ -632,7 +632,7 @@ section { padding: 120px 40px; }
   background: var(--white) !important;
   color: var(--text-primary) !important;
   border: 1px solid var(--border) !important;
-  border-left: 4px solid var(--cta-pink) !important;
+  border-left: 4px solid var(--petrol-medium) !important;
   border-radius: 14px !important;
   padding: 28px 26px 24px !important;
   box-shadow: 0 4px 22px rgba(19,47,53,0.05) !important;
@@ -685,6 +685,40 @@ section { padding: 120px 40px; }
 .geo-tri-grid .teaser-request .cc-form-row { grid-template-columns: 1fr; }
 .geo-tri-grid .teaser-request .cc-submit { background: var(--cta-pink); }
 .geo-tri-grid .teaser-request .cc-submit:hover { background: var(--cta-pink-hover); }
+
+/* ── REVIEWS 2-TILE GRID (matches .why-reviews-grid KPI card look) ── */
+.reviews-bi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 40px auto 0;
+  max-width: 1180px;
+  align-items: stretch;
+}
+.reviews-bi-grid > * {
+  background: var(--white) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 4px solid var(--petrol-medium) !important;
+  border-radius: 14px !important;
+  padding: 32px 30px 28px !important;
+  box-shadow: 0 4px 22px rgba(19,47,53,0.05) !important;
+  display: flex; flex-direction: column;
+  margin: 0;
+  min-width: 0;
+}
+@media (max-width: 860px) {
+  .reviews-bi-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+/* Inner overrides */
+.reviews-bi-grid .product-info h3 { font-size: 24px; margin-bottom: 14px; }
+.reviews-bi-grid .product-info > p { font-size: 14px; line-height: 1.65; margin-bottom: 18px; }
+.reviews-bi-grid .product-info .product-features { margin-bottom: 22px; }
+.reviews-bi-grid .product-info .product-features li { font-size: 13.5px; }
+.reviews-bi-grid .product-info .pricing-box { margin-top: auto; padding: 20px 22px; }
+.reviews-bi-grid .product-info .pricing-beta { font-size: 28px; }
+.reviews-bi-grid .teaser-request { margin-top: 0; }
+.reviews-bi-grid .teaser-request h4 { font-size: 18px; }
 
 /* ── GEO INFO CARD (TL quadrant) ── */
 .geo-info-card {
@@ -1751,43 +1785,10 @@ section { padding: 120px 40px; }
       </div>
     </div>
 
-    <div class="product-showcase">
-      <div class="product-preview fade-up">
-        <div class="product-preview-inner">
-          <div class="preview-badge">Beispiel-Analyse</div>
-          <h3>Was Ihre Bewertungen wirklich &uuml;ber Ihr Unternehmen sagen</h3>
-          <div class="product-metrics">
-            <div class="product-metric">
-              <div class="val">3,2</div>
-              <div class="lbl">Aktueller Score</div>
-            </div>
-            <div class="product-metric">
-              <div class="val">4,6</div>
-              <div class="lbl">Benchmark Top 5</div>
-            </div>
-            <div class="product-metric">
-              <div class="val">87</div>
-              <div class="lbl">Bewertungen</div>
-            </div>
-          </div>
-          <div class="product-sample-items">
-            <div class="product-sample-item">
-              <span class="category">Wartezeiten &amp; Terminvergabe</span>
-              <span class="severity severity-high">Sofort</span>
-            </div>
-            <div class="product-sample-item">
-              <span class="category">Kommunikation &amp; Aufkl&auml;rung</span>
-              <span class="severity severity-high">Sofort</span>
-            </div>
-            <div class="product-sample-item">
-              <span class="category">Freundlichkeit Personal</span>
-              <span class="severity severity-mid">Kurzfristig</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="reviews-bi-grid">
 
-      <div class="product-info fade-up delay-1">
+      <!-- Karte 1: Produkt-Info + Pricing -->
+      <div class="product-info fade-up">
         <h3>Alles, was Sie brauchen, um Ihren Score zu verbessern</h3>
         <p>Wir analysieren jede einzelne Google-Bewertung Ihres Unternehmens und liefern Ihnen einen individuellen Report mit konkreten, sofort umsetzbaren Ma&szlig;nahmen.</p>
 
@@ -1810,9 +1811,10 @@ section { padding: 120px 40px; }
             Jetzt bestellen &rarr;
           </a>
         </div>
+      </div>
 
-        <!-- ── Inbound: free teaser request ── -->
-        <div class="teaser-request" id="teaserRequest">
+      <!-- Karte 2: Inbound free teaser request -->
+      <div class="teaser-request fade-up delay-1" id="teaserRequest">
           <div class="teaser-request-head">
             <span class="teaser-request-badge">Kostenlos</span>
             <h4>Erst eine kostenlose Vorschau anfordern</h4>
@@ -1860,10 +1862,9 @@ section { padding: 120px 40px; }
               angegebene E-Mail-Adresse. Bei Fragen: <a href="mailto:hello@aisolo.io">hello@aisolo.io</a>.
             </p>
           </div>
-        </div>
+      </div><!-- /.teaser-request -->
 
-      </div>
-    </div>
+    </div><!-- /.reviews-bi-grid -->
     </div><!-- /#prod-google-reviews -->
 
     <!-- Live product detail (GEO Audit mit Remote-Umsetzung) -->
