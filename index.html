@@ -2616,13 +2616,18 @@ function syncProductFromHash() {
   if (!target) return;
   const panel = target.closest('.product-detail') || (target.classList.contains('product-detail') ? target : null);
   if (panel && activateProduct(panel.id)) {
-    // Wait one frame so the un-hidden panel has layout before scrolling.
-    requestAnimationFrame(() => {
+    // Force fade-up elements inside the panel to their final position
+    // *before* measuring — otherwise translateY(30px) shifts the target
+    // and subsequent siblings expand post-scroll, missing the mark.
+    panel.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    if (panel.classList.contains('fade-up')) panel.classList.add('visible');
+    // Two rAFs so the browser finishes layout after the transform change.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
       const navEl = document.querySelector('.nav');
       const navH = navEl ? navEl.getBoundingClientRect().height : 0;
       const y = target.getBoundingClientRect().top + window.scrollY - navH - 24;
       window.scrollTo({ top: y, behavior: 'smooth' });
-    });
+    }));
   }
 }
 if (location.hash) {
