@@ -1884,7 +1884,7 @@ section { padding: 120px 40px; }
       </div>
 
       <!-- Bundle-Picker: 3 Tiers -->
-      <div class="bundle-grid fade-up delay-2">
+      <div id="invest-bundles" class="bundle-grid fade-up delay-2">
 
         <div class="bundle-card">
           <div class="bundle-name">Schnupper</div>
@@ -2589,13 +2589,41 @@ window.addEventListener('scroll', () => {
 // Product tile switcher (Online Shop)
 const productTiles = document.querySelectorAll('.product-tile');
 const productDetails = document.querySelectorAll('.product-detail');
+function activateProduct(targetId) {
+  let matched = false;
+  productTiles.forEach(t => {
+    const isTarget = t.getAttribute('data-target') === targetId;
+    t.classList.toggle('active', isTarget);
+    if (isTarget) matched = true;
+  });
+  productDetails.forEach(d => { d.hidden = (d.id !== targetId); });
+  return matched;
+}
 productTiles.forEach(tile => {
   tile.addEventListener('click', () => {
-    const targetId = tile.getAttribute('data-target');
-    productTiles.forEach(t => t.classList.toggle('active', t === tile));
-    productDetails.forEach(d => { d.hidden = (d.id !== targetId); });
+    activateProduct(tile.getAttribute('data-target'));
   });
 });
+// Deep-link support:
+//   aisolo.io/#prod-investing   → opens Investing panel, scrolls to panel top
+//   aisolo.io/#invest-bundles   → opens Investing panel, scrolls to bundle grid
+// Works for any hash that points at a .product-detail root, or at any element
+// *inside* a .product-detail — the panel is un-hidden first, then scrolled to.
+function syncProductFromHash() {
+  const h = (location.hash || '').replace('#', '');
+  if (!h) return;
+  const target = document.getElementById(h);
+  if (!target) return;
+  const panel = target.closest('.product-detail') || (target.classList.contains('product-detail') ? target : null);
+  if (panel && activateProduct(panel.id)) {
+    // Wait one frame so the un-hidden panel has layout before scrolling.
+    requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+}
+if (location.hash) {
+  window.addEventListener('load', syncProductFromHash);
+}
+window.addEventListener('hashchange', syncProductFromHash);
 
 // Mobile hamburger toggle
 const navToggle = document.getElementById('navToggle');
