@@ -2617,7 +2617,12 @@ function syncProductFromHash() {
   const panel = target.closest('.product-detail') || (target.classList.contains('product-detail') ? target : null);
   if (panel && activateProduct(panel.id)) {
     // Wait one frame so the un-hidden panel has layout before scrolling.
-    requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    requestAnimationFrame(() => {
+      const navEl = document.querySelector('.nav');
+      const navH = navEl ? navEl.getBoundingClientRect().height : 0;
+      const y = target.getBoundingClientRect().top + window.scrollY - navH - 24;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
   }
 }
 if (location.hash) {
