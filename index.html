@@ -31,7 +31,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'Plus Jakarta Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -39,6 +39,7 @@ body {
   line-height: 1.6;
   background: var(--white);
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* ── NAV ── */
@@ -121,13 +122,15 @@ body {
 .hero-inner {
   max-width: 1200px; margin: 0 auto; padding: 160px 40px 120px;
   position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: center;
 }
+.hero-text, .hero-visual { min-width: 0; }
 .hero-text h1 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: clamp(40px, 5vw, 64px);
   line-height: 1.1; color: var(--white);
   margin-bottom: 24px;
+  overflow-wrap: break-word;
 }
 .hero-text h1 em {
   font-style: italic; color: var(--petrol-light);
@@ -1492,6 +1495,7 @@ section { padding: 120px 40px; }
 .cta-slide-name {
   font-size: 26px; font-weight: 700; color: var(--white); margin: 0 0 8px;
   font-family: 'Playfair Display', serif;
+  overflow-wrap: break-word; hyphens: auto;
 }
 .cta-slide-tag {
   font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -1586,10 +1590,11 @@ section { padding: 120px 40px; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 48px; }
   .hero-visual { order: 2; }
   .hero-text  { order: 1; }
   .hero-card { max-width: 360px; }
+  .hero-visual .cta-slider { max-width: 100%; }
   .brand-grid { grid-template-columns: 1fr; gap: 48px; }
   .product-showcase { grid-template-columns: 1fr; }
   .product-tiles { grid-template-columns: 1fr 1fr; }
