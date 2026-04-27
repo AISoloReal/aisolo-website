@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eberwein Rolladen & Sonnenschutz — Schatten, der zu Ihrem Haus passt.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --eb-yellow: #ffd403;
+    --eb-yellow-deep: #e6bc00;
+    --eb-yellow-soft: #fff7d1;
+    --ink: #1c1d1e;
+    --ink-soft: #3a3b3d;
+    --charcoal: #232e2d;
+    --cream: #faf8f3;
+    --cream-warm: #f4ede0;
+    --paper: #ffffff;
+    --slate: #595c5e;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .display { font-family: 'Fraunces', Georgia, serif; font-weight: 400; }
+  .display-italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+  .smallcaps {
+    font-family: 'Manrope', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.30em;
+    font-weight: 500;
+    font-size: 0.7rem;
+  }
+  .reveal { opacity: 0; transform: translateY(24px); animation: r 1.4s cubic-bezier(0.2,0.7,0.2,1) forwards; }
+  .reveal.d1 { animation-delay: 0.1s; }
+  .reveal.d2 { animation-delay: 0.3s; }
+  .reveal.d3 { animation-delay: 0.5s; }
+  .reveal.d4 { animation-delay: 0.7s; }
+  @keyframes r { to { opacity: 1; transform: translateY(0); } }
+  .ornament {
+    display: inline-block; width: 1.4rem; height: 1px;
+    background: var(--eb-yellow-deep); vertical-align: middle; margin: 0 0.6rem;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1rem 2.4rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    transition: all 0.4s ease;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--charcoal); transform: translateY(-1px); }
+  .btn-yellow {
+    background: var(--eb-yellow);
+    color: var(--ink);
+    padding: 1rem 2.4rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    transition: all 0.4s ease;
+    display: inline-block;
+  }
+  .btn-yellow:hover { background: var(--eb-yellow-deep); transform: translateY(-1px); }
+  .btn-secondary {
+    border: 1.5px solid currentColor;
+    padding: 1rem 2.4rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    transition: all 0.4s ease;
+    display: inline-block;
+  }
+  .nav-link {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: opacity 0.3s;
+  }
+  .nav-link:hover { opacity: 0.6; }
+  .product-tile {
+    background: var(--paper);
+    border: 1px solid rgba(28,29,30,0.08);
+    transition: all 0.5s cubic-bezier(0.2,0.7,0.2,1);
+    overflow: hidden;
+  }
+  .product-tile:hover {
+    transform: translateY(-4px);
+    border-color: var(--eb-yellow-deep);
+    box-shadow: 0 20px 50px rgba(28,29,30,0.10);
+  }
+  .product-illustration {
+    aspect-ratio: 4/3;
+    position: relative;
+  }
+  /* Rollladen — Streifen-Pattern */
+  .ill-rolladen {
+    background:
+      repeating-linear-gradient(
+        180deg,
+        var(--charcoal) 0px,
+        var(--charcoal) 12px,
+        #2d3a39 12px,
+        #2d3a39 14px
+      );
+  }
+  .ill-rolladen::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(255,212,3,0.0) 30%, rgba(255,212,3,0.18) 100%);
+  }
+  /* Markise — diagonale Streifen */
+  .ill-markise {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--eb-yellow) 0px,
+        var(--eb-yellow) 24px,
+        var(--cream-warm) 24px,
+        var(--cream-warm) 48px
+      );
+    position: relative;
+  }
+  .ill-markise::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(28,29,30,0.20) 100%);
+  }
+  /* Terrassendach — Glas/Stahl */
+  .ill-terrassendach {
+    background:
+      linear-gradient(180deg, #b5d8e0 0%, #e3eef1 50%, #6b7d80 100%);
+    position: relative;
+  }
+  .ill-terrassendach::before {
+    content: '';
+    position: absolute; inset: 12% 8%;
+    background-image:
+      linear-gradient(90deg, var(--charcoal) 0 4px, transparent 4px),
+      linear-gradient(90deg, transparent calc(50% - 2px), var(--charcoal) calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px)),
+      linear-gradient(90deg, transparent calc(100% - 4px), var(--charcoal) calc(100% - 4px));
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .ill-terrassendach::after {
+    content: '';
+    position: absolute; inset: 12% 8%;
+    border: 3px solid var(--charcoal);
+    background: linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.30) 100%);
+  }
+  /* Garagentor — Lamellen + Tor-Box */
+  .ill-garagentor {
+    background:
+      linear-gradient(180deg, #f4ede0 0%, #d6c9a8 100%);
+    position: relative;
+  }
+  .ill-garagentor::after {
+    content: '';
+    position: absolute;
+    left: 12%; right: 12%; top: 18%; bottom: 18%;
+    background:
+      repeating-linear-gradient(180deg,
+        var(--charcoal) 0px, var(--charcoal) 14px,
+        #404748 14px, #404748 16px);
+    border: 2px solid var(--ink);
+  }
+  /* Insektenschutz — Mesh */
+  .ill-insektenschutz {
+    background: var(--cream-warm);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(28,29,30,0.30) 0 1px, transparent 1px 6px),
+      repeating-linear-gradient(90deg, rgba(28,29,30,0.30) 0 1px, transparent 1px 6px);
+    position: relative;
+  }
+  .ill-insektenschutz::after {
+    content: '';
+    position: absolute; inset: 8%;
+    border: 2px solid var(--ink);
+    background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent);
+  }
+  /* Plissee */
+  .ill-plissee {
+    background: var(--cream-warm);
+    background-image:
+      repeating-linear-gradient(180deg,
+        rgba(89,92,94,0.7) 0px, rgba(89,92,94,0.7) 1px,
+        rgba(244,237,224,0.0) 1px, rgba(244,237,224,0.0) 7px);
+  }
+  .ill-plissee::after {
+    content: '';
+    position: absolute; inset: 6% 12%;
+    background: linear-gradient(180deg, rgba(255,212,3,0.18) 0%, transparent 100%);
+  }
+  /* Jalousie */
+  .ill-jalousie {
+    background:
+      repeating-linear-gradient(180deg,
+        var(--slate) 0px, var(--slate) 9px,
+        #74787a 9px, #74787a 11px);
+  }
+  /* Vorbau-Element */
+  .ill-vorbau {
+    background:
+      linear-gradient(135deg, var(--cream) 0%, var(--cream-warm) 100%);
+    position: relative;
+  }
+  .ill-vorbau::before {
+    content: '';
+    position: absolute; left: 25%; top: 15%; right: 25%; bottom: 30%;
+    background: var(--charcoal);
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+  }
+  .ill-vorbau::after {
+    content: '';
+    position: absolute; inset: 50% 15% 8% 15%;
+    background:
+      repeating-linear-gradient(180deg,
+        var(--ink) 0px, var(--ink) 4px,
+        var(--charcoal) 4px, var(--charcoal) 8px);
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .review-card {
+    background: var(--paper);
+    border-top: 3px solid var(--eb-yellow);
+    box-shadow: 0 1px 3px rgba(28,29,30,0.04), 0 8px 24px rgba(28,29,30,0.06);
+  }
+  .stripe-bg {
+    background: var(--charcoal);
+    background-image:
+      repeating-linear-gradient(135deg, rgba(255,212,3,0.04) 0 12px, transparent 12px 28px);
+  }
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .hero-bg {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255,212,3,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(35,46,45,0.06) 0%, transparent 60%),
+      var(--cream);
+    position: relative;
+  }
+  .hero-house {
+    aspect-ratio: 5/4;
+    background: var(--cream-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-house::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 75%;
+    background:
+      linear-gradient(180deg, #e2d9c2 0%, #c4b89b 100%);
+  }
+  .hero-house::after {
+    content: '';
+    position: absolute; bottom: 0; left: 6%; right: 6%; height: 65%;
+    background: linear-gradient(180deg, #2c3535 0%, #1a2020 100%);
+    clip-path: polygon(0 100%, 0 35%, 50% 0%, 100% 35%, 100% 100%);
+  }
+  .markise-overlay {
+    position: absolute;
+    bottom: 30%;
+    left: 12%;
+    right: 12%;
+    height: 20%;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--eb-yellow) 0 18px,
+        var(--cream) 18px 36px);
+    transform: skewY(-8deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+    z-index: 5;
+  }
+  .markise-overlay::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: -8px; height: 8px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--eb-yellow) 0 6px,
+        transparent 6px 12px);
+    transform: skewX(-15deg);
+  }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- ========== TOP NAV ========== -->
+<header class="absolute top-0 left-0 right-0 z-30 px-6 md:px-12 py-6">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <img src="data:image/png;base64,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" alt="Eberwein Rolladen & Sonnenschutz" class="h-12">
+    <nav class="hidden md:flex items-center gap-9" style="color: var(--ink);">
+      <a href="#produkte" class="nav-link">Produkte</a>
+      <a href="#warum" class="nav-link">Warum Eberwein</a>
+      <a href="#stimmen" class="nav-link">Stimmen</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+    </nav>
+    <a href="#kontakt" class="hidden md:inline-block btn-yellow" style="padding: 0.7rem 1.6rem; font-size: 0.7rem;">Kostenlose Beratung</a>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="relative min-h-[100vh] overflow-hidden hero-bg flex items-center">
+  <div class="grain"></div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 grid md:grid-cols-12 gap-12 items-center">
+    <div class="md:col-span-7">
+      <span class="smallcaps reveal d1" style="color: var(--ink-soft);">Waldenbuch · Stuttgarter Str. 16 · seit über 30 Jahren</span>
+      <h1 class="display reveal d2 mt-7 leading-[0.95]" style="font-size: clamp(3rem, 7.4vw, 6.4rem); font-weight: 400; color: var(--ink);">
+        <span class="block">Schatten,</span>
+        <span class="display-italic block" style="color: var(--eb-yellow-deep); font-weight: 500;">der zu Ihrem Haus</span>
+        <span class="block">passt.</span>
+      </h1>
+      <p class="reveal d3 mt-9 max-w-lg text-lg leading-relaxed" style="color: var(--ink-soft);">
+        Rolladen, Markisen, Terrassendächer, Garagentore und Insektenschutz — beraten, gemessen, gefertigt, montiert. Alles aus einer Hand, in Waldenbuch und Umgebung.
+      </p>
+      <div class="reveal d4 mt-11 flex flex-wrap items-center gap-4">
+        <a href="#kontakt" class="btn-yellow">Kostenlose Vor-Ort-Beratung</a>
+        <a href="#produkte" class="btn-secondary" style="color: var(--ink);">Produkte ansehen</a>
+      </div>
+      <div class="reveal d4 mt-12 flex items-center gap-7 text-sm" style="color: var(--ink-soft);">
+        <div class="flex items-center gap-2">
+          <span class="display-italic" style="font-size: 1.6rem; color: var(--ink);">4,7</span>
+          <div>
+            <div class="smallcaps">★ ★ ★ ★ ★</div>
+            <div class="text-xs mt-0.5">aus 15 Google-Bewertungen</div>
+          </div>
+        </div>
+        <div class="h-12 w-px" style="background: rgba(28,29,30,0.2);"></div>
+        <div>
+          <div class="display-italic" style="font-size: 1.6rem; color: var(--ink);">30+</div>
+          <div class="text-xs mt-0.5">Jahre in Waldenbuch</div>
+        </div>
+      </div>
+    </div>
+    <div class="md:col-span-5 reveal d3">
+      <!-- House illustration with Eberwein-yellow markise -->
+      <div class="hero-house rounded-[3px] shadow-2xl">
+        <div class="markise-overlay"></div>
+        <div class="absolute bottom-4 left-4 z-20 px-3 py-1.5 rounded-full text-xs" style="background: var(--ink); color: var(--cream);">
+          Beispielprojekt · Gelenkarm-Markise · Waldenbuch 2025
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRUST-Block ========== -->
+<section class="relative py-20 md:py-24 px-6 md:px-12" style="background: var(--ink); color: var(--cream);">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 text-center">
+    <div>
+      <div class="stat-num" style="font-size: 3.5rem; color: var(--eb-yellow);">5/5</div>
+      <div class="smallcaps mt-3" style="color: rgba(250,248,243,0.7);">aller letzten Reviews</div>
+    </div>
+    <div>
+      <div class="stat-num" style="font-size: 3.5rem; color: var(--eb-yellow);">15</div>
+      <div class="smallcaps mt-3" style="color: rgba(250,248,243,0.7);">Google-Bewertungen</div>
+    </div>
+    <div>
+      <div class="stat-num" style="font-size: 3.5rem; color: var(--eb-yellow);">7</div>
+      <div class="smallcaps mt-3" style="color: rgba(250,248,243,0.7);">Produkt-Bereiche</div>
+    </div>
+    <div>
+      <div class="stat-num" style="font-size: 3.5rem; color: var(--eb-yellow);">7157</div>
+      <div class="smallcaps mt-3" style="color: rgba(250,248,243,0.7);">Vorwahl, sofort erreichbar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRODUKTE ========== -->
+<section id="produkte" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden" style="background: var(--cream);">
+  <div class="max-w-7xl mx-auto">
+    <div class="md:flex md:items-end md:justify-between mb-14">
+      <div>
+        <span class="smallcaps" style="color: var(--eb-yellow-deep);">Produkte nach Maß</span>
+        <h2 class="display mt-6 leading-[1.05]" style="font-size: clamp(2.4rem, 5vw, 4rem); color: var(--ink);">
+          Alles, was Schatten <span class="display-italic" style="color: var(--eb-yellow-deep);">spendet</span> oder<br>Insekten draußen lässt.
+        </h2>
+      </div>
+      <p class="md:max-w-md mt-6 md:mt-0 text-base leading-relaxed" style="color: var(--ink-soft);">
+        Sieben Kern-Bereiche, immer auf Maß gefertigt — von der ersten Beratung über die Aufmaß-Tour bis zur Montage am Haus.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-rolladen"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Rolladen</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Manuell oder elektrisch, Aufsatz oder Vorbau — passend zum Bestand.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-markise"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Markisen</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Gelenkarm, Kassetten, Wintergartenmarkisen — auch motorisiert.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-terrassendach"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Terrassendach</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Aluminium-Konstruktion mit Glas-Eindeckung, statisch berechnet.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-garagentor"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Garagentore</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Sektional, Schwing, Roll-Tor — mit oder ohne Motor und Funk.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-insektenschutz"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Insektenschutz</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Spann-, Pendel-, Roll- oder Plissee-Lösungen für jedes Fenster.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-plissee"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Plissees</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Lichtfilter und Sichtschutz — auch für Dachfenster und Schrägen.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-jalousie"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Jalousien</h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Aluminium oder Holz, Innen oder Außen — präzise einstellbar.</p>
+        </div>
+      </div>
+      <div class="product-tile rounded-[3px]">
+        <div class="product-illustration ill-vorbau"></div>
+        <div class="p-6">
+          <h3 class="display" style="font-size: 1.35rem; color: var(--ink);">Vorbau-<span class="display-italic" style="color: var(--eb-yellow-deep);">Elemente</span></h3>
+          <p class="mt-2 text-sm" style="color: var(--ink-soft);">Zur Nachrüstung beim Bestandsbau ohne Eingriff in die Fassade.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WARUM EBERWEIN ========== -->
+<section id="warum" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden stripe-bg" style="color: var(--cream);">
+  <div class="grain"></div>
+  <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-14 items-center relative">
+    <div class="md:col-span-7">
+      <span class="smallcaps" style="color: var(--eb-yellow);">Warum Eberwein</span>
+      <h2 class="display mt-6 leading-[1.05]" style="font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 400;">
+        Wir machen das, <span class="display-italic" style="color: var(--eb-yellow);">was viele nicht mehr machen.</span>
+      </h2>
+      <div class="mt-12 space-y-7 max-w-2xl">
+        <div class="flex gap-5">
+          <div class="display-italic flex-shrink-0" style="font-size: 2rem; color: var(--eb-yellow); line-height: 1;">01</div>
+          <div>
+            <h3 class="display" style="font-size: 1.4rem; color: var(--cream);">Vor-Ort-Beratung, kostenlos.</h3>
+            <p class="mt-2 leading-relaxed" style="color: rgba(250,248,243,0.78);">Wir kommen zu Ihnen, messen am Bestand, schauen die Fassade an. Daraus wird ein konkretes Angebot — kein Online-Konfigurator-Schätzpreis.</p>
+          </div>
+        </div>
+        <div class="flex gap-5">
+          <div class="display-italic flex-shrink-0" style="font-size: 2rem; color: var(--eb-yellow); line-height: 1;">02</div>
+          <div>
+            <h3 class="display" style="font-size: 1.4rem; color: var(--cream);">Reparatur statt Wegwerf.</h3>
+            <p class="mt-2 leading-relaxed" style="color: rgba(250,248,243,0.78);">Defekter Rolladen-Gurt? Festsitzende Markise? Wir reparieren — auch Marken, die wir nicht selbst verbaut haben. „Sehr kulant" ist kein Slogan, sondern unser Stil.</p>
+          </div>
+        </div>
+        <div class="flex gap-5">
+          <div class="display-italic flex-shrink-0" style="font-size: 2rem; color: var(--eb-yellow); line-height: 1;">03</div>
+          <div>
+            <h3 class="display" style="font-size: 1.4rem; color: var(--cream);">Garantiefall? Wir kommen wieder.</h3>
+            <p class="mt-2 leading-relaxed" style="color: rgba(250,248,243,0.78);">Drei unserer fünf jüngsten Bewertungen erwähnen den Service auch nach Jahren. Eine Hand, die immer da ist — auch nach der Rechnung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md:col-span-5">
+      <div class="border-l pl-8" style="border-color: var(--eb-yellow);">
+        <span class="smallcaps" style="color: var(--eb-yellow);">5★ Stimme</span>
+        <p class="display-italic mt-7" style="font-size: 1.55rem; line-height: 1.4; color: var(--cream);">
+          „Bei uns wurden einige Rolläden ersetzt. Sehr fisselige Arbeit, da Altbau und mit Fassadenplatten verkleidet. Trotz aller Schwierigkeiten wurden wir sehr gut betreut."
+        </p>
+        <span class="smallcaps mt-5 block" style="color: rgba(231,239,224,0.65);">— Bollnaes E., Waldenbuch · vor 4 Monaten</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REVIEWS ========== -->
+<section id="stimmen" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden" style="background: var(--cream);">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="smallcaps" style="color: var(--eb-yellow-deep);">15 Bewertungen · 4,7★</span>
+      <h2 class="display mt-6 leading-[1.05]" style="font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--ink);">
+        Was die Kunden <span class="display-italic" style="color: var(--eb-yellow-deep);">sagen.</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="review-card p-8 rounded-[3px]">
+        <div class="flex items-center gap-1 mb-5" style="color: var(--eb-yellow-deep);">★★★★★</div>
+        <p class="display-italic leading-relaxed" style="font-size: 1.05rem; color: var(--ink);">
+          „Super schneller Reparaturservice, unheimlich netter und motivierter Mitarbeiter. Unbedingt zu empfehlen."
+        </p>
+        <div class="mt-6 flex items-center justify-between text-xs" style="color: var(--ink-soft);">
+          <span>— Wolf S.</span>
+          <span>vor einem Jahr</span>
+        </div>
+      </div>
+      <div class="review-card p-8 rounded-[3px]">
+        <div class="flex items-center gap-1 mb-5" style="color: var(--eb-yellow-deep);">★★★★★</div>
+        <p class="display-italic leading-relaxed" style="font-size: 1.05rem; color: var(--ink);">
+          „Schneller und freundlicher Service auch im Garantiefall. Zu empfehlen!"
+        </p>
+        <div class="mt-6 flex items-center justify-between text-xs" style="color: var(--ink-soft);">
+          <span>— Jan-Filip L.</span>
+          <span>5 Jahre Stammkunde</span>
+        </div>
+      </div>
+      <div class="review-card p-8 rounded-[3px]">
+        <div class="flex items-center gap-1 mb-5" style="color: var(--eb-yellow-deep);">★★★★★</div>
+        <p class="display-italic leading-relaxed" style="font-size: 1.05rem; color: var(--ink);">
+          „Super Service und sehr Kulant. Jederzeit wieder."
+        </p>
+        <div class="mt-6 flex items-center justify-between text-xs" style="color: var(--ink-soft);">
+          <span>— Ken H.</span>
+          <span>5 Jahre Stammkunde</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KONTAKT ========== -->
+<section id="kontakt" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden" style="background: var(--paper);">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-14">
+    <div class="md:col-span-7">
+      <span class="smallcaps" style="color: var(--eb-yellow-deep);"><span class="ornament"></span>Beratung anfragen<span class="ornament"></span></span>
+      <h2 class="display mt-7 leading-[1.05]" style="font-size: clamp(2.6rem, 5.5vw, 4.4rem); color: var(--ink);">
+        <span class="display-italic" style="color: var(--eb-yellow-deep);">Kostenlos &amp;</span><br>am Haus.
+      </h2>
+      <p class="mt-7 text-lg leading-relaxed max-w-xl" style="color: var(--ink-soft);">
+        Sie schreiben uns kurz, was Sie vorhaben, oder rufen direkt an. Wir kommen zur Aufmaß-Tour, schauen Fassade und Bestand — und nennen Ihnen einen festen Preis.
+      </p>
+      <form class="mt-10 max-w-xl space-y-5">
+        <div class="grid grid-cols-2 gap-4">
+          <input class="border-b py-3 bg-transparent w-full focus:outline-none" style="border-color: rgba(28,29,30,0.3);" placeholder="Ihr Name">
+          <input class="border-b py-3 bg-transparent w-full focus:outline-none" style="border-color: rgba(28,29,30,0.3);" placeholder="Telefon">
+        </div>
+        <input class="border-b py-3 bg-transparent w-full focus:outline-none" style="border-color: rgba(28,29,30,0.3);" placeholder="Adresse / Ort">
+        <select class="border-b py-3 bg-transparent w-full focus:outline-none" style="border-color: rgba(28,29,30,0.3);">
+          <option>Worum geht es? (optional)</option>
+          <option>Markise · neu oder Reparatur</option>
+          <option>Rolladen · neu oder Reparatur</option>
+          <option>Terrassendach</option>
+          <option>Garagentor</option>
+          <option>Insektenschutz</option>
+          <option>Anderes</option>
+        </select>
+        <textarea rows="3" class="border-b py-3 bg-transparent w-full focus:outline-none" style="border-color: rgba(28,29,30,0.3);" placeholder="Ihre Notiz (optional)"></textarea>
+        <button class="btn-yellow mt-6">Termin anfragen</button>
+      </form>
+    </div>
+    <div class="md:col-span-5">
+      <div class="border-l pl-10" style="border-color: var(--eb-yellow-deep);">
+        <span class="smallcaps" style="color: var(--eb-yellow-deep);">Direkt</span>
+        <div class="mt-7">
+          <div class="smallcaps mb-2" style="color: var(--ink-soft);">Telefon</div>
+          <a href="tel:+497157706" class="display-italic" style="font-size: 1.7rem; color: var(--ink);">07157 7065</a>
+        </div>
+        <div class="mt-7">
+          <div class="smallcaps mb-2" style="color: var(--ink-soft);">E-Mail</div>
+          <a href="mailto:info@eberwein-rolladen.de" class="display-italic" style="font-size: 1.4rem; color: var(--ink);">info@<br>eberwein-rolladen.de</a>
+        </div>
+        <div class="mt-9 pt-7 border-t" style="border-color: rgba(28,29,30,0.15);">
+          <span class="smallcaps" style="color: var(--ink-soft);">Werkstatt &amp; Showroom</span>
+          <p class="mt-4 text-base leading-relaxed" style="color: var(--ink);">
+            Stuttgarter Str. 16<br>
+            71111 Waldenbuch
+          </p>
+          <p class="mt-5 text-sm" style="color: var(--ink-soft);">
+            Mo – Fr · 8:00 – 17:00<br>
+            Sa · nach Absprache
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="relative py-12 px-6 md:px-12" style="background: var(--ink); color: var(--cream);">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-xs" style="color: rgba(250,248,243,0.65);">
+    <div class="flex items-center gap-4">
+      <img src="data:image/png;base64,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" alt="" class="h-9 brightness-0 invert opacity-90">
+      <span>© 2026 Eberwein Rolladen &amp; Sonnenschutz</span>
+    </div>
+    <div class="flex flex-wrap gap-6 smallcaps" style="font-size: 0.6rem;">
+      <a href="#" class="hover:underline">Impressum</a>
+      <a href="#" class="hover:underline">Datenschutz</a>
+      <a href="#" class="hover:underline">AGB</a>
+    </div>
+    <div class="smallcaps" style="font-size: 0.6rem; color: rgba(250,248,243,0.45);">
+      Waldenbuch · Sonnenschutz seit über 30 Jahren
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

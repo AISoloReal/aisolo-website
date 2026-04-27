@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praxis Dr. Sabine Lachmann — Zahnheilkunde mit Zeit. Böblingen.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #010044;
+    --navy-deep: #000028;
+    --navy-soft: #4d4d7c;
+    --navy-pale: #e7e8f0;
+    --apricot: #f7d4b8;
+    --apricot-soft: #fbe5d3;
+    --cream: #fbf9f6;
+    --cream-warm: #f4ecde;
+    --paper: #ffffff;
+    --ink: #14142b;
+    --ink-soft: #3f3f5e;
+    --slate: #6e6e87;
+    --sage: #a4b5a3;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    font-weight: 400;
+    line-height: 1.65;
+  }
+  .display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
+  .display-italic { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; }
+  .smallcaps {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-weight: 500;
+    font-size: 0.7rem;
+  }
+  .reveal { opacity: 0; transform: translateY(24px); animation: r 1.6s cubic-bezier(0.2,0.7,0.2,1) forwards; }
+  .reveal.d1 { animation-delay: 0.15s; }
+  .reveal.d2 { animation-delay: 0.4s; }
+  .reveal.d3 { animation-delay: 0.65s; }
+  .reveal.d4 { animation-delay: 0.9s; }
+  @keyframes r { to { opacity: 1; transform: translateY(0); } }
+  .ornament {
+    display: inline-block; width: 1.5rem; height: 1px;
+    background: var(--apricot); vertical-align: middle; margin: 0 0.7rem;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 1rem 2.4rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    transition: all 0.4s ease;
+    display: inline-block;
+    border-radius: 4px;
+  }
+  .btn-primary:hover { background: var(--navy-deep); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(1,0,68,0.16); }
+  .btn-secondary {
+    border: 1.5px solid currentColor;
+    padding: 1rem 2.4rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    transition: all 0.4s ease;
+    display: inline-block;
+    border-radius: 4px;
+  }
+  .btn-apricot {
+    background: var(--apricot);
+    color: var(--navy-deep);
+    padding: 1rem 2.4rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    transition: all 0.4s ease;
+    display: inline-block;
+    border-radius: 4px;
+  }
+  .nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: opacity 0.3s;
+  }
+  .nav-link:hover { opacity: 0.6; }
+  .glow-bg {
+    background:
+      radial-gradient(ellipse at 25% 20%, rgba(247,212,184,0.40) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 75%, rgba(231,232,240,0.55) 0%, transparent 60%),
+      var(--cream);
+  }
+  .ring-soft { box-shadow: 0 0 0 1px rgba(20,20,43,0.06); }
+  .soft-shadow {
+    box-shadow:
+      0 1px 3px rgba(20,20,43,0.04),
+      0 8px 24px rgba(20,20,43,0.06),
+      0 32px 80px rgba(20,20,43,0.08);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--navy);
+  }
+  .praxis-illustration {
+    aspect-ratio: 4/5;
+    background: linear-gradient(160deg, var(--navy-pale) 0%, var(--cream-warm) 60%, var(--apricot-soft) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .praxis-illustration::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 8%; right: 8%; height: 70%;
+    background: linear-gradient(180deg, var(--paper) 0%, #f4f4f8 100%);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -2px 8px rgba(20,20,43,0.06);
+  }
+  .praxis-illustration::after {
+    content: '';
+    position: absolute;
+    bottom: 18%; left: 18%; right: 18%; height: 38%;
+    background:
+      linear-gradient(180deg, #f4f4f8 0%, #e8e8f0 100%);
+    border-radius: 100% 100% 8px 8px / 35% 35% 8px 8px;
+    box-shadow: 0 4px 12px rgba(20,20,43,0.10);
+  }
+  .praxis-detail {
+    position: absolute;
+    width: 36px; height: 36px;
+    background: var(--navy);
+    border-radius: 50%;
+    top: 35%;
+    right: 25%;
+    box-shadow: 0 4px 12px rgba(1,0,68,0.30);
+  }
+  .praxis-detail::before {
+    content: '';
+    position: absolute;
+    inset: 30%;
+    background: var(--apricot);
+    border-radius: 50%;
+  }
+  .booking-step {
+    background: var(--paper);
+    border: 1px solid rgba(20,20,43,0.08);
+    transition: all 0.5s cubic-bezier(0.2,0.7,0.2,1);
+  }
+  .booking-step.active {
+    border-color: var(--navy);
+    box-shadow: 0 8px 24px rgba(1,0,68,0.12);
+  }
+  .review-card {
+    background: var(--paper);
+    border-left: 3px solid var(--apricot);
+    box-shadow: 0 1px 3px rgba(20,20,43,0.04), 0 8px 24px rgba(20,20,43,0.06);
+  }
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .floating-quote {
+    background: var(--paper);
+    border: 1px solid rgba(20,20,43,0.08);
+    box-shadow: 0 12px 32px rgba(20,20,43,0.10);
+  }
+  .badge-navy {
+    background: var(--navy-pale);
+    color: var(--navy);
+    padding: 0.32rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .badge-apricot {
+    background: var(--apricot);
+    color: var(--navy-deep);
+    padding: 0.32rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .calendar-day {
+    aspect-ratio: 1/1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .calendar-day.muted { color: rgba(20,20,43,0.3); }
+  .calendar-day.available:hover { background: var(--navy-pale); }
+  .calendar-day.selected {
+    background: var(--navy);
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .time-slot {
+    border: 1px solid rgba(20,20,43,0.15);
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .time-slot:hover { border-color: var(--navy); }
+  .time-slot.selected {
+    background: var(--navy);
+    color: var(--paper);
+    border-color: var(--navy);
+  }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- ========== TOP NAV ========== -->
+<header class="absolute top-0 left-0 right-0 z-30 px-6 md:px-12 py-6">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <img src="data:image/png;base64,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" alt="Dr. Sabine Lachmann" class="h-12">
+    <nav class="hidden md:flex items-center gap-9" style="color: var(--navy);">
+      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#termin" class="nav-link">Online-Termin</a>
+      <a href="#praxis" class="nav-link">Praxis</a>
+      <a href="#stimmen" class="nav-link">Stimmen</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+    </nav>
+    <a href="#termin" class="hidden md:inline-block btn-primary" style="padding: 0.7rem 1.6rem; font-size: 0.7rem;">Termin online</a>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="relative min-h-[100vh] overflow-hidden glow-bg flex items-center">
+  <div class="grain"></div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 grid md:grid-cols-12 gap-12 items-center">
+    <div class="md:col-span-7">
+      <span class="smallcaps reveal d1" style="color: var(--navy-soft);">Praxis für Zahnheilkunde · Landhausstr. 5 · Böblingen</span>
+      <h1 class="display reveal d2 mt-7 leading-[0.95]" style="font-size: clamp(3rem, 7.5vw, 6.6rem); font-weight: 400; color: var(--navy-deep);">
+        <span class="block">Zeit,</span>
+        <span class="display-italic block" style="color: var(--apricot); font-weight: 500;">die ankommt</span>
+        <span class="block">— auch im Stuhl.</span>
+      </h1>
+      <p class="reveal d3 mt-9 max-w-lg text-lg leading-relaxed" style="color: var(--ink-soft);">
+        Wir nehmen uns Zeit für jede Behandlung — ob Prophylaxe, Familienkontrolle oder Implantat. Dr. Sabine Lachmann und ihr Team begleiten Stammpatienten oft schon in der zweiten Generation.
+      </p>
+      <div class="reveal d4 mt-11 flex flex-wrap items-center gap-4">
+        <a href="#termin" class="btn-primary">Termin online buchen</a>
+        <a href="tel:+497031220174" class="btn-secondary" style="color: var(--navy);">07031 220174</a>
+      </div>
+      <div class="reveal d4 mt-12 flex items-center gap-7 text-sm" style="color: var(--ink-soft);">
+        <div class="flex items-center gap-2">
+          <span class="display-italic" style="font-size: 1.6rem; color: var(--navy);">4,8</span>
+          <div>
+            <div class="smallcaps" style="color: var(--apricot); -webkit-text-stroke: 0.4px var(--navy-soft);">★ ★ ★ ★ ★</div>
+            <div class="text-xs mt-0.5">aus 20 Google-Bewertungen</div>
+          </div>
+        </div>
+        <div class="h-12 w-px" style="background: rgba(20,20,43,0.2);"></div>
+        <div>
+          <div class="display-italic" style="font-size: 1.6rem; color: var(--navy);">2.</div>
+          <div class="text-xs mt-0.5">Generation Stammpatienten</div>
+        </div>
+      </div>
+    </div>
+    <div class="md:col-span-5 reveal d3 relative">
+      <div class="praxis-illustration rounded-[3px] soft-shadow ring-soft">
+        <span class="praxis-detail"></span>
+        <div class="absolute top-6 left-6 text-xs px-3 py-1.5 rounded-full" style="background: var(--paper); color: var(--navy-soft);">
+          Praxisfoto · Beispielmotiv
+        </div>
+      </div>
+      <div class="floating-quote absolute -bottom-10 -left-6 md:-left-12 max-w-[280px] p-6 rounded-[3px]">
+        <span class="display-italic block" style="font-size: 1.1rem; line-height: 1.5; color: var(--navy-deep);">„Man ist hier noch wirklich Patient — und wird sehr gut behandelt und beraten."</span>
+        <span class="smallcaps mt-3 block" style="color: var(--navy-soft);">— Reik (Google, vor einem Jahr)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ONLINE-TERMIN — der Hero-Hebel ========== -->
+<section id="termin" class="relative py-32 md:py-44 px-6 md:px-12 overflow-hidden" style="background: var(--navy-deep); color: var(--cream);">
+  <div class="grain"></div>
+  <div class="max-w-6xl mx-auto relative">
+    <div class="text-center mb-16">
+      <span class="smallcaps" style="color: var(--apricot);">Online-Terminbuchung · Service für Sie</span>
+      <h2 class="display mt-7 leading-[1.05]" style="font-size: clamp(2.6rem, 5.4vw, 4.4rem); font-weight: 300;">
+        Termin <span class="display-italic" style="color: var(--apricot);">in drei Schritten</span> —<br>
+        ohne Telefon-Wartezeit.
+      </h2>
+      <p class="mt-7 max-w-xl mx-auto text-lg leading-relaxed" style="color: rgba(251,249,246,0.78);">
+        Sie sehen alle freien Slots in Echtzeit, wählen Tag und Uhrzeit, fertig. Telefon geht natürlich auch — manche Patient:innen mögen das lieber.
+      </p>
+    </div>
+    <div class="rounded-[3px] overflow-hidden soft-shadow" style="background: var(--cream); color: var(--ink);">
+      <div class="grid md:grid-cols-12">
+        <!-- Schritt 1: Behandlung -->
+        <div class="md:col-span-4 p-9 border-b md:border-b-0 md:border-r" style="border-color: rgba(20,20,43,0.10);">
+          <div class="flex items-center gap-3 mb-7">
+            <span class="display-italic" style="font-size: 1.7rem; color: var(--apricot);">01</span>
+            <span class="smallcaps" style="color: var(--ink-soft);">Behandlung wählen</span>
+          </div>
+          <div class="space-y-3">
+            <div class="p-4 ring-soft rounded-[3px]" style="background: var(--cream-warm);">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="display" style="font-size: 1.05rem; color: var(--navy-deep);">Prophylaxe</div>
+                  <div class="text-xs mt-1" style="color: var(--ink-soft);">60 Min · Kasse oder privat</div>
+                </div>
+                <span class="badge-apricot">gewählt</span>
+              </div>
+            </div>
+            <div class="p-4 rounded-[3px] opacity-60">
+              <div class="display" style="font-size: 1rem; color: var(--navy-deep);">Kontroll-Termin</div>
+              <div class="text-xs mt-1" style="color: var(--ink-soft);">30 Min</div>
+            </div>
+            <div class="p-4 rounded-[3px] opacity-60">
+              <div class="display" style="font-size: 1rem; color: var(--navy-deep);">Beratung Implantat</div>
+              <div class="text-xs mt-1" style="color: var(--ink-soft);">45 Min</div>
+            </div>
+            <div class="p-4 rounded-[3px] opacity-60">
+              <div class="display" style="font-size: 1rem; color: var(--navy-deep);">Familien-Termin (mit Kind)</div>
+              <div class="text-xs mt-1" style="color: var(--ink-soft);">45 Min · Wunsch-Termin Nachmittag</div>
+            </div>
+          </div>
+        </div>
+        <!-- Schritt 2: Tag -->
+        <div class="md:col-span-4 p-9 border-b md:border-b-0 md:border-r" style="border-color: rgba(20,20,43,0.10);">
+          <div class="flex items-center gap-3 mb-7">
+            <span class="display-italic" style="font-size: 1.7rem; color: var(--apricot);">02</span>
+            <span class="smallcaps" style="color: var(--ink-soft);">Tag wählen</span>
+          </div>
+          <div class="display mb-3" style="font-size: 1rem; color: var(--navy-deep);">Mai 2026</div>
+          <div class="grid grid-cols-7 gap-1 text-center text-xs mb-4" style="color: var(--ink-soft);">
+            <span>Mo</span><span>Di</span><span>Mi</span><span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+          </div>
+          <div class="grid grid-cols-7 gap-1">
+            <span class="calendar-day muted">28</span>
+            <span class="calendar-day muted">29</span>
+            <span class="calendar-day muted">30</span>
+            <span class="calendar-day available">1</span>
+            <span class="calendar-day available">2</span>
+            <span class="calendar-day muted">3</span>
+            <span class="calendar-day muted">4</span>
+            <span class="calendar-day available">5</span>
+            <span class="calendar-day available">6</span>
+            <span class="calendar-day selected">7</span>
+            <span class="calendar-day available">8</span>
+            <span class="calendar-day available">9</span>
+            <span class="calendar-day muted">10</span>
+            <span class="calendar-day muted">11</span>
+            <span class="calendar-day available">12</span>
+            <span class="calendar-day available">13</span>
+            <span class="calendar-day available">14</span>
+            <span class="calendar-day available">15</span>
+            <span class="calendar-day available">16</span>
+          </div>
+          <div class="mt-7 pt-5 border-t" style="border-color: rgba(20,20,43,0.1);">
+            <div class="smallcaps mb-3" style="color: var(--ink-soft);">Do, 7. Mai · freie Zeiten</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="time-slot">08:30</span>
+              <span class="time-slot selected">10:15</span>
+              <span class="time-slot">14:00</span>
+              <span class="time-slot">16:30</span>
+            </div>
+          </div>
+        </div>
+        <!-- Schritt 3: Bestätigung -->
+        <div class="md:col-span-4 p-9" style="background: var(--cream-warm);">
+          <div class="flex items-center gap-3 mb-7">
+            <span class="display-italic" style="font-size: 1.7rem; color: var(--apricot);">03</span>
+            <span class="smallcaps" style="color: var(--ink-soft);">Daten + Bestätigung</span>
+          </div>
+          <h3 class="display-italic" style="font-size: 1.5rem; color: var(--navy-deep);">Do, 7. Mai · 10:15</h3>
+          <div class="mt-4 space-y-3 text-sm" style="color: var(--ink-soft);">
+            <div class="flex justify-between">
+              <span>Prophylaxe</span>
+              <span style="color: var(--navy-deep);">60 Min</span>
+            </div>
+            <div class="flex justify-between border-t pt-3" style="border-color: rgba(20,20,43,0.1);">
+              <span>Patient:in</span>
+              <span class="display-italic" style="color: var(--navy-deep);">Bestandspat. ✓</span>
+            </div>
+          </div>
+          <div class="mt-7 space-y-3">
+            <input class="border-b py-2 bg-transparent w-full text-sm focus:outline-none" style="border-color: rgba(20,20,43,0.2);" placeholder="Vorname &amp; Name">
+            <input class="border-b py-2 bg-transparent w-full text-sm focus:outline-none" style="border-color: rgba(20,20,43,0.2);" placeholder="Mobilnummer (für Erinnerung)">
+          </div>
+          <a href="#" class="btn-primary mt-9 w-full text-center block" style="padding: 0.95rem 1.6rem;">Termin bestätigen</a>
+          <div class="mt-6 text-xs leading-relaxed" style="color: var(--ink-soft);">
+            SMS-Erinnerung 24h vorher. Kostenlos absagen bis 48h vorher.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-10 flex justify-center items-center gap-6 flex-wrap">
+      <span class="smallcaps" style="color: rgba(251,249,246,0.55);">Auch bei</span>
+      <span class="display-italic" style="font-size: 1.4rem; color: var(--apricot);">Doctolib</span>
+      <span class="opacity-30">·</span>
+      <span class="display-italic" style="font-size: 1.4rem; color: var(--apricot);">jameda</span>
+      <span class="opacity-30">·</span>
+      <span class="display-italic" style="font-size: 1.4rem; color: var(--apricot);">Google Maps</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== LEISTUNGEN ========== -->
+<section id="leistungen" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden" style="background: var(--cream);">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="smallcaps" style="color: var(--apricot);">Unser Leistungsspektrum</span>
+      <h2 class="display mt-6 leading-[1.05]" style="font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--navy-deep);">
+        Behandlungen, <span class="display-italic" style="color: var(--apricot);">die Zeit kosten</span> dürfen.
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <div class="ring-soft p-8 rounded-[3px]" style="background: var(--paper);">
+        <span class="badge-navy">Quartalsbasis</span>
+        <h3 class="display mt-5" style="font-size: 1.6rem; color: var(--navy-deep);">Professionelle <span class="display-italic" style="color: var(--apricot);">Zahnreinigung</span></h3>
+        <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft);">Schonende Reinigung mit Pulver-/Wasserstrahl, Fluoridierung und individueller Mundhygiene-Beratung.</p>
+      </div>
+      <div class="ring-soft p-8 rounded-[3px]" style="background: var(--paper);">
+        <span class="badge-navy">Kinder &amp; Eltern</span>
+        <h3 class="display mt-5" style="font-size: 1.6rem; color: var(--navy-deep);">Familien­behandlung <span class="display-italic" style="color: var(--apricot);">in einer Sitzung</span></h3>
+        <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft);">Eltern und Kinder hintereinander in Wunschterminen — Sie müssen nur einmal kommen.</p>
+      </div>
+      <div class="ring-soft p-8 rounded-[3px]" style="background: var(--paper);">
+        <span class="badge-apricot">Schwerpunkt</span>
+        <h3 class="display mt-5" style="font-size: 1.6rem; color: var(--navy-deep);">Implantologie <span class="display-italic" style="color: var(--apricot);">&amp; Zahnersatz</span></h3>
+        <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft);">Schmaler Eingriff, lange Beratungszeit. Einzelimplantate bis Brücken — mit Heilungsbegleitung.</p>
+      </div>
+      <div class="ring-soft p-8 rounded-[3px]" style="background: var(--paper);">
+        <span class="badge-navy">Vorsorge</span>
+        <h3 class="display mt-5" style="font-size: 1.6rem; color: var(--navy-deep);">Kontrolltermine</h3>
+        <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft);">Halbjahres-Check mit kleiner Reinigung, Karies-Früherkennung, Bonusheft-Pflege.</p>
+      </div>
+      <div class="ring-soft p-8 rounded-[3px]" style="background: var(--paper);">
+        <span class="badge-navy">Ästhetik</span>
+        <h3 class="display mt-5" style="font-size: 1.6rem; color: var(--navy-deep);">Bleaching &amp; Veneers</h3>
+        <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft);">In-Office Bleaching mit medizinischer Aufhellung, Veneers in Schichttechnik.</p>
+      </div>
+      <div class="ring-soft p-8 rounded-[3px]" style="background: var(--paper);">
+        <span class="badge-navy">Notfall</span>
+        <h3 class="display mt-5" style="font-size: 1.6rem; color: var(--navy-deep);">Akut-Schmerz<span class="display-italic" style="color: var(--apricot);"> binnen 24h</span></h3>
+        <p class="mt-3 text-sm leading-relaxed" style="color: var(--ink-soft);">Bei Schmerzen versuchen wir, Sie noch am gleichen oder folgenden Werktag zu sehen — Anruf reicht.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRAXIS / DR. LACHMANN ========== -->
+<section id="praxis" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden" style="background: var(--cream-warm);">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-14 items-center">
+    <div class="md:col-span-5">
+      <div class="praxis-illustration rounded-[3px] soft-shadow ring-soft" style="aspect-ratio: 4/5;">
+        <span class="praxis-detail" style="top: 28%; right: 30%; background: var(--apricot); width: 44px; height: 44px;">
+          <span style="position: absolute; inset: 30%; background: var(--navy); border-radius: 50%;"></span>
+        </span>
+        <div class="absolute bottom-6 left-6 text-xs px-3 py-1.5 rounded-full" style="background: var(--paper); color: var(--navy-soft);">
+          Arzt-Porträt · Beispielmotiv
+        </div>
+      </div>
+    </div>
+    <div class="md:col-span-7">
+      <span class="smallcaps" style="color: var(--apricot);">Wer Sie behandelt</span>
+      <h2 class="display mt-6 leading-[1.05]" style="font-size: clamp(2.4rem, 5vw, 4rem); color: var(--navy-deep);">
+        Dr. <span class="display-italic" style="color: var(--apricot);">Sabine Lachmann.</span><br>Seit 1998 in Böblingen.
+      </h2>
+      <p class="mt-7 text-lg leading-loose" style="color: var(--ink-soft);">
+        Studium an der Universität Tübingen, Promotion 1996, eigene Niederlassung in der Landhausstraße seit 1998. Mein Anspruch: Patientinnen und Patienten so zu behandeln, wie ich es selbst erwarten würde — mit Zeit, Erklärung, und ohne Druck.
+      </p>
+      <div class="mt-12 grid grid-cols-3 gap-6">
+        <div class="border-l pl-5" style="border-color: var(--apricot);">
+          <div class="stat-num" style="font-size: 2rem;">28</div>
+          <div class="smallcaps mt-1" style="color: var(--ink-soft);">Jahre Praxis</div>
+        </div>
+        <div class="border-l pl-5" style="border-color: var(--apricot);">
+          <div class="stat-num" style="font-size: 2rem;">3</div>
+          <div class="smallcaps mt-1" style="color: var(--ink-soft);">Mitarbeiterinnen</div>
+        </div>
+        <div class="border-l pl-5" style="border-color: var(--apricot);">
+          <div class="stat-num" style="font-size: 2rem;">4,8★</div>
+          <div class="smallcaps mt-1" style="color: var(--ink-soft);">Google-Schnitt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STIMMEN ========== -->
+<section id="stimmen" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden glow-bg">
+  <div class="max-w-7xl mx-auto relative">
+    <div class="text-center mb-16">
+      <span class="smallcaps" style="color: var(--apricot);">20 Bewertungen · 4,8★ Schnitt</span>
+      <h2 class="display mt-6 leading-[1.05]" style="font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--navy-deep);">
+        Was Patient:innen <span class="display-italic" style="color: var(--apricot);">sagen.</span>
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="review-card p-8 rounded-[3px]">
+        <div class="flex items-center gap-1 mb-5" style="color: var(--apricot);">★★★★★</div>
+        <p class="display-italic leading-relaxed" style="font-size: 1.05rem; color: var(--navy-deep);">
+          „Frau Dr. Lachmann nimmt sich viel Zeit für eine ordentliche Behandlung. Man ist hier noch wirklich Patient — und wird sehr gut behandelt und beraten."
+        </p>
+        <div class="mt-6 flex items-center justify-between text-xs" style="color: var(--ink-soft);">
+          <span>— Reik</span>
+          <span>vor einem Jahr</span>
+        </div>
+      </div>
+      <div class="review-card p-8 rounded-[3px]">
+        <div class="flex items-center gap-1 mb-5" style="color: var(--apricot);">★★★★★</div>
+        <p class="display-italic leading-relaxed" style="font-size: 1.05rem; color: var(--navy-deep);">
+          „Schon seit jeher meine Zahnärztin, nun komme ich mit meinen Kindern. Frau Dr. Lachmann ist äußerst freundlich und kompetent."
+        </p>
+        <div class="mt-6 flex items-center justify-between text-xs" style="color: var(--ink-soft);">
+          <span>— Ohli B.</span>
+          <span>2. Generation</span>
+        </div>
+      </div>
+      <div class="review-card p-8 rounded-[3px]">
+        <div class="flex items-center gap-1 mb-5" style="color: var(--apricot);">★★★★★</div>
+        <p class="display-italic leading-relaxed" style="font-size: 1.05rem; color: var(--navy-deep);">
+          „Sehr gepflegte Praxis, kurze Wartezeit, perfekte Zahnreinigung. Zahnärztin und Mitarbeiterinnen sind sehr freundlich — gerne wieder."
+        </p>
+        <div class="mt-6 flex items-center justify-between text-xs" style="color: var(--ink-soft);">
+          <span>— Michael E.</span>
+          <span>vor einem Jahr</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== KONTAKT ========== -->
+<section id="kontakt" class="relative py-32 md:py-40 px-6 md:px-12 overflow-hidden" style="background: var(--paper);">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-14">
+    <div class="md:col-span-7">
+      <span class="smallcaps" style="color: var(--apricot);"><span class="ornament"></span>Wir sind für Sie da<span class="ornament"></span></span>
+      <h2 class="display mt-7 leading-[1.05]" style="font-size: clamp(2.6rem, 5.5vw, 4.4rem); color: var(--navy-deep);">
+        <span class="display-italic" style="color: var(--apricot);">Landhausstraße 5,</span><br>71032 Böblingen.
+      </h2>
+      <div class="mt-12 grid grid-cols-2 gap-y-7 gap-x-10 max-w-xl">
+        <div>
+          <div class="smallcaps mb-2" style="color: var(--apricot);">Termin · Telefon</div>
+          <a href="tel:+497031220174" class="display-italic" style="font-size: 1.7rem; color: var(--navy-deep);">07031 220174</a>
+        </div>
+        <div>
+          <div class="smallcaps mb-2" style="color: var(--apricot);">Notfall (außerhalb Sprechzeit)</div>
+          <a href="tel:+497031220174" class="display-italic" style="font-size: 1.4rem; color: var(--navy-deep);">Anruf — wir<br>melden uns binnen 1h</a>
+        </div>
+      </div>
+    </div>
+    <div class="md:col-span-5">
+      <div class="border-l pl-10" style="border-color: var(--apricot);">
+        <span class="smallcaps" style="color: var(--apricot);">Sprechzeiten</span>
+        <div class="mt-7 space-y-4">
+          <div class="flex justify-between items-baseline border-b pb-3" style="border-color: rgba(20,20,43,0.1);">
+            <span class="display" style="font-size: 1.15rem; color: var(--navy-deep);">Mo, Di, Do</span>
+            <span class="display-italic" style="font-size: 1.05rem; color: var(--apricot);">8:00 – 12:00 · 14:00 – 18:00</span>
+          </div>
+          <div class="flex justify-between items-baseline border-b pb-3" style="border-color: rgba(20,20,43,0.1);">
+            <span class="display" style="font-size: 1.15rem; color: var(--navy-deep);">Mi, Fr</span>
+            <span class="display-italic" style="font-size: 1.05rem; color: var(--apricot);">8:00 – 13:00</span>
+          </div>
+          <div class="flex justify-between items-baseline">
+            <span class="display" style="font-size: 1.15rem; color: var(--navy-deep);">Sa, So</span>
+            <span class="display-italic" style="font-size: 1.05rem; color: var(--ink-soft); opacity: 0.6;">Notfall-Linie aktiv</span>
+          </div>
+        </div>
+        <div class="mt-9 pt-7 border-t" style="border-color: rgba(20,20,43,0.1);">
+          <span class="smallcaps" style="color: var(--apricot);">Anfahrt</span>
+          <p class="mt-4 text-sm leading-relaxed" style="color: var(--ink-soft);">
+            S-Bahn Böblingen Hbf · 5 Min Fußweg<br>
+            Parkhaus Postplatz · 3 Min<br>
+            Barrierefreier Zugang
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="relative py-12 px-6 md:px-12" style="background: var(--navy-deep); color: var(--cream);">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-xs" style="color: rgba(251,249,246,0.65);">
+    <div class="flex items-center gap-4">
+      <img src="data:image/png;base64,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" alt="" class="h-9 brightness-200 opacity-90">
+      <span>© 2026 Praxis Dr. Sabine Lachmann · Zahnheilkunde Böblingen</span>
+    </div>
+    <div class="flex flex-wrap gap-6 smallcaps" style="font-size: 0.6rem;">
+      <a href="#" class="hover:underline">Impressum</a>
+      <a href="#" class="hover:underline">Datenschutz</a>
+      <a href="#" class="hover:underline">Patientenrechte</a>
+      <a href="#" class="hover:underline">Cookie-Einstellungen</a>
+    </div>
+    <div class="smallcaps" style="font-size: 0.6rem; color: rgba(251,249,246,0.45);">
+      Zahnheilkunde · Böblingen seit 1998
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
