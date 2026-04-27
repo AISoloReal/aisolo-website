@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /mockups/
+Disallow: /worker/
+
+Sitemap: https://aisolo.io/sitemap.xml
